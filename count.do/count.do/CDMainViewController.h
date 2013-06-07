@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface CDMainViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+{
+    NSMutableArray *reminders;
+    int selected;
+}
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
 
 @end

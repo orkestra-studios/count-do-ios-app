@@ -34,6 +34,7 @@
 - (IBAction)previousMin:(id)sender;
 
 - (IBAction)goBack:(id)sender;
+- (IBAction)saveReminder:(id)sender;
 
 - (void)endEdits;
 

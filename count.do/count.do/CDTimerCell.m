@@ -11,42 +11,29 @@
 
 @implementation CDTimerCell
 @synthesize comps;
+@synthesize init;
 
-- (id)initWithCoder:(NSCoder *)aDecoder
-{
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        comps = [[NSDateComponents alloc] init];
-        [comps setYear:2013];
-        [comps setMonth:6];
-        [comps setDay:6];
-        
-        [comps setHour:18];
-        [comps setMinute:46];
-        [comps setSecond:15];
-        
-        NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        timerTarget = [cal dateFromComponents:comps];
-        
-        firstLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
-        firstLeft = firstLeft>0 ? firstLeft : 0;
-        [self printTimer];
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.2
-                                                 target:self
-                                               selector:@selector(printTimer)
-                                               userInfo:nil
-                                                repeats:YES ];
-
-        
-    }
-    return self;
+- (void) initialize {
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    timerTarget = [cal dateFromComponents:comps];
+    
+    firstLeft = [timerTarget timeIntervalSinceReferenceDate] - [init timeIntervalSinceReferenceDate];
+    firstLeft = firstLeft>0 ? firstLeft : 0;
+    [self printTimer];
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.2
+                                             target:self
+                                           selector:@selector(printTimer)
+                                           userInfo:nil
+                                            repeats:YES ];
+    
 }
 
 - (void) printTimer {
     timeLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
     timeLeft = timeLeft>0 ? timeLeft : 0;
     int tempLeft = timeLeft;
-    self.progressView.angle = @(358 - ((timeLeft/(firstLeft+0.001))*360));
+    self.progressView.angle = @(358.999 - ((timeLeft/(firstLeft+0.001))*360));
+    self.progressView.angle = [self.progressView.angle floatValue]>0 ? self.progressView.angle : @0.001;
     int years  = tempLeft / 31104000;
     tempLeft   = tempLeft - years*31104000;
     int months = tempLeft / 2592000;
@@ -73,7 +60,7 @@
     self.hourLabel.text = hourString;
     self.minuteLabel.text = minString;
     self.secondLabel.text = secString;
-    if(timeLeft==0) [timer invalidate];
+    if(timeLeft<0.6) [timer invalidate];
 }
 
 /*

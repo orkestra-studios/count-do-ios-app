@@ -42,8 +42,17 @@
 }
 
 - (IBAction)saveReminder:(id)sender {
-    NSMutableArray *reminders = [[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"];
-    reminders addObject:@{}
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
+    NSDate *selected = [cal dateFromComponents:date];
+    NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
+    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"init":[formatter stringFromDate:[NSDate date]], @"timestamp":@([selected timeIntervalSince1970])}];
+    NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
+    NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+                               
+    
+    [[NSUserDefaults standardUserDefaults] setObject:sorted forKey:@"reminders"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -18,6 +18,7 @@
     NSTimer *timer;
     
 }
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dayLabel;
@@ -27,7 +28,8 @@
 @property (weak, nonatomic) IBOutlet CDProgressView *progressView;
 
 @property (strong, nonatomic) NSDateComponents *comps;
+@property (strong, nonatomic) NSDate *init;
 
-
+- (void) initialize;
 
 @end

@@ -24,6 +24,16 @@
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
+    if (!reminders) {
+        reminders = [NSMutableArray arrayWithCapacity:10];
+        [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+    }
+    NSLog(@"reminders:%@",reminders);
+    [self.timers reloadData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -39,7 +49,16 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
+    return [reminders count];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout*)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake(320, 90);
 }
 
 
@@ -49,13 +68,24 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CDTimerCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"timer"
-                                                                           forIndexPath:indexPath];
+    CDTimerCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"timer" forIndexPath:indexPath];
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
+    cell.comps = [cal components:NSYearCalendarUnit  |
+    NSMonthCalendarUnit |
+    NSDayCalendarUnit   |
+    NSHourCalendarUnit  |
+    NSMinuteCalendarUnit|
+    NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[indexPath.row][@"date"]]];
+    cell.init = [formatter dateFromString:reminders[indexPath.row][@"init"]];
+    
+    cell.titleLabel.text = reminders[indexPath.row][@"title"];
+    [cell initialize];
     return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"kind %@",kind);
     UICollectionReusableView *reusableView = nil;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"addNew" forIndexPath:indexPath];
