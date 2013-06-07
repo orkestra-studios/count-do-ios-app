@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CDMainViewController : UIViewController
+@interface CDMainViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
 
 @end
