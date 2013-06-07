@@ -21,6 +21,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *titleInput;
 @property (weak, nonatomic) IBOutlet UICollectionView *calendar;
 @property (weak, nonatomic) IBOutlet UIView *shield;
+@property (weak, nonatomic) IBOutlet UIView *monthDetector;
+@property (weak, nonatomic) IBOutlet UIView *hourDetector;
+@property (weak, nonatomic) IBOutlet UIView *minDetector;
 
 - (void) redrawDateValues;
 
@@ -37,5 +40,6 @@
 - (IBAction)saveReminder:(id)sender;
 
 - (void)endEdits;
+- (IBAction) textFieldDoneEditing:(id)sender;
 
 @end

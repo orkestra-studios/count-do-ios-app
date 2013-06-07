@@ -29,6 +29,35 @@
     UITapGestureRecognizer *shieldToggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdits)];
     [self.shield addGestureRecognizer:shieldToggle];
     [self redrawDateValues];
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.titleInput becomeFirstResponder];
+    });
+    
+    //Add Gesture recognizers
+    //Month Selection
+    UISwipeGestureRecognizer *rgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextMonth:)];
+    rgr.direction = UISwipeGestureRecognizerDirectionRight;
+    UISwipeGestureRecognizer *lgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previousMonth:)];
+    lgr.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.monthDetector addGestureRecognizer:rgr];
+    [self.monthDetector addGestureRecognizer:lgr];
+    
+    //Hour selection
+    UISwipeGestureRecognizer *uhgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextHour:)];
+    uhgr.direction = UISwipeGestureRecognizerDirectionUp;
+    UISwipeGestureRecognizer *dhgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previousHour:)];
+    dhgr.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.hourDetector addGestureRecognizer:uhgr];
+    [self.hourDetector addGestureRecognizer:dhgr];
+    
+    UISwipeGestureRecognizer *umgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextMin:)];
+    umgr.direction = UISwipeGestureRecognizerDirectionUp;
+    UISwipeGestureRecognizer *dmgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(previousMin:)];
+    dmgr.direction = UISwipeGestureRecognizerDirectionDown;
+    [self.minDetector addGestureRecognizer:umgr];
+    [self.minDetector addGestureRecognizer:dmgr];
 }
 
 - (void)didReceiveMemoryWarning
@@ -166,7 +195,7 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.minLabel.alpha=0.1;
     }];
-    if(date.minute<59) date.minute+=5;
+    if(date.minute<55) date.minute+=5;
     else {
         date.minute=0;
         [self nextHour:nil];
@@ -179,7 +208,7 @@
     }];
     if(date.minute>0) date.minute-=5;
     else {
-        date.minute=59;
+        date.minute=55;
         [self previousHour:nil];
     }
     [self redrawDateValues];
@@ -245,6 +274,19 @@
     }];
 }
 
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField {
+    if (self.titleInput.text.length>0) {
+        return YES;
+    }else return NO;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)theTextField {
+    [theTextField resignFirstResponder];
+    if (self.titleInput.text.length>0) {
+        return YES;
+    }else return NO;
+}
+
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     [UIView animateWithDuration:0.3 animations:^{
         self.shield.alpha=0;
@@ -258,7 +300,10 @@
 }
 
 - (void)endEdits {
-    [self.titleInput resignFirstResponder];
+    if (self.titleInput.text.length>0) {
+        [self.titleInput resignFirstResponder];
+    }
+
 }
 
 @end

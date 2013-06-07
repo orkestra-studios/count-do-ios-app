@@ -25,6 +25,7 @@
                                            selector:@selector(printTimer)
                                            userInfo:nil
                                             repeats:YES ];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     
 }
 
@@ -32,7 +33,7 @@
     timeLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
     timeLeft = timeLeft>0 ? timeLeft : 0;
     int tempLeft = timeLeft;
-    self.progressView.angle = @(358.999 - ((timeLeft/(firstLeft+0.001))*360));
+    self.progressView.angle = @(358.9 - ((timeLeft/(firstLeft+0.001))*360));
     self.progressView.angle = [self.progressView.angle floatValue]>0 ? self.progressView.angle : @0.001;
     int years  = tempLeft / 31104000;
     tempLeft   = tempLeft - years*31104000;

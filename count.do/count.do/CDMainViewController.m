@@ -30,7 +30,7 @@
         reminders = [NSMutableArray arrayWithCapacity:10];
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
     }
-    NSLog(@"reminders:%@",reminders);
+    selected = -2;
     [self.timers reloadData];
 }
 
@@ -49,24 +49,38 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [reminders count];
+    if(selected!=-2) return [reminders count]+1;
+    else return [reminders count];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row==selected+1 && selected!=-2) return;
+    if (selected != indexPath.row) selected = indexPath.row;
+    else selected = -2;
+    NSLog(@"selected: %d",selected);
+    [collectionView reloadData];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(320, 90);
+    if (indexPath.row==selected+1 && selected!=-2)
+        return CGSizeMake(320, 30);
+    else
+        return CGSizeMake(320, 90);
 }
-
 
 #pragma mark -
 #pragma mark Collection View Data Source Methods
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.row==selected+1 && selected!=-2){
+        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
+        return cell;
+    }
+    
+    int dataIndex = (indexPath.row>selected && selected!=-2) ? indexPath.row-1 : indexPath.row;
     
     CDTimerCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"timer" forIndexPath:indexPath];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -77,10 +91,10 @@
     NSDayCalendarUnit   |
     NSHourCalendarUnit  |
     NSMinuteCalendarUnit|
-    NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[indexPath.row][@"date"]]];
-    cell.init = [formatter dateFromString:reminders[indexPath.row][@"init"]];
+    NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[dataIndex][@"date"]]];
+    cell.init = [formatter dateFromString:reminders[dataIndex][@"init"]];
     
-    cell.titleLabel.text = reminders[indexPath.row][@"title"];
+    cell.titleLabel.text = reminders[dataIndex][@"title"];
     [cell initialize];
     return cell;
 }
