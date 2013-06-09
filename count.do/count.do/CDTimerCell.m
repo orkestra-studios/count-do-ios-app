@@ -20,12 +20,16 @@
     firstLeft = [timerTarget timeIntervalSinceReferenceDate] - [init timeIntervalSinceReferenceDate];
     firstLeft = firstLeft>0 ? firstLeft : 0;
     [self printTimer];
-    timer = [NSTimer scheduledTimerWithTimeInterval:0.2
-                                             target:self
-                                           selector:@selector(printTimer)
-                                           userInfo:nil
-                                            repeats:YES ];
-    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    if (firstLeft>0) {
+        [self.progressView increment];
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.2
+                                                 target:self
+                                               selector:@selector(printTimer)
+                                               userInfo:nil
+                                                repeats:YES ];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    }
+    
     
 }
 

@@ -31,6 +31,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
     }
     selected = -2;
+    selectedSize = 0;
     [self.timers reloadData];
 }
 
@@ -54,18 +55,24 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==selected+1 && selected!=-2) return;
-    if (selected != indexPath.row) selected = indexPath.row;
-    else selected = -2;
+    if (indexPath.row==selected+1) return;
+    dataIndex = (indexPath.row>selected && selected!=-2) ? indexPath.row-1 : indexPath.row;
+    indexpath = indexPath.row;
+    closeTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                  target:self
+                                                selector:@selector(closeMenu)
+                                                userInfo:indexPath
+                                                 repeats:YES ];
+    [[NSRunLoop currentRunLoop] addTimer:closeTimer forMode:NSRunLoopCommonModes];
+    
     NSLog(@"selected: %d",selected);
-    [collectionView reloadData];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout*)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row==selected+1 && selected!=-2)
-        return CGSizeMake(320, 30);
+        return CGSizeMake(320, selectedSize);
     else
         return CGSizeMake(320, 90);
 }
@@ -78,9 +85,9 @@
     if(indexPath.row==selected+1 && selected!=-2){
         UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
         return cell;
-    }
+    }else{
     
-    int dataIndex = (indexPath.row>selected && selected!=-2) ? indexPath.row-1 : indexPath.row;
+    int dataIndexL = (indexPath.row>selected && selected!=-2) ? indexPath.row-1 : indexPath.row;
     
     CDTimerCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"timer" forIndexPath:indexPath];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -91,12 +98,13 @@
     NSDayCalendarUnit   |
     NSHourCalendarUnit  |
     NSMinuteCalendarUnit|
-    NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[dataIndex][@"date"]]];
-    cell.init = [formatter dateFromString:reminders[dataIndex][@"init"]];
+    NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[dataIndexL][@"date"]]];
+    cell.init = [formatter dateFromString:reminders[dataIndexL][@"init"]];
     
-    cell.titleLabel.text = reminders[dataIndex][@"title"];
+    cell.titleLabel.text = reminders[dataIndexL][@"title"];
     [cell initialize];
     return cell;
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
@@ -105,8 +113,40 @@
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"addNew" forIndexPath:indexPath];
     }else if([kind isEqualToString:UICollectionElementKindSectionFooter]){
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
+        reusableView.backgroundColor = bgColor;
     }
     return reusableView;
+}
+
+#pragma mark -
+#pragma mark Item Menu Methods
+
+- (void) openMenu {
+    if(selectedSize>=36) {
+        selectedSize = 36;
+        [openTimer invalidate];
+    }else{
+        selectedSize+=2;
+        [self.timers reloadData];
+    }
+}
+
+- (void) closeMenu {
+    if(selectedSize<=0) {
+        selectedSize = 0;
+        [closeTimer invalidate];
+        if (selected != indexpath) selected = dataIndex;
+        else selected = -2;
+        openTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
+                                                     target:self
+                                                   selector:@selector(openMenu)
+                                                   userInfo:nil
+                                                    repeats:YES ];
+        [[NSRunLoop currentRunLoop] addTimer:openTimer forMode:NSRunLoopCommonModes];
+    }else{
+        selectedSize-=2;
+        [self.timers reloadData];
+    }
 }
 
 @end

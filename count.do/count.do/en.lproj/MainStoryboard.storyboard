@@ -30,7 +30,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="IPF-8i-Ks7">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="6" minimumInteritemSpacing="0.0" id="2DM-0M-ghi">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="2DM-0M-ghi">
                                     <size key="itemSize" width="320" height="90"/>
                                     <size key="headerReferenceSize" width="320" height="68"/>
                                     <size key="footerReferenceSize" width="320" height="36"/>
@@ -223,7 +223,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="menu" id="huE-ah-asn">
-                                        <rect key="frame" x="0.0" y="164" width="320" height="32"/>
+                                        <rect key="frame" x="0.0" y="158" width="320" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="32"/>
@@ -273,14 +273,14 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="7WO-B1-0Xs" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="1Sg-At-jW8"/>
-                                            <constraint firstItem="lRO-ln-n9t" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="761-al-vxA"/>
+                                            <constraint firstItem="o5g-58-1AY" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="E5x-yb-HYB"/>
                                             <constraint firstItem="lRO-ln-n9t" firstAttribute="leading" secondItem="huE-ah-asn" secondAttribute="leading" constant="69" id="J8Y-PE-mao"/>
-                                            <constraint firstItem="o5g-58-1AY" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="Jc9-T0-8Wg"/>
                                             <constraint firstItem="o5g-58-1AY" firstAttribute="leading" secondItem="huE-ah-asn" secondAttribute="leading" constant="116" id="Kvb-UW-4DE"/>
                                             <constraint firstItem="MoH-xj-9NR" firstAttribute="leading" secondItem="huE-ah-asn" secondAttribute="leading" constant="23" id="Ldk-rX-4IE"/>
-                                            <constraint firstAttribute="trailing" secondItem="7WO-B1-0Xs" secondAttribute="trailing" constant="111" id="QWk-jc-lfZ"/>
-                                            <constraint firstItem="MoH-xj-9NR" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="ye9-LZ-r4Y"/>
+                                            <constraint firstItem="7WO-B1-0Xs" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="dQd-Jn-cYp"/>
+                                            <constraint firstItem="7WO-B1-0Xs" firstAttribute="leading" secondItem="huE-ah-asn" secondAttribute="leading" constant="162" id="fvo-Qy-56y"/>
+                                            <constraint firstItem="lRO-ln-n9t" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="oL0-PY-833"/>
+                                            <constraint firstItem="MoH-xj-9NR" firstAttribute="top" secondItem="huE-ah-asn" secondAttribute="top" type="default" id="qPT-5z-dFJ"/>
                                         </constraints>
                                         <size key="customSize" width="320" height="32"/>
                                     </collectionViewCell>
@@ -313,7 +313,7 @@
                                     </constraints>
                                 </collectionReusableView>
                                 <collectionReusableView key="sectionFooterView" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="footer" id="Dab-eY-YfT">
-                                    <rect key="frame" x="0.0" y="196" width="320" height="36"/>
+                                    <rect key="frame" x="0.0" y="190" width="320" height="36"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="finish.png" translatesAutoresizingMaskIntoConstraints="NO" id="bZO-pr-iDq">

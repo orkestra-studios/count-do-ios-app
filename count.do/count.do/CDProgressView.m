@@ -18,12 +18,14 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         angle = @0;
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.05
-                                                 target:self
-                                               selector:@selector(increment)
-                                               userInfo:nil
-                                                repeats:YES ];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        if (f(angle)>359) {
+            timer = [NSTimer scheduledTimerWithTimeInterval:0.05
+                                                     target:self
+                                                   selector:@selector(increment)
+                                                   userInfo:nil
+                                                    repeats:YES ];
+            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        }
     }
     return self;
 }

@@ -12,7 +12,14 @@
 {
     NSMutableArray *reminders;
     int selected;
+    int selectedSize;
+    int dataIndex,indexpath;
+    BOOL selfSelect;
+    NSTimer *openTimer,*closeTimer;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
+
+- (void) openMenu;
+- (void) closeMenu;
 
 @end

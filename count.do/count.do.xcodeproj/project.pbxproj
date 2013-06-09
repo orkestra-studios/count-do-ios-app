@@ -198,31 +198,9 @@
 		36E37D7917609D1B001461C6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				36F692A617623534009EB15F /* Add  */,
+				36F692A617623534009EB15F /* Add Timer Screen */,
 				36F692A51762352A009EB15F /* Main Screen */,
 				36F692A417622B0C009EB15F /* App Images */,
-				36E37DA41760E2BD001461C6 /* right_arrow.png */,
-				36E37D9D1760E2AC001461C6 /* down_arrow.png */,
-				36E37D9E1760E2AC001461C6 /* up_arrow.png */,
-				36E37D9F1760E2AC001461C6 /* left_arrow.png */,
-				36E37D871760AB88001461C6 /* indicator.png */,
-				36E37D801760A2A7001461C6 /* addnewcountdown.png */,
-				36E37D811760A2A7001461C6 /* addnewcountdown@2x.png */,
-				36E37D7017609BE0001461C6 /* container.png */,
-				36E37D7117609BE0001461C6 /* container@2x.png */,
-				36E37DB71761FD06001461C6 /* proceed_button.png */,
-				36E37DB81761FD06001461C6 /* proceed_button@2x.png */,
-				36E37DB91761FD06001461C6 /* goback.png */,
-				36E37DBA1761FD06001461C6 /* goback@2x.png */,
-				36E37DC1176200D9001461C6 /* finish.png */,
-				36F6929417622B08009EB15F /* delete.png */,
-				36F6929517622B08009EB15F /* delete@2x.png */,
-				36F6929617622B08009EB15F /* notification.png */,
-				36F6929717622B08009EB15F /* notification@2x.png */,
-				36F6929817622B08009EB15F /* facebook.png */,
-				36F6929917622B08009EB15F /* facebook@2x.png */,
-				36F6929A17622B08009EB15F /* twitter.png */,
-				36F6929B17622B08009EB15F /* twitter@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -253,15 +231,37 @@
 		36F692A51762352A009EB15F /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
+				36E37D871760AB88001461C6 /* indicator.png */,
+				36E37D801760A2A7001461C6 /* addnewcountdown.png */,
+				36E37D811760A2A7001461C6 /* addnewcountdown@2x.png */,
+				36E37D7017609BE0001461C6 /* container.png */,
+				36E37D7117609BE0001461C6 /* container@2x.png */,
+				36E37DC1176200D9001461C6 /* finish.png */,
+				36F6929417622B08009EB15F /* delete.png */,
+				36F6929517622B08009EB15F /* delete@2x.png */,
+				36F6929617622B08009EB15F /* notification.png */,
+				36F6929717622B08009EB15F /* notification@2x.png */,
+				36F6929817622B08009EB15F /* facebook.png */,
+				36F6929917622B08009EB15F /* facebook@2x.png */,
+				36F6929A17622B08009EB15F /* twitter.png */,
+				36F6929B17622B08009EB15F /* twitter@2x.png */,
 			);
 			name = "Main Screen";
 			sourceTree = "<group>";
 		};
-		36F692A617623534009EB15F /* Add  */ = {
+		36F692A617623534009EB15F /* Add Timer Screen */ = {
 			isa = PBXGroup;
 			children = (
+				36E37DA41760E2BD001461C6 /* right_arrow.png */,
+				36E37D9D1760E2AC001461C6 /* down_arrow.png */,
+				36E37D9E1760E2AC001461C6 /* up_arrow.png */,
+				36E37D9F1760E2AC001461C6 /* left_arrow.png */,
+				36E37DB71761FD06001461C6 /* proceed_button.png */,
+				36E37DB81761FD06001461C6 /* proceed_button@2x.png */,
+				36E37DB91761FD06001461C6 /* goback.png */,
+				36E37DBA1761FD06001461C6 /* goback@2x.png */,
 			);
-			name = "Add ";
+			name = "Add Timer Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
