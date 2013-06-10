@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		36A934AF17663F3A00AFF987 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A934AE17663F3A00AFF987 /* Social.framework */; };
+		36A934B117663F3E00AFF987 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A934B017663F3E00AFF987 /* Accounts.framework */; };
 		36E37D4E176099E9001461C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E37D4D176099E9001461C6 /* UIKit.framework */; };
 		36E37D50176099E9001461C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E37D4F176099E9001461C6 /* Foundation.framework */; };
 		36E37D52176099E9001461C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E37D51176099E9001461C6 /* CoreGraphics.framework */; };
@@ -54,6 +56,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36A934AE17663F3A00AFF987 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		36A934B017663F3E00AFF987 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		36E37D4A176099E9001461C6 /* count.do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = count.do.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E37D4D176099E9001461C6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		36E37D4F176099E9001461C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -115,6 +119,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36A934B117663F3E00AFF987 /* Accounts.framework in Frameworks */,
+				36A934AF17663F3A00AFF987 /* Social.framework in Frameworks */,
 				36E37D4E176099E9001461C6 /* UIKit.framework in Frameworks */,
 				36E37D50176099E9001461C6 /* Foundation.framework in Frameworks */,
 				36E37D52176099E9001461C6 /* CoreGraphics.framework in Frameworks */,
@@ -144,6 +150,8 @@
 		36E37D4C176099E9001461C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				36A934B017663F3E00AFF987 /* Accounts.framework */,
+				36A934AE17663F3A00AFF987 /* Social.framework */,
 				36E37D4D176099E9001461C6 /* UIKit.framework */,
 				36E37D4F176099E9001461C6 /* Foundation.framework */,
 				36E37D51176099E9001461C6 /* CoreGraphics.framework */,

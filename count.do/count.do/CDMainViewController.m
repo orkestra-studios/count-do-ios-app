@@ -208,8 +208,64 @@
         }
     }
     
+}/*
+- (IBAction)shareTW:(id)sender {
+    NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
+        SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
+            //if (result == SLComposeViewControllerResultCancelled) {} else{}
+            [controller dismissViewControllerAnimated:YES completion:nil];
+        };
+        controller.completionHandler = myBlock;
+        
+        
+        [controller setInitialText:[NSString stringWithFormat:@"countdo.co/%@ @countdoapp"],reminder[timestamp]];
+        //[controller addURL:[NSURL URLWithString:@"http://www.google.com"]];
+        
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(320, self.view.frame.size.height-40),NO,0.0);
+        [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        [controller addImage:image];
+        [self presentViewController:controller animated:YES completion:nil];
+    }
 }
-- (IBAction)shareFB:(id)sender{}
-- (IBAction)shareTW:(id)sender{}
+
+
+- (IBAction)shareFB:(id)sender {
+    if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
+            //if (result == SLComposeViewControllerResultCancelled) {} else{}
+            [UIView animateWithDuration:0.2 animations:^{
+                self.fbShare.alpha = 1;
+                self.twShare.alpha = 1;
+                aiw.alpha = 1;
+            }];
+            [controller dismissViewControllerAnimated:YES completion:nil];
+        };
+        controller.completionHandler = myBlock;
+        
+        self.fbShare.alpha = 0;
+        self.twShare.alpha = 0;
+        aiw.alpha = 0;
+        
+        [controller setInitialText:@""];
+        //[controller addURL:[NSURL URLWithString:@"http://www.google.com"]];
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(320, self.view.frame.size.height-40),NO,0.0);
+        [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        //image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([image CGImage], CGRectMake(16, 16, 288, self.view.frame.size.height-32))];
+        UIGraphicsEndImageContext();
+        [controller addImage:image];
+        [self presentViewController:controller animated:YES completion:nil];
+    }
+}
+
+- (NSString *)scramble: {
+  
+}*/
 
 @end
