@@ -18,14 +18,14 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         angle = @0;
-        if (f(angle)>359) {
-            timer = [NSTimer scheduledTimerWithTimeInterval:0.05
+        /*if (f(angle)>359) {
+            timer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                      target:self
                                                    selector:@selector(increment)
                                                    userInfo:nil
                                                     repeats:YES ];
             [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-        }
+        }*/
     }
     return self;
 }
@@ -40,6 +40,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    [self increment];
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(30, 30) radius:16 startAngle:d2r(180) endAngle:d2r(f(angle)-179) clockwise:true];
     path.lineWidth = 9;
     [[UIColor colorWithRed:(140+f(angle)/2.8)/255.0 green:(221-f(angle)/2.7)/255.0 blue:(205-f(angle)/1.7)/255.0 alpha:1] setStroke];

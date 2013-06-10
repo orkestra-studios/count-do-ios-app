@@ -16,6 +16,7 @@
 - (void) initialize {
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     timerTarget = [cal dateFromComponents:comps];
+    self.selectMenu.alpha=0;
     
     firstLeft = [timerTarget timeIntervalSinceReferenceDate] - [init timeIntervalSinceReferenceDate];
     firstLeft = firstLeft>0 ? firstLeft : 0;
@@ -65,6 +66,7 @@
     self.hourLabel.text = hourString;
     self.minuteLabel.text = minString;
     self.secondLabel.text = secString;
+    [self.progressView setNeedsDisplay];
     if(timeLeft<0.6) [timer invalidate];
 }
 

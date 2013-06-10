@@ -30,9 +30,18 @@
         reminders = [NSMutableArray arrayWithCapacity:10];
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
     }
-    selected = -2;
-    selectedSize = 0;
+    selected = -1;
     [self.timers reloadData];
+}
+
+- (void)viewDidDisappear:(BOOL)animated{
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    [UIView animateWithDuration:0.3 animations:^{
+        cell.selectMenu.alpha=0;
+    } completion:^(BOOL finished) {
+        selected = -1;
+        selectedIndexPath = nil;
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,31 +59,32 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
-    if(selected!=-2) return [reminders count]+1;
-    else return [reminders count];
+    return [reminders count];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==selected+1) return;
-    dataIndex = (indexPath.row>selected && selected!=-2) ? indexPath.row-1 : indexPath.row;
-    indexpath = indexPath.row;
-    closeTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                  target:self
-                                                selector:@selector(closeMenu)
-                                                userInfo:indexPath
-                                                 repeats:YES ];
-    [[NSRunLoop currentRunLoop] addTimer:closeTimer forMode:NSRunLoopCommonModes];
-    
-    NSLog(@"selected: %d",selected);
+    CDTimerCell *cell = (CDTimerCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    if(selected!=indexPath.row)
+        [UIView animateWithDuration:0.3 animations:^{
+            cell.selectMenu.alpha=1;
+        }];
+    else
+        [UIView animateWithDuration:0.3 animations:^{
+            cell.selectMenu.alpha=0;
+        } completion:^(BOOL finished) {
+            selected = -1;
+            selectedIndexPath = nil;
+        }];
+    selected = indexPath.row;
+    selectedIndexPath = indexPath;
+    NSLog(@"alarm: %@",reminders[selected][@"alarm"]);
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout*)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==selected+1 && selected!=-2)
-        return CGSizeMake(320, selectedSize);
-    else
-        return CGSizeMake(320, 90);
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
+    CDTimerCell *cell = (CDTimerCell *)[collectionView cellForItemAtIndexPath:indexPath];
+    [UIView animateWithDuration:0.3 animations:^{
+        cell.selectMenu.alpha=0;
+    }];
 }
 
 #pragma mark -
@@ -82,12 +92,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row==selected+1 && selected!=-2){
-        UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"menu" forIndexPath:indexPath];
-        return cell;
-    }else{
-    
-    int dataIndexL = (indexPath.row>selected && selected!=-2) ? indexPath.row-1 : indexPath.row;
+
+    int dataIndexL = indexPath.row;
     
     CDTimerCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"timer" forIndexPath:indexPath];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -103,9 +109,12 @@
     
     cell.titleLabel.text = reminders[dataIndexL][@"title"];
     [cell initialize];
-    return cell;
+    if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
+        cell.alarmButton.alpha=0.5;
     }
-}
+    
+    return cell;
+} 
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     UICollectionReusableView *reusableView = nil;
@@ -118,35 +127,89 @@
     return reusableView;
 }
 
+
+
 #pragma mark -
 #pragma mark Item Menu Methods
 
-- (void) openMenu {
-    if(selectedSize>=36) {
-        selectedSize = 36;
-        [openTimer invalidate];
-    }else{
-        selectedSize+=2;
+- (IBAction)deleteItem:(id)sender {
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    [UIView animateWithDuration:0.3 animations:^{
+        cell.alpha=0;
+    } completion:^(BOOL finished) {
+        //remove selected item
+        [reminders removeObjectAtIndex:selected];
+        //sort the rest as a failsafe
+        /*NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
+        NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];*/
+        [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+        selectedIndexPath = nil;
+        selected = -1;
         [self.timers reloadData];
-    }
+    }];
 }
 
-- (void) closeMenu {
-    if(selectedSize<=0) {
-        selectedSize = 0;
-        [closeTimer invalidate];
-        if (selected != indexpath) selected = dataIndex;
-        else selected = -2;
-        openTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
-                                                     target:self
-                                                   selector:@selector(openMenu)
-                                                   userInfo:nil
-                                                    repeats:YES ];
-        [[NSRunLoop currentRunLoop] addTimer:openTimer forMode:NSRunLoopCommonModes];
+- (IBAction)toggleAlarm:(id)sender{
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
+    
+    if ([reminder[@"alarm"] isEqualToString:@"1"]) {
+        UIApplication *app = [UIApplication sharedApplication];
+        NSArray *eventArray = [app scheduledLocalNotifications];
+        for (int i=0; i<[eventArray count]; i++)
+        {
+            UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+            NSDictionary *userInfoCurrent = oneEvent.userInfo;
+            NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
+            if ([uid isEqualToString:reminder[@"timestamp"]])
+            {
+                NSLog(@"cancelled");
+                [app cancelLocalNotification:oneEvent];
+                break;
+            }
+        }
+        [UIView animateWithDuration:0.3 animations:^{
+            cell.alarmButton.alpha = 0.5;
+        } completion:^(BOOL finished) {
+            [reminders removeObjectAtIndex:selected];
+            reminder[@"alarm"] = @"0";
+            [reminders insertObject:reminder atIndex:selected];
+            [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+            NSLog(@"%@",reminders);
+        }];
+        
     }else{
-        selectedSize-=2;
-        [self.timers reloadData];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
+        NSDate *date = [formatter dateFromString:reminder[@"date"]];
+                     
+        //Set an alarm
+        UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+        if (localNotif != nil){
+            localNotif.fireDate = date;
+            localNotif.timeZone = [NSTimeZone defaultTimeZone];
+            // Notification details
+            localNotif.alertBody = reminder[@"title"];
+            localNotif.alertAction = @"Dismiss";
+            localNotif.soundName = UILocalNotificationDefaultSoundName;
+            localNotif.applicationIconBadgeNumber = 1;
+            localNotif.userInfo = @{@"uid":reminder[@"timestamp"]};
+            // Schedule the notification
+            [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+            [UIView animateWithDuration:0.3 animations:^{
+                cell.alarmButton.alpha = 1;
+            } completion:^(BOOL finished) {
+                [reminders removeObjectAtIndex:selected];
+                reminder[@"alarm"] = @"1";
+                [reminders insertObject:reminder atIndex:selected];
+                [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+                NSLog(@"%@",reminders);
+            }];
+        }
     }
+    
 }
+- (IBAction)shareFB:(id)sender{}
+- (IBAction)shareTW:(id)sender{}
 
 @end

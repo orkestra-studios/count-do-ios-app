@@ -8,6 +8,7 @@
 
 #import "CDAddTimerViewController.h"
 #import "NSDate+Reporting.h"
+#import <stdlib.h>
 #define dayNums @{@"Sunday":@0,@"Monday":@1,@"Tuesday":@2,@"Wednesday":@3,@"Thursday":@4,@"Friday":@5,@"Saturday":@6}
 
 @interface CDAddTimerViewController ()
@@ -71,16 +72,35 @@
 }
 
 - (IBAction)saveReminder:(id)sender {
+    
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
+    date.second = arc4random_uniform(60);
     NSDate *selected = [cal dateFromComponents:date];
     NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
-    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"init":[formatter stringFromDate:[NSDate date]], @"timestamp":@([selected timeIntervalSince1970])}];
+    
+    
+    NSNumber *timestamp = @([selected timeIntervalSince1970]);
+    
+    //Set an alarm
+    UILocalNotification *localNotif = [[UILocalNotification alloc] init];
+    if (localNotif != nil){
+        // Notification details
+        localNotif.fireDate = selected;
+        localNotif.timeZone = [NSTimeZone defaultTimeZone];
+        localNotif.alertBody = self.titleInput.text;
+        localNotif.alertAction = @"Dismiss";
+        localNotif.soundName = UILocalNotificationDefaultSoundName;
+        localNotif.applicationIconBadgeNumber = 1;
+        localNotif.userInfo = @{@"uid":timestamp};
+        // Schedule the notification
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+        NSLog(@"local notification set.");
+    };
+    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"init":[formatter stringFromDate:[NSDate date]], @"timestamp":timestamp,@"alarm":@"1"}];
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
     NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
-                               
-    
     [[NSUserDefaults standardUserDefaults] setObject:sorted forKey:@"reminders"];
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -260,6 +280,7 @@
         cell.backgroundColor = [UIColor whiteColor];
         ((UILabel *)[cell viewWithTag:1]).font = [UIFont fontWithName:@"Helvetica-Light" size:15];
     }
+    
     return cell;
 }
 
