@@ -69,7 +69,13 @@
     self.minuteLabel.text = minString;
     self.secondLabel.text = secString;
     [self.progressView setNeedsDisplay];
-    if(timeLeft<0.6) [timer invalidate];
+    if(timeLeft<0.6){
+        self.doneButton.hidden = false;
+        [UIView animateWithDuration:0.3 animations:^{
+            self.doneButton.alpha = 1;
+        }];
+        [timer invalidate];
+    }
 }
 
 - (void)showMenu {

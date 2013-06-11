@@ -114,6 +114,7 @@
     NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[dataIndexL][@"date"]]];
     cell.init = [formatter dateFromString:reminders[dataIndexL][@"init"]];
     cell.selectMenu.tag = dataIndexL;
+    cell.doneButton.tag = dataIndexL;
     cell.titleLabel.text = reminders[dataIndexL][@"title"];
     [cell initialize];
     if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
@@ -253,10 +254,16 @@
 }
 
 - (void) setSelected {
-    NSLog(@"select gesture");
     NSIndexPath *path = [NSIndexPath indexPathForRow:[[NSUserDefaults standardUserDefaults] integerForKey:@"selected"] inSection:1];
     selected = path.row;
     selectedIndexPath = path;
+}
+
+- (IBAction)itemDone:(id)sender{
+    UIButton *d = (UIButton *)sender;
+    [[NSUserDefaults standardUserDefaults] setInteger:d.tag forKey:@"selected"];
+    [self setSelected];
+    [self deleteItem:nil];
 }
 
 @end

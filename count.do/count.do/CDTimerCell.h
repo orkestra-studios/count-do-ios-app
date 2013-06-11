@@ -27,7 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondLabel;
 @property (weak, nonatomic) IBOutlet CDProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
-
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) NSDateComponents *comps;
 @property (strong, nonatomic) NSDate *init;
 @property (weak, nonatomic) IBOutlet UIView *selectMenu;

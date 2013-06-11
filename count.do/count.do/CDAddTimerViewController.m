@@ -79,7 +79,7 @@
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
-    date.second = arc4random_uniform(60);
+    date.second = arc4random_uniform(10);
     NSDate *selected = [cal dateFromComponents:date];
     NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
     
@@ -316,10 +316,10 @@
 - (IBAction)textFieldDidChange:(id)sender{
     NSLog(@"%d",self.titleInput.text.length);
     if (self.titleInput.text.length==0) {
-        self.backButton.hidden = false;
+        self.backButton.hidden  = false;
         self.placeholder.hidden = false;
     }else if(!self.backButton.hidden) {
-        self.backButton.hidden = true;
+        self.backButton.hidden  = true;
         self.placeholder.hidden = true;
     }
 }
