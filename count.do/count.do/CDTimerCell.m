@@ -30,7 +30,9 @@
                                                 repeats:YES ];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     }
-    
+    UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu)];
+    sgr.direction = UISwipeGestureRecognizerDirectionRight;
+    [self addGestureRecognizer:sgr];
     
 }
 
@@ -70,13 +72,10 @@
     if(timeLeft<0.6) [timer invalidate];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)showMenu {
+    [UIView animateWithDuration:0.3 animations:^{
+        self.selectMenu.alpha=1;
+    }];
 }
-*/
 
 @end

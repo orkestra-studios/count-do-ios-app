@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIView *monthDetector;
 @property (weak, nonatomic) IBOutlet UIView *hourDetector;
 @property (weak, nonatomic) IBOutlet UIView *minDetector;
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
 
 - (void) redrawDateValues;
 
@@ -41,5 +42,6 @@
 
 - (void)endEdits;
 - (IBAction) textFieldDoneEditing:(id)sender;
+- (IBAction)textFieldDidChange:(id)sender;
 
 @end

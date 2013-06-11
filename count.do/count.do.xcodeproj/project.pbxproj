@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		36A934AF17663F3A00AFF987 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A934AE17663F3A00AFF987 /* Social.framework */; };
 		36A934B117663F3E00AFF987 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A934B017663F3E00AFF987 /* Accounts.framework */; };
+		36A934F2176799EB00AFF987 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F1176799EB00AFF987 /* back.png */; };
+		36A934FB17679CA700AFF987 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F317679CA700AFF987 /* delete.png */; };
+		36A934FC17679CA700AFF987 /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F417679CA700AFF987 /* delete@2x.png */; };
+		36A934FD17679CA700AFF987 /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F517679CA700AFF987 /* notification.png */; };
+		36A934FE17679CA700AFF987 /* notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F617679CA700AFF987 /* notification@2x.png */; };
+		36A934FF17679CA700AFF987 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F717679CA700AFF987 /* facebook.png */; };
+		36A9350017679CA700AFF987 /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F817679CA700AFF987 /* facebook@2x.png */; };
+		36A9350117679CA700AFF987 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F917679CA700AFF987 /* twitter.png */; };
+		36A9350217679CA700AFF987 /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934FA17679CA700AFF987 /* twitter@2x.png */; };
 		36E37D4E176099E9001461C6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E37D4D176099E9001461C6 /* UIKit.framework */; };
 		36E37D50176099E9001461C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E37D4F176099E9001461C6 /* Foundation.framework */; };
 		36E37D52176099E9001461C6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36E37D51176099E9001461C6 /* CoreGraphics.framework */; };
@@ -45,19 +54,20 @@
 		36E37DBE1761FD06001461C6 /* goback.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DB91761FD06001461C6 /* goback.png */; };
 		36E37DBF1761FD06001461C6 /* goback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DBA1761FD06001461C6 /* goback@2x.png */; };
 		36E37DC2176200D9001461C6 /* finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DC1176200D9001461C6 /* finish.png */; };
-		36F6929C17622B08009EB15F /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929417622B08009EB15F /* delete.png */; };
-		36F6929D17622B08009EB15F /* delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929517622B08009EB15F /* delete@2x.png */; };
-		36F6929E17622B08009EB15F /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929617622B08009EB15F /* notification.png */; };
-		36F6929F17622B08009EB15F /* notification@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929717622B08009EB15F /* notification@2x.png */; };
-		36F692A017622B08009EB15F /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929817622B08009EB15F /* facebook.png */; };
-		36F692A117622B08009EB15F /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929917622B08009EB15F /* facebook@2x.png */; };
-		36F692A217622B08009EB15F /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929A17622B08009EB15F /* twitter.png */; };
-		36F692A317622B08009EB15F /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36F6929B17622B08009EB15F /* twitter@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		36A934AE17663F3A00AFF987 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		36A934B017663F3E00AFF987 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		36A934F1176799EB00AFF987 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		36A934F317679CA700AFF987 /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		36A934F417679CA700AFF987 /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
+		36A934F517679CA700AFF987 /* notification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notification.png; sourceTree = "<group>"; };
+		36A934F617679CA700AFF987 /* notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification@2x.png"; sourceTree = "<group>"; };
+		36A934F717679CA700AFF987 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
+		36A934F817679CA700AFF987 /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
+		36A934F917679CA700AFF987 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
+		36A934FA17679CA700AFF987 /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
 		36E37D4A176099E9001461C6 /* count.do.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = count.do.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36E37D4D176099E9001461C6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		36E37D4F176099E9001461C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,14 +114,6 @@
 		36E37DB91761FD06001461C6 /* goback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goback.png; sourceTree = "<group>"; };
 		36E37DBA1761FD06001461C6 /* goback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goback@2x.png"; sourceTree = "<group>"; };
 		36E37DC1176200D9001461C6 /* finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish.png; sourceTree = "<group>"; };
-		36F6929417622B08009EB15F /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
-		36F6929517622B08009EB15F /* delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete@2x.png"; sourceTree = "<group>"; };
-		36F6929617622B08009EB15F /* notification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notification.png; sourceTree = "<group>"; };
-		36F6929717622B08009EB15F /* notification@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notification@2x.png"; sourceTree = "<group>"; };
-		36F6929817622B08009EB15F /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
-		36F6929917622B08009EB15F /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
-		36F6929A17622B08009EB15F /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
-		36F6929B17622B08009EB15F /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,14 +247,6 @@
 				36E37D7017609BE0001461C6 /* container.png */,
 				36E37D7117609BE0001461C6 /* container@2x.png */,
 				36E37DC1176200D9001461C6 /* finish.png */,
-				36F6929417622B08009EB15F /* delete.png */,
-				36F6929517622B08009EB15F /* delete@2x.png */,
-				36F6929617622B08009EB15F /* notification.png */,
-				36F6929717622B08009EB15F /* notification@2x.png */,
-				36F6929817622B08009EB15F /* facebook.png */,
-				36F6929917622B08009EB15F /* facebook@2x.png */,
-				36F6929A17622B08009EB15F /* twitter.png */,
-				36F6929B17622B08009EB15F /* twitter@2x.png */,
 			);
 			name = "Main Screen";
 			sourceTree = "<group>";
@@ -260,6 +254,15 @@
 		36F692A617623534009EB15F /* Add Timer Screen */ = {
 			isa = PBXGroup;
 			children = (
+				36A934F317679CA700AFF987 /* delete.png */,
+				36A934F417679CA700AFF987 /* delete@2x.png */,
+				36A934F517679CA700AFF987 /* notification.png */,
+				36A934F617679CA700AFF987 /* notification@2x.png */,
+				36A934F717679CA700AFF987 /* facebook.png */,
+				36A934F817679CA700AFF987 /* facebook@2x.png */,
+				36A934F917679CA700AFF987 /* twitter.png */,
+				36A934FA17679CA700AFF987 /* twitter@2x.png */,
+				36A934F1176799EB00AFF987 /* back.png */,
 				36E37DA41760E2BD001461C6 /* right_arrow.png */,
 				36E37D9D1760E2AC001461C6 /* down_arrow.png */,
 				36E37D9E1760E2AC001461C6 /* up_arrow.png */,
@@ -349,14 +352,15 @@
 				36E37DBE1761FD06001461C6 /* goback.png in Resources */,
 				36E37DBF1761FD06001461C6 /* goback@2x.png in Resources */,
 				36E37DC2176200D9001461C6 /* finish.png in Resources */,
-				36F6929C17622B08009EB15F /* delete.png in Resources */,
-				36F6929D17622B08009EB15F /* delete@2x.png in Resources */,
-				36F6929E17622B08009EB15F /* notification.png in Resources */,
-				36F6929F17622B08009EB15F /* notification@2x.png in Resources */,
-				36F692A017622B08009EB15F /* facebook.png in Resources */,
-				36F692A117622B08009EB15F /* facebook@2x.png in Resources */,
-				36F692A217622B08009EB15F /* twitter.png in Resources */,
-				36F692A317622B08009EB15F /* twitter@2x.png in Resources */,
+				36A934F2176799EB00AFF987 /* back.png in Resources */,
+				36A934FB17679CA700AFF987 /* delete.png in Resources */,
+				36A934FC17679CA700AFF987 /* delete@2x.png in Resources */,
+				36A934FD17679CA700AFF987 /* notification.png in Resources */,
+				36A934FE17679CA700AFF987 /* notification@2x.png in Resources */,
+				36A934FF17679CA700AFF987 /* facebook.png in Resources */,
+				36A9350017679CA700AFF987 /* facebook@2x.png in Resources */,
+				36A9350117679CA700AFF987 /* twitter.png in Resources */,
+				36A9350217679CA700AFF987 /* twitter@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

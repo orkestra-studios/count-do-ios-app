@@ -59,6 +59,7 @@
     dmgr.direction = UISwipeGestureRecognizerDirectionDown;
     [self.minDetector addGestureRecognizer:umgr];
     [self.minDetector addGestureRecognizer:dmgr];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -289,9 +290,11 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField {
     self.shield.alpha=0;
+    self.backButton.hidden = false;
     [self.view bringSubviewToFront:self.shield];
     [UIView animateWithDuration:0.3 animations:^{
         self.shield.alpha=0.7;
+        self.backButton.alpha = 1;
     }];
 }
 
@@ -306,6 +309,15 @@
     if (self.titleInput.text.length>0) {
         return YES;
     }else return NO;
+}
+
+- (IBAction)textFieldDidChange:(id)sender{
+    NSLog(@"%d",self.titleInput.text.length);
+    if (self.titleInput.text.length==0) {
+        self.backButton.hidden = false;
+    }else if(!self.backButton.hidden) {
+        self.backButton.hidden = true;
+    }
 }
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {

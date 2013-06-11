@@ -33,5 +33,6 @@
 @property (weak, nonatomic) IBOutlet UIView *selectMenu;
 
 - (void) initialize;
+- (void)showMenu;
 
 @end

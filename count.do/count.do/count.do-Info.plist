@@ -30,7 +30,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1</string>
+	<string>0.9</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
@@ -39,12 +39,12 @@
 	<true/>
 	<key>ReplacementFonts</key>
 	<dict>
-		<key>Helvetica-Light</key>
-		<string>Lato-Light</string>
 		<key>Helvetica</key>
 		<string>Lato-Regular</string>
 		<key>Helvetica-Bold</key>
 		<string>Lato-Black</string>
+		<key>Helvetica-Light</key>
+		<string>Lato-Light</string>
 	</dict>
 	<key>UIAppFonts</key>
 	<array>

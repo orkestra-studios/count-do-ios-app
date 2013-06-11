@@ -8,6 +8,7 @@
 
 #import "CDMainViewController.h"
 #import "CDTimerCell.h"
+#import <stdlib.h>
 #define bgColor [UIColor colorWithRed:(236/255.0) green:(240/255.0) blue:(241/255.0) alpha:1]
 
 @interface CDMainViewController ()
@@ -22,6 +23,12 @@
     self.view.backgroundColor = bgColor;
     NSLog(@"started");
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(setSelected)
+                                                 name:@"selected"
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -128,10 +135,8 @@
 }
 
 
-
 #pragma mark -
 #pragma mark Item Menu Methods
-
 - (IBAction)deleteItem:(id)sender {
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
     [UIView animateWithDuration:0.3 animations:^{
@@ -207,65 +212,45 @@
             }];
         }
     }
-    
-}/*
+}
+
 - (IBAction)shareTW:(id)sender {
     NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
-            //if (result == SLComposeViewControllerResultCancelled) {} else{}
             [controller dismissViewControllerAnimated:YES completion:nil];
         };
         controller.completionHandler = myBlock;
         
-        
-        [controller setInitialText:[NSString stringWithFormat:@"countdo.co/%@ @countdoapp"],reminder[timestamp]];
-        //[controller addURL:[NSURL URLWithString:@"http://www.google.com"]];
-        
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(320, self.view.frame.size.height-40),NO,0.0);
-        [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        [controller addImage:image];
+        [controller setInitialText:[NSString stringWithFormat:@"countdo.co/%@ @countdoapp",[self scramble:reminder[@"timestamp"]]]];
         [self presentViewController:controller animated:YES completion:nil];
     }
 }
 
-
 - (IBAction)shareFB:(id)sender {
+    NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         SLComposeViewControllerCompletionHandler myBlock = ^(SLComposeViewControllerResult result){
-            //if (result == SLComposeViewControllerResultCancelled) {} else{}
-            [UIView animateWithDuration:0.2 animations:^{
-                self.fbShare.alpha = 1;
-                self.twShare.alpha = 1;
-                aiw.alpha = 1;
-            }];
             [controller dismissViewControllerAnimated:YES completion:nil];
         };
         controller.completionHandler = myBlock;
-        
-        self.fbShare.alpha = 0;
-        self.twShare.alpha = 0;
-        aiw.alpha = 0;
-        
-        [controller setInitialText:@""];
-        //[controller addURL:[NSURL URLWithString:@"http://www.google.com"]];
-        UIGraphicsBeginImageContextWithOptions(CGSizeMake(320, self.view.frame.size.height-40),NO,0.0);
-        [[self.view layer] renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        //image = [UIImage imageWithCGImage:CGImageCreateWithImageInRect([image CGImage], CGRectMake(16, 16, 288, self.view.frame.size.height-32))];
-        UIGraphicsEndImageContext();
-        [controller addImage:image];
+        [controller setInitialText:[NSString stringWithFormat:@"countdo.co/%@",[self scramble:reminder[@"timestamp"]]]];
         [self presentViewController:controller animated:YES completion:nil];
     }
 }
 
-- (NSString *)scramble: {
-  
-}*/
+- (NSString *)scramble:(NSString *)timestamp{
+    int multiplier = arc4random_uniform(90000)+10000;
+    int base       = [timestamp integerValue];
+    long done       = (base*multiplier);
+    NSLog(@"%li",done);
+    return [NSString stringWithFormat:@"%lx%d",done,multiplier];
+}
+
+- (void) setSelected {
+    
+}
 
 @end

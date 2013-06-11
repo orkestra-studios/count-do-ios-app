@@ -18,9 +18,11 @@
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
 
+- (void)showMenuOnSelected;
 - (IBAction)deleteItem:(id)sender;
 - (IBAction)toggleAlarm:(id)sender;
 - (IBAction)shareFB:(id)sender;
 - (IBAction)shareTW:(id)sender;
+- (NSString *)scramble:(NSString *)timestamp;
 
 @end
