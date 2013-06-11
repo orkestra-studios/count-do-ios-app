@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIView *hourDetector;
 @property (weak, nonatomic) IBOutlet UIView *minDetector;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UILabel *placeholder;
 
 - (void) redrawDateValues;
 

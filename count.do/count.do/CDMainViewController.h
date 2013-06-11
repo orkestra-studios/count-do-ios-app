@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
+#import <stdlib.h>
 
 @interface CDMainViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
 {
@@ -18,7 +19,7 @@
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
 
-- (void)showMenuOnSelected;
+- (void)setSelected;
 - (IBAction)deleteItem:(id)sender;
 - (IBAction)toggleAlarm:(id)sender;
 - (IBAction)shareFB:(id)sender;

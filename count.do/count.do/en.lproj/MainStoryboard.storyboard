@@ -399,6 +399,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOE-H2-gVW">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Event name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVH-th-5HF">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="171" id="JsN-g1-OoH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.84725765310000001" green="0.84725765310000001" blue="0.84725765310000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MgR-l0-Dyu">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" type="user" id="J09-uc-qpD"/>
@@ -408,7 +416,6 @@
                                 <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
-                                    <action selector="textFieldDidChange:" destination="C2N-Ua-FLr" eventType="valueChanged" id="52Q-gX-9O0"/>
                                     <action selector="textFieldDidChange:" destination="C2N-Ua-FLr" eventType="editingChanged" id="eKM-lB-Whv"/>
                                     <outlet property="delegate" destination="C2N-Ua-FLr" id="5Tp-7x-b06"/>
                                 </connections>
@@ -815,11 +822,11 @@
                             </collectionView>
                             <button hidden="YES" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cX9-R4-r3L">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="19" id="4uT-Bu-Fvl"/>
-                                    <constraint firstAttribute="width" constant="19" id="Sd4-Gh-RBr"/>
+                                    <constraint firstAttribute="width" constant="55" id="eF8-qR-fUa"/>
+                                    <constraint firstAttribute="height" constant="30" id="lUS-6i-9Ek"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" image="back.png">
+                                <state key="normal" image="goback_mini.png">
                                     <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -838,14 +845,17 @@
                             <constraint firstItem="2J9-dw-VX4" firstAttribute="top" secondItem="e1V-e7-wgY" secondAttribute="bottom" constant="6" type="user" id="2Ff-UQ-VWS"/>
                             <constraint firstItem="euz-oZ-8Oi" firstAttribute="leading" secondItem="R5a-jN-fHC" secondAttribute="leading" constant="54" id="42j-Az-T7V"/>
                             <constraint firstItem="BK1-Mm-cLD" firstAttribute="leading" secondItem="R5a-jN-fHC" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="4O7-MR-Wzv"/>
-                            <constraint firstAttribute="trailing" secondItem="cX9-R4-r3L" secondAttribute="trailing" constant="21" id="64W-3r-yx5"/>
+                            <constraint firstItem="eVH-th-5HF" firstAttribute="centerY" secondItem="MgR-l0-Dyu" secondAttribute="centerY" type="default" id="9wb-LU-Bwh"/>
                             <constraint firstItem="ehg-0D-ktL" firstAttribute="top" secondItem="e1V-e7-wgY" secondAttribute="bottom" constant="6" type="user" id="A3q-Xm-Ai0"/>
                             <constraint firstItem="XmD-W8-oHc" firstAttribute="trailing" secondItem="R5a-jN-fHC" secondAttribute="trailing" type="default" id="C4n-BC-8Kv"/>
+                            <constraint firstItem="eVH-th-5HF" firstAttribute="leading" secondItem="MgR-l0-Dyu" secondAttribute="leading" type="default" id="DB1-dY-d4x"/>
                             <constraint firstItem="XmD-W8-oHc" firstAttribute="top" secondItem="MgR-l0-Dyu" secondAttribute="bottom" constant="8" symbolic="YES" type="user" id="KXJ-3v-4fy"/>
+                            <constraint firstAttribute="trailing" secondItem="cX9-R4-r3L" secondAttribute="trailing" constant="7" id="L4K-k5-Tw8"/>
                             <constraint firstItem="ehg-0D-ktL" firstAttribute="leading" secondItem="R5a-jN-fHC" secondAttribute="leading" constant="125" id="LyX-JG-AZu"/>
                             <constraint firstItem="XmD-W8-oHc" firstAttribute="leading" secondItem="R5a-jN-fHC" secondAttribute="leading" type="default" id="NCV-JI-9li"/>
-                            <constraint firstItem="BK1-Mm-cLD" firstAttribute="trailing" secondItem="MgR-l0-Dyu" secondAttribute="trailing" type="default" id="O8j-sl-qUi"/>
+                            <constraint firstItem="LOE-H2-gVW" firstAttribute="top" secondItem="eVH-th-5HF" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ngn-Hd-IQF"/>
                             <constraint firstAttribute="bottom" secondItem="BK1-Mm-cLD" secondAttribute="bottom" constant="375" id="Pr3-k7-qEX"/>
+                            <constraint firstItem="eVH-th-5HF" firstAttribute="top" secondItem="cX9-R4-r3L" secondAttribute="top" type="default" id="QcQ-7b-mAn"/>
                             <constraint firstItem="MgR-l0-Dyu" firstAttribute="top" secondItem="R5a-jN-fHC" secondAttribute="top" constant="10" type="user" id="RWg-bD-asL"/>
                             <constraint firstItem="e1V-e7-wgY" firstAttribute="top" secondItem="R5a-jN-fHC" secondAttribute="top" constant="325" type="user" id="TKr-UM-TMC"/>
                             <constraint firstItem="BK1-Mm-cLD" firstAttribute="top" secondItem="R5a-jN-fHC" secondAttribute="top" constant="149" id="UVK-Ck-Qqa"/>
@@ -853,15 +863,15 @@
                             <constraint firstItem="e1V-e7-wgY" firstAttribute="leading" secondItem="R5a-jN-fHC" secondAttribute="leading" type="default" id="ZuI-VK-lO2"/>
                             <constraint firstItem="e1V-e7-wgY" firstAttribute="trailing" secondItem="R5a-jN-fHC" secondAttribute="trailing" type="default" id="a0C-36-vXI"/>
                             <constraint firstItem="euz-oZ-8Oi" firstAttribute="top" secondItem="R5a-jN-fHC" secondAttribute="top" constant="171" id="bCT-Lr-XUD"/>
+                            <constraint firstItem="XmD-W8-oHc" firstAttribute="top" secondItem="eVH-th-5HF" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="bgL-OM-oAG"/>
                             <constraint firstItem="MgR-l0-Dyu" firstAttribute="centerX" secondItem="XmD-W8-oHc" secondAttribute="centerX" type="default" id="cCg-Gz-H23"/>
+                            <constraint firstItem="BK1-Mm-cLD" firstAttribute="trailing" secondItem="MgR-l0-Dyu" secondAttribute="trailing" type="default" id="dFh-0R-rd8"/>
                             <constraint firstItem="2J9-dw-VX4" firstAttribute="top" secondItem="ehg-0D-ktL" secondAttribute="top" type="user" id="gsz-bQ-IbP"/>
                             <constraint firstAttribute="bottom" secondItem="e1V-e7-wgY" secondAttribute="bottom" priority="159" constant="118" type="user" id="k3r-Cm-vjo"/>
                             <constraint firstItem="LOE-H2-gVW" firstAttribute="trailing" secondItem="R5a-jN-fHC" secondAttribute="trailing" type="default" id="lyz-iF-K4z"/>
                             <constraint firstAttribute="bottom" secondItem="XmD-W8-oHc" secondAttribute="bottom" priority="4" constant="400" type="user" id="pDw-Em-Ad2"/>
-                            <constraint firstItem="cX9-R4-r3L" firstAttribute="centerY" secondItem="MgR-l0-Dyu" secondAttribute="centerY" type="default" id="raR-DJ-1Cg"/>
                             <constraint firstItem="2J9-dw-VX4" firstAttribute="leading" secondItem="R5a-jN-fHC" secondAttribute="leading" constant="5" id="sfr-PG-3O9"/>
                             <constraint firstAttribute="bottom" secondItem="2J9-dw-VX4" secondAttribute="bottom" priority="68" constant="102" type="user" id="u3p-vp-aNF"/>
-                            <constraint firstItem="LOE-H2-gVW" firstAttribute="top" secondItem="MgR-l0-Dyu" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="uMy-el-GHk"/>
                             <constraint firstAttribute="bottom" secondItem="e1V-e7-wgY" secondAttribute="bottom" priority="115" constant="118" type="user" id="v8k-Nf-X9l"/>
                         </constraints>
                     </view>
@@ -874,6 +884,7 @@
                         <outlet property="minLabel" destination="yhO-78-Htf" id="1dh-IS-JWM"/>
                         <outlet property="monthDetector" destination="nO3-Wp-G1j" id="rBX-89-Use"/>
                         <outlet property="monthLabel" destination="QMC-5k-T9o" id="wIv-uo-Aar"/>
+                        <outlet property="placeholder" destination="eVH-th-5HF" id="jEz-M2-NUy"/>
                         <outlet property="shield" destination="LOE-H2-gVW" id="jsj-dw-efq"/>
                         <outlet property="titleInput" destination="MgR-l0-Dyu" id="TUi-KW-Lig"/>
                         <outlet property="yearLabel" destination="M0t-J1-brm" id="M3U-Bw-wUo"/>
@@ -886,13 +897,13 @@
     </scenes>
     <resources>
         <image name="addnewcountdown.png" width="253" height="13"/>
-        <image name="back.png" width="56" height="56"/>
         <image name="container.png" width="320" height="68"/>
         <image name="delete.png" width="36" height="36"/>
         <image name="down_arrow.png" width="19" height="10"/>
         <image name="facebook.png" width="36" height="36"/>
         <image name="finish.png" width="24" height="24"/>
         <image name="goback.png" width="115" height="35"/>
+        <image name="goback_mini.png" width="131" height="70"/>
         <image name="indicator.png" width="54" height="54"/>
         <image name="left_arrow.png" width="11" height="19"/>
         <image name="notification.png" width="36" height="36"/>
@@ -923,6 +934,7 @@
                 <relationship kind="outlet" name="minLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="monthDetector" candidateClass="UIView"/>
                 <relationship kind="outlet" name="monthLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="placeholder" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="shield" candidateClass="UIView"/>
                 <relationship kind="outlet" name="titleInput" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="yearLabel" candidateClass="UILabel"/>
@@ -967,9 +979,6 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

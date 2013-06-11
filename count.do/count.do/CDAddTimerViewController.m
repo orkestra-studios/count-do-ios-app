@@ -69,6 +69,8 @@
 }
 
 - (IBAction)goBack:(id)sender {
+    self.titleInput.text = @" ";
+    [self endEdits];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -90,7 +92,7 @@
         // Notification details
         localNotif.fireDate = selected;
         localNotif.timeZone = [NSTimeZone defaultTimeZone];
-        localNotif.alertBody = self.titleInput.text;
+        localNotif.alertBody = [NSString stringWithFormat:@"Countdown finished: %@",self.titleInput.text];
         localNotif.alertAction = @"Dismiss";
         localNotif.soundName = UILocalNotificationDefaultSoundName;
         localNotif.applicationIconBadgeNumber = 1;
@@ -315,8 +317,10 @@
     NSLog(@"%d",self.titleInput.text.length);
     if (self.titleInput.text.length==0) {
         self.backButton.hidden = false;
+        self.placeholder.hidden = false;
     }else if(!self.backButton.hidden) {
         self.backButton.hidden = true;
+        self.placeholder.hidden = true;
     }
 }
 

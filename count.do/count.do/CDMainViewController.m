@@ -8,7 +8,7 @@
 
 #import "CDMainViewController.h"
 #import "CDTimerCell.h"
-#import <stdlib.h>
+#import "CDBaseConversion.h"
 #define bgColor [UIColor colorWithRed:(236/255.0) green:(240/255.0) blue:(241/255.0) alpha:1]
 
 @interface CDMainViewController ()
@@ -113,7 +113,7 @@
     NSMinuteCalendarUnit|
     NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[dataIndexL][@"date"]]];
     cell.init = [formatter dateFromString:reminders[dataIndexL][@"init"]];
-    
+    cell.selectMenu.tag = dataIndexL;
     cell.titleLabel.text = reminders[dataIndexL][@"title"];
     [cell initialize];
     if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
@@ -194,7 +194,7 @@
             localNotif.fireDate = date;
             localNotif.timeZone = [NSTimeZone defaultTimeZone];
             // Notification details
-            localNotif.alertBody = reminder[@"title"];
+            localNotif.alertBody = [NSString stringWithFormat:@"Countdown finished: %@",reminder[@"title"]];
             localNotif.alertAction = @"Dismiss";
             localNotif.soundName = UILocalNotificationDefaultSoundName;
             localNotif.applicationIconBadgeNumber = 1;
@@ -242,15 +242,21 @@
 }
 
 - (NSString *)scramble:(NSString *)timestamp{
-    int multiplier = arc4random_uniform(90000)+10000;
+    int multiplier = 457291;//arc4random_uniform(90000)+10000;
     int base       = [timestamp integerValue];
     long done       = (base*multiplier);
-    NSLog(@"%li",done);
-    return [NSString stringWithFormat:@"%lx%d",done,multiplier];
+    
+    NSString *converted = [CDBaseConversion formatNumber:done toBase:62];
+    
+    return [NSString stringWithFormat:@"%@",converted];
+    //,multiplier];
 }
 
 - (void) setSelected {
-    
+    NSLog(@"select gesture");
+    NSIndexPath *path = [NSIndexPath indexPathForRow:[[NSUserDefaults standardUserDefaults] integerForKey:@"selected"] inSection:1];
+    selected = path.row;
+    selectedIndexPath = path;
 }
 
 @end

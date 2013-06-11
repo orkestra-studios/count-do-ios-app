@@ -76,6 +76,10 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.selectMenu.alpha=1;
     }];
+    [[NSUserDefaults standardUserDefaults] setInteger:self.selectMenu.tag forKey:@"selected"];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:@"selected"
+     object:self];
 }
 
 @end
