@@ -99,7 +99,6 @@
         localNotif.userInfo = @{@"uid":timestamp};
         // Schedule the notification
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-        NSLog(@"local notification set.");
     };
     [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"init":[formatter stringFromDate:[NSDate date]], @"timestamp":timestamp,@"alarm":@"1"}];
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
@@ -318,13 +317,15 @@
 }
 
 - (IBAction)textFieldDidChange:(id)sender{
-    NSLog(@"%d",self.titleInput.text.length);
     if (self.titleInput.text.length==0) {
         self.backButton.hidden  = false;
         self.placeholder.hidden = false;
     }else if(!self.backButton.hidden) {
         self.backButton.hidden  = true;
         self.placeholder.hidden = true;
+    }
+    if (self.titleInput.text.length>=30) {
+        self.titleInput.text = [self.titleInput.text substringToIndex:30];
     }
 }
 
