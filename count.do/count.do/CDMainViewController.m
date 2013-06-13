@@ -228,7 +228,7 @@
         [controller setInitialText:[NSString stringWithFormat:@"%@ %@. countdo.co/%@ @countdoapp",[self timeLeft:[cell getDate]],reminder[@"title"],[self scramble:reminder[@"timestamp"] with:reminder[@"title"]]]];
         [self presentViewController:controller animated:YES completion:nil];
         dispatch_async(bgq, ^{
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString stringWithFormat:@"http://countdo.co/save/%@/%@/%@",[self scramble:reminder[@"timestamp"] with:reminder[@"title"]],reminder[@"title"],reminder[@"timestamp"]]sstringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString stringWithFormat:@"http://countdo.co/save/%@/%@/%@",[self scramble:reminder[@"timestamp"] with:reminder[@"title"]],reminder[@"title"],reminder[@"timestamp"]]stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
             [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         });
     }
