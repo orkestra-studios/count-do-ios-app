@@ -23,7 +23,7 @@
     self.view.backgroundColor = bgColor;
     NSLog(@"started");
 	// Do any additional setup after loading the view, typically from a nib.
-    
+    bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(setSelected)
@@ -140,7 +140,7 @@
 #pragma mark Item Menu Methods
 - (IBAction)deleteItem:(id)sender {
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.4 animations:^{
         cell.alpha=0;
     } completion:^(BOOL finished) {
         //remove selected item
@@ -216,6 +216,7 @@
 }
 
 - (IBAction)shareTW:(id)sender {
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
     NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
@@ -224,12 +225,17 @@
         };
         controller.completionHandler = myBlock;
         
-        [controller setInitialText:[NSString stringWithFormat:@"countdo.co/%@ @countdoapp",[self scramble:reminder[@"timestamp"]]]];
+        [controller setInitialText:[NSString stringWithFormat:@"%@ %@. countdo.co/%@ @countdoapp",[self timeLeft:[cell getDate]],reminder[@"title"],[self scramble:reminder[@"timestamp"] with:reminder[@"title"]]]];
         [self presentViewController:controller animated:YES completion:nil];
+        dispatch_async(bgq, ^{
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString stringWithFormat:@"http://countdo.co/save/%@/%@/%@",[self scramble:reminder[@"timestamp"] with:reminder[@"title"]],reminder[@"title"],reminder[@"timestamp"]]sstringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+            [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        });
     }
 }
 
 - (IBAction)shareFB:(id)sender {
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
     NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *controller = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
@@ -237,18 +243,28 @@
             [controller dismissViewControllerAnimated:YES completion:nil];
         };
         controller.completionHandler = myBlock;
-        [controller setInitialText:[NSString stringWithFormat:@"countdo.co/%@",[self scramble:reminder[@"timestamp"]]]];
-        [self presentViewController:controller animated:YES completion:nil];
+        [controller setInitialText:[NSString stringWithFormat:@"%@ %@. countdo.co/%@",[self timeLeft:[cell getDate]],reminder[@"title"],[self scramble:reminder[@"timestamp"] with:reminder[@"title"]]]];
+        [self presentViewController:controller animated:YES completion:^{
+            dispatch_async(bgq, ^{
+                NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString stringWithFormat:@"http://countdo.co/save/%@/%@/%@",[self scramble:reminder[@"timestamp"] with:reminder[@"title"]],reminder[@"title"],reminder[@"timestamp"]] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+                [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+            });
+        }];
     }
 }
 
-- (NSString *)scramble:(NSString *)timestamp{
+- (NSString *)scramble:(NSString *)timestamp with:(NSString *)key{
+    NSString *pKey;
+    if (key.length<8) {
+        pKey = [[key stringByReplacingOccurrencesOfString:@" " withString:@"q"] substringToIndex:4];
+    }else pKey = [key substringToIndex:4];
     int multiplier = 457291;//arc4random_uniform(90000)+10000;
     int base       = [timestamp integerValue];
-    long done       = (base*multiplier);
+    long long int done = ((long long)base)*multiplier/1000000;
+    long long int qKey = [CDBaseConversion decode62:pKey];
     
-    NSString *converted = [CDBaseConversion formatNumber:done toBase:62];
     
+    NSString *converted = [CDBaseConversion formatNumber:(done+qKey) toBase:62];
     return [NSString stringWithFormat:@"%@",converted];
     //,multiplier];
 }
@@ -264,6 +280,37 @@
     [[NSUserDefaults standardUserDefaults] setInteger:d.tag forKey:@"selected"];
     [self setSelected];
     [self deleteItem:nil];
+}
+
+- (NSString *) timeLeft:(NSDateComponents *)from {
+    NSString *yearString, *monthString, *dayString, *hourString, *minString, *secString;
+    yearString = monthString = dayString = hourString = minString = secString = @"";
+    NSString *plural;
+    if (from.year>0) {
+        plural = (from.year>1) ? @"s" : @"";
+        yearString = [NSString stringWithFormat:@"%d year%@ ",from.year,plural];
+    }
+    if (from.year>0 || from.month>0) {
+        plural = (from.month>1) ? @"s" : @"";
+        monthString = [NSString stringWithFormat:@"%d month%@ ",from.month,plural];
+    }
+    if (from.year>0 || from.month>0 || from.day>0) {
+        plural = (from.day>1) ? @"s" : @"";
+        dayString = [NSString stringWithFormat:@"%d day%@ ",from.day,plural];
+    }
+    if (from.year>0 || from.month>0 || from.day>0 || from.hour>0) {
+        plural = (from.hour>1) ? @"s" : @"";
+        hourString = [NSString stringWithFormat:@"%d hour%@ ",from.hour,plural];
+    }
+    if (from.year>0 || from.month>0 || from.day>0 || from.hour>0 || from.minute>0) {
+        plural = (from.minute>1) ? @"s" : @"";
+        minString = [NSString stringWithFormat:@"%d minute%@ and ",from.minute,plural];
+    }
+    if (from.year>0 || from.month>0 || from.day>0 || from.hour>0 || from.minute>0) {
+        plural = (from.second>1 || from.second==0) ? @"s" : @"";
+        secString = [NSString stringWithFormat:@"%d second%@ to",from.second,plural];
+    }
+    return [NSString stringWithFormat:@"%@%@%@%@%@%@",yearString,monthString,dayString,hourString,minString,secString];
 }
 
 @end

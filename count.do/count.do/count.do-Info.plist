@@ -31,6 +31,19 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>FacebookAppID</key>
+	<string>451419751605321</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.viveka.${PRODUCT_NAME}</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb451419751605321</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>

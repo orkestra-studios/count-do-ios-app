@@ -105,6 +105,7 @@
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
     NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     [[NSUserDefaults standardUserDefaults] setObject:sorted forKey:@"reminders"];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -160,12 +161,12 @@
 }
 
 - (IBAction)nextMonth:(id)sender {
-    
+    date.day = 1;
     [UIView animateWithDuration:0.2 animations:^{
         self.monthLabel.alpha=0.2;
         self.calendar.alpha = 0.5;
     }];
-    if(date.month<11) date.month++;
+    if(date.month<12) date.month++;
     else {
         date.month=1;
         date.year++;
@@ -175,8 +176,9 @@
     }
     [self redrawDateValues];
 }
-- (IBAction)previousMonth:(id)sender;
-    {[UIView animateWithDuration:0.2 animations:^{
+- (IBAction)previousMonth:(id)sender {
+    date.day = 1;
+    [UIView animateWithDuration:0.2 animations:^{
         self.monthLabel.alpha=0.2;
         self.calendar.alpha=0.5;
     }];
@@ -206,7 +208,7 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.hourLabel.alpha=0.1;
     }];
-    if(date.hour>1) date.hour--;
+    if(date.hour>0) date.hour--;
     else {
         date.hour = 23;
         //TODO: decrement day
@@ -292,11 +294,13 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField {
     self.shield.alpha=0;
-    self.backButton.hidden = false;
     [self.view bringSubviewToFront:self.shield];
+    if (self.titleInput.text.length==0) {
+        self.backButton.hidden = false;
+        self.backButton.alpha = 1;
+    }
     [UIView animateWithDuration:0.3 animations:^{
         self.shield.alpha=0.7;
-        self.backButton.alpha = 1;
     }];
 }
 
@@ -326,9 +330,11 @@
 
 - (void) textFieldDidEndEditing:(UITextField *)textField {
     [UIView animateWithDuration:0.3 animations:^{
-        self.shield.alpha=0;
+        self.shield.alpha = 0;
+        self.backButton.alpha = 0;
     } completion:^(BOOL finished) {
         [self.view sendSubviewToBack:self.shield];
+        self.backButton.hidden = true;
     }];
 }
 

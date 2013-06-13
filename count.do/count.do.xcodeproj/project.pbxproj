@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36A934AF17663F3A00AFF987 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A934AE17663F3A00AFF987 /* Social.framework */; };
+		36A934AF17663F3A00AFF987 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A934AE17663F3A00AFF987 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		36A934B117663F3E00AFF987 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 36A934B017663F3E00AFF987 /* Accounts.framework */; };
 		36A934F2176799EB00AFF987 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F1176799EB00AFF987 /* back.png */; };
 		36A934FB17679CA700AFF987 /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 36A934F317679CA700AFF987 /* delete.png */; };
@@ -484,6 +484,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "count.do/count.do-Prefix.pch";
 				INFOPLIST_FILE = "count.do/count.do-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -495,6 +496,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "count.do/count.do-Prefix.pch";
 				INFOPLIST_FILE = "count.do/count.do-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

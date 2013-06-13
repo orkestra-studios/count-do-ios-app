@@ -963,6 +963,7 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CDMainViewController.h"/>
             <relationships>
                 <relationship kind="action" name="deleteItem:"/>
+                <relationship kind="action" name="itemDone:"/>
                 <relationship kind="action" name="shareFB:"/>
                 <relationship kind="action" name="shareTW:"/>
                 <relationship kind="action" name="toggleAlarm:"/>

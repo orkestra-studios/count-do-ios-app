@@ -11,7 +11,7 @@
 @implementation CDBaseConversion
 
 // Uses the alphabet length as base.
-+(NSString*) formatNumber:(NSUInteger)n usingAlphabet:(NSString*)alphabet
++(NSString*) formatNumber:(long long)n usingAlphabet:(NSString*)alphabet
 {
     NSUInteger base = [alphabet length];
     if (n<base){
@@ -30,11 +30,25 @@
     }
 }
 
-+(NSString*) formatNumber:(NSUInteger)n toBase:(NSUInteger)base
++(NSString*) formatNumber:(long long)n toBase:(NSUInteger)base
 {
-    NSString *alphabet = @"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"; // 62 digits
+    NSString *alphabet = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"; // 62 digits
     NSAssert([alphabet length]>=base,@"Not enough characters. Use base %ld or lower.",(unsigned long)[alphabet length]);
     return [self formatNumber:n usingAlphabet:[alphabet substringWithRange:NSMakeRange (0, base)]];
+}
+
++(long long)decode62:(NSString*)string
+{
+    int num = 0;
+    NSString * alphabet = @"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    for (int i = 0, len = [string length]; i < len; i++)
+    {
+        NSRange range = [alphabet rangeOfString:[string substringWithRange:NSMakeRange(i,1)]];
+        num = num * 62 + range.location;
+    }
+    
+    return num;
 }
 
 @end

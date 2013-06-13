@@ -71,10 +71,10 @@
     [self.progressView setNeedsDisplay];
     if(timeLeft<0.6){
         self.doneButton.hidden = false;
-        [UIView animateWithDuration:0.3 animations:^{
-            self.doneButton.alpha = 1;
-        }];
+        self.doneButton.alpha = 1;
         [timer invalidate];
+    }else{
+        self.doneButton.hidden = true;
     }
 }
 
@@ -86,6 +86,18 @@
     [[NSNotificationCenter defaultCenter]
      postNotificationName:@"selected"
      object:self];
+}
+
+
+- (NSDateComponents *)getDate {
+    NSDateComponents *left = [[NSDateComponents alloc] init];
+    left.year   = [self.yearLabel.text integerValue];
+    left.month  = [self.monthLabel.text integerValue];
+    left.day    = [self.dayLabel.text integerValue];
+    left.hour   = [self.hourLabel.text integerValue];
+    left.minute = [self.minuteLabel.text integerValue];
+    left.second = [self.secondLabel.text integerValue];
+    return left;
 }
 
 @end

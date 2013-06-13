@@ -32,7 +32,8 @@
 @property (strong, nonatomic) NSDate *init;
 @property (weak, nonatomic) IBOutlet UIView *selectMenu;
 
-- (void) initialize;
+- (void)initialize;
 - (void)showMenu;
+- (NSDateComponents *)getDate;
 
 @end

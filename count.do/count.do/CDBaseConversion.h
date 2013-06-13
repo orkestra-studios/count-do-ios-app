@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CDBaseConversion : NSObject
-+(NSString*) formatNumber:(NSUInteger)n toBase:(NSUInteger)base;
-+(NSString*) formatNumber:(NSUInteger)n usingAlphabet:(NSString*)alphabet;
++(NSString*) formatNumber:(long long)n toBase:(NSUInteger)base;
++(NSString*) formatNumber:(long long)n usingAlphabet:(NSString*)alphabet;
++(long long)decode62:(NSString*)string;
 @end
