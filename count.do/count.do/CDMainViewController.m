@@ -21,7 +21,6 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = bgColor;
-    NSLog(@"started");
 	// Do any additional setup after loading the view, typically from a nib.
     bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
     
@@ -84,7 +83,6 @@
         }];
     selected = indexPath.row;
     selectedIndexPath = indexPath;
-    NSLog(@"alarm: %@",reminders[selected][@"alarm"]);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -169,7 +167,6 @@
             NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
             if ([uid isEqualToString:reminder[@"timestamp"]])
             {
-                NSLog(@"cancelled");
                 [app cancelLocalNotification:oneEvent];
                 break;
             }
@@ -181,7 +178,6 @@
             reminder[@"alarm"] = @"0";
             [reminders insertObject:reminder atIndex:selected];
             [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
-            NSLog(@"%@",reminders);
         }];
         
     }else{
@@ -209,7 +205,6 @@
                 reminder[@"alarm"] = @"1";
                 [reminders insertObject:reminder atIndex:selected];
                 [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
-                NSLog(@"%@",reminders);
             }];
         }
     }
