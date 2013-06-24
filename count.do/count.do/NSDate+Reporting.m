@@ -280,6 +280,7 @@
     NSString *output = [NSDateFormatter localizedStringFromDate:self
                                                       dateStyle:NSDateFormatterMediumStyle 
                                                       timeStyle:NSDateFormatterMediumStyle];
+    NSLog(@"%@",output);
 }
 #endif
 

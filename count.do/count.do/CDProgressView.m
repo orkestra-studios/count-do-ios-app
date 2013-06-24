@@ -41,8 +41,8 @@
 - (void)drawRect:(CGRect)rect
 {
     [self increment];
-    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(30, 30) radius:16 startAngle:d2r(180) endAngle:d2r(f(angle)-179) clockwise:true];
-    path.lineWidth = 9;
+    UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(30, 30) radius:15 startAngle:d2r(180) endAngle:d2r(f(angle)-179) clockwise:true];
+    path.lineWidth = 6.5;
     [[UIColor colorWithRed:(140+f(angle)/3.9)/255.0 green:(221-f(angle)/2.4)/255.0 blue:(205-f(angle)/2.2)/255.0 alpha:1] setStroke];
     [path stroke];
     

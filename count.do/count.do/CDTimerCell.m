@@ -30,10 +30,6 @@
                                                 repeats:YES ];
         [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     }
-    UISwipeGestureRecognizer *sgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(showMenu)];
-    sgr.direction = UISwipeGestureRecognizerDirectionRight;
-    [self addGestureRecognizer:sgr];
-    
 }
 
 - (void) printTimer {

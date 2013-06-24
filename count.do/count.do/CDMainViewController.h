@@ -26,6 +26,7 @@
 - (IBAction)toggleAlarm:(id)sender;
 - (IBAction)shareFB:(id)sender;
 - (IBAction)shareTW:(id)sender;
+- (void) deselect;
 - (NSString *)scramble:(NSString *)timestamp with:(NSString *)key;
 - (NSString *) timeLeft:(NSDateComponents *)from;
 

@@ -24,6 +24,11 @@
 	// Do any additional setup after loading the view, typically from a nib.
     bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
     
+    UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselect)];
+    UIView *gView = [[UIView alloc] initWithFrame:self.timers.frame];
+    [gView addGestureRecognizer:tgr];
+    self.timers.backgroundView = gView;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(setSelected)
                                                  name:@"selected"
@@ -145,7 +150,7 @@
         [reminders removeObjectAtIndex:selected];
         //sort the rest as a failsafe
         /*NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
-        NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];*/
+         NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];*/
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
         selectedIndexPath = nil;
         selected = -1;
@@ -171,8 +176,8 @@
                 break;
             }
         }
-        [UIView animateWithDuration:0.3 animations:^{
-            cell.alarmButton.alpha = 0.5;
+        [UIView animateWithDuration:0.2 animations:^{
+            cell.alarmButton.alpha = 0.3;
         } completion:^(BOOL finished) {
             [reminders removeObjectAtIndex:selected];
             reminder[@"alarm"] = @"0";
@@ -198,7 +203,7 @@
             localNotif.userInfo = @{@"uid":reminder[@"timestamp"]};
             // Schedule the notification
             [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:0.2 animations:^{
                 cell.alarmButton.alpha = 1;
             } completion:^(BOOL finished) {
                 [reminders removeObjectAtIndex:selected];
@@ -268,6 +273,16 @@
     NSIndexPath *path = [NSIndexPath indexPathForRow:[[NSUserDefaults standardUserDefaults] integerForKey:@"selected"] inSection:1];
     selected = path.row;
     selectedIndexPath = path;
+}
+
+- (void) deselect {
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    [UIView animateWithDuration:0.4 animations:^{
+        cell.selectMenu.alpha = 0;
+    } completion:^(BOOL finished) {
+        selectedIndexPath = nil;
+        selected = -1;
+    }];
 }
 
 - (IBAction)itemDone:(id)sender{
