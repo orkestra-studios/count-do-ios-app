@@ -198,7 +198,7 @@
             // Notification details
             localNotif.alertBody = [NSString stringWithFormat:@"Countdown finished: %@",reminder[@"title"]];
             localNotif.alertAction = @"Dismiss";
-            localNotif.soundName = UILocalNotificationDefaultSoundName;
+            localNotif.soundName = @"sound.m4r";
             localNotif.applicationIconBadgeNumber = 1;
             localNotif.userInfo = @{@"uid":reminder[@"timestamp"]};
             // Schedule the notification

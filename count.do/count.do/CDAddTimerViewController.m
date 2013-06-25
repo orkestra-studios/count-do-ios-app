@@ -94,7 +94,7 @@
         localNotif.timeZone = [NSTimeZone defaultTimeZone];
         localNotif.alertBody = [NSString stringWithFormat:@"Countdown finished: %@",self.titleInput.text];
         localNotif.alertAction = @"Dismiss";
-        localNotif.soundName = UILocalNotificationDefaultSoundName;
+        localNotif.soundName = @"sound.m4r";
         localNotif.applicationIconBadgeNumber = 1;
         localNotif.userInfo = @{@"uid":timestamp};
         // Schedule the notification
@@ -320,12 +320,12 @@
     if (self.titleInput.text.length==0) {
         self.backButton.hidden  = false;
         self.placeholder.hidden = false;
-    }else if(!self.backButton.hidden) {
+    }else {
         self.backButton.hidden  = true;
         self.placeholder.hidden = true;
     }
-    if (self.titleInput.text.length>=30) {
-        self.titleInput.text = [self.titleInput.text substringToIndex:30];
+    if (self.titleInput.text.length>=24) {
+        self.titleInput.text = [self.titleInput.text substringToIndex:24];
     }
 }
 
