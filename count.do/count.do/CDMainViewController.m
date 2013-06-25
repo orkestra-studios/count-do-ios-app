@@ -169,8 +169,8 @@
         {
             UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
             NSDictionary *userInfoCurrent = oneEvent.userInfo;
-            NSString *uid=[NSString stringWithFormat:@"%@",[userInfoCurrent valueForKey:@"uid"]];
-            if ([uid isEqualToString:reminder[@"timestamp"]])
+            NSNumber *uid=[userInfoCurrent valueForKey:@"uid"];
+            if ([uid isEqual:reminder[@"timestamp"]])
             {
                 [app cancelLocalNotification:oneEvent];
                 break;

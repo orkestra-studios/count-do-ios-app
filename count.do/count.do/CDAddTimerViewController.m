@@ -9,7 +9,7 @@
 #import "CDAddTimerViewController.h"
 #import "NSDate+Reporting.h"
 #import <stdlib.h>
-#define dayNums @{@"Sunday":@0,@"Monday":@1,@"Tuesday":@2,@"Wednesday":@3,@"Thursday":@4,@"Friday":@5,@"Saturday":@6}
+#define dayNums @{@"Sunday":@0,@"Pazar":@0,@"Monday":@1,@"Pazartesi":@1,@"Tuesday":@2,@"Salı":@2,@"Wednesday":@3,@"Çarşamba":@3,@"Thursday":@4,@"Perşembe":@4,@"Friday":@5,@"Cuma":@5,@"Saturday":@6,@"Cumartesi":@6}
 
 @interface CDAddTimerViewController ()
 
@@ -79,7 +79,7 @@
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
-    date.second = arc4random_uniform(10);
+    date.second = 0;//arc4random_uniform(5);
     NSDate *selected = [cal dateFromComponents:date];
     NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
     
