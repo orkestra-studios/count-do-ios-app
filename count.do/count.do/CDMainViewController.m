@@ -316,7 +316,7 @@
         plural = (from.minute>1) ? @"s" : @"";
         minString = [NSString stringWithFormat:@"%d minute%@ and ",from.minute,plural];
     }
-    if (from.year>0 || from.month>0 || from.day>0 || from.hour>0 || from.minute>0) {
+    if (from.year>0 || from.month>0 || from.day>0 || from.hour>0 || from.minute>0 || from.second>0) {
         plural = (from.second>1 || from.second==0) ? @"s" : @"";
         secString = [NSString stringWithFormat:@"%d second%@ to",from.second,plural];
     }
