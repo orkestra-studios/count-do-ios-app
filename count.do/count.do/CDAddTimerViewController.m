@@ -324,6 +324,7 @@
         self.placeholder.hidden = false;
     }else {
         self.backButton.hidden  = true;
+        self.backButton.alpha = 1;
         self.placeholder.hidden = true;
     }
     if (self.titleInput.text.length>=24) {
