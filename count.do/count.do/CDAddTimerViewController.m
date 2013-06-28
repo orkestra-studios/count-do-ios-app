@@ -9,7 +9,7 @@
 #import "CDAddTimerViewController.h"
 #import "NSDate+Reporting.h"
 #import <stdlib.h>
-#define dayNums @{@"Sunday":@0,@"Pazar":@0,@"Monday":@1,@"Pazartesi":@1,@"Tuesday":@2,@"Salı":@2,@"Wednesday":@3,@"Çarşamba":@3,@"Thursday":@4,@"Perşembe":@4,@"Friday":@5,@"Cuma":@5,@"Saturday":@6,@"Cumartesi":@6}
+#define dayNums @{@"Sunday":@0,@"Monday":@1,@"Tuesday":@2,@"Wednesday":@3,@"Thursday":@4,@"Friday":@5,@"Saturday":@6}
 
 @interface CDAddTimerViewController ()
 
@@ -114,9 +114,11 @@
 - (void) redrawDateValues {
     yearLabel.text = [NSString stringWithFormat:@"%d",date.year];
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"US"]];
     monthLabel.text = [[[df monthSymbols] objectAtIndex:(date.month-1)] uppercaseString];
     NSDateFormatter *weekday = [[NSDateFormatter alloc] init];
     [weekday setDateFormat: @"EEEE"];
+    [weekday setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"US"]];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDate *selected = [cal dateFromComponents:date];
     
