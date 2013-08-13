@@ -24,18 +24,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	NSDate *current = [NSDate date];
-    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
-    UITapGestureRecognizer *shieldToggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdits)];
-    [self.shield addGestureRecognizer:shieldToggle];
-    [self redrawDateValues];
-    double delayInSeconds = 0.5;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self.titleInput becomeFirstResponder];
-    });
-    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"editing"]) {
+        [self editReminder];
+    }else {
+        [self newReminder];
+    }
     //Add Gesture recognizers
     //Month Selection
     UISwipeGestureRecognizer *rgr = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(nextMonth:)];
@@ -59,7 +52,31 @@
     dmgr.direction = UISwipeGestureRecognizerDirectionDown;
     [self.minDetector addGestureRecognizer:umgr];
     [self.minDetector addGestureRecognizer:dmgr];
-    
+}
+
+- (void) newReminder {
+    NSDate *current = [NSDate date];
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
+    UITapGestureRecognizer *shieldToggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdits)];
+    [self.shield addGestureRecognizer:shieldToggle];
+    [self redrawDateValues];
+    double delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.titleInput becomeFirstResponder];
+    });
+}
+
+- (void) editReminder {
+    self.titleInput.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"title"];
+    NSDate *current = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"timestamp"] integerValue]];
+    NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
+    UITapGestureRecognizer *shieldToggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdits)];
+    [self.shield addGestureRecognizer:shieldToggle];
+    [self redrawDateValues];
+    [self textFieldDidChange:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +96,7 @@
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
-    date.second = 0;//arc4random_uniform(5);
+    date.second = arc4random_uniform(5);
     NSDate *selected = [cal dateFromComponents:date];
     NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
     
@@ -104,6 +121,10 @@
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
     NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     [[NSUserDefaults standardUserDefaults] setObject:sorted forKey:@"reminders"];
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"editing"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"editingEnd" object:nil];
+    }
     
     [self.navigationController popViewControllerAnimated:YES];
 }

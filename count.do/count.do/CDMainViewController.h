@@ -16,7 +16,9 @@
     NSMutableArray *reminders;
     int selected;
     NSIndexPath *selectedIndexPath;
-    
+    int selected_n;
+    NSIndexPath *selectedIndexPath_n;
+    NSTimer *timer;
     dispatch_queue_t bgq;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
@@ -27,6 +29,7 @@
 - (IBAction)shareFB:(id)sender;
 - (IBAction)shareTW:(id)sender;
 - (void) deselect;
+- (void)endEdit;
 - (NSString *)scramble:(NSString *)timestamp with:(NSString *)key;
 - (NSString *) timeLeft:(NSDateComponents *)from;
 

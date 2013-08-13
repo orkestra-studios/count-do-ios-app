@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeholder;
 
+- (void) newReminder;
+- (void) editReminder;
+
 - (void) redrawDateValues;
 
 - (IBAction)nextMonth:(id)sender;

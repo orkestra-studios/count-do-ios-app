@@ -8,6 +8,7 @@
 
 #import "CDMainViewController.h"
 #import "CDTimerCell.h"
+#import "CDAddTimerViewController.h"
 #import "CDBaseConversion.h"
 #define bgColor [UIColor colorWithRed:(236/255.0) green:(240/255.0) blue:(241/255.0) alpha:1]
 
@@ -23,7 +24,7 @@
     self.view.backgroundColor = bgColor;
 	// Do any additional setup after loading the view, typically from a nib.
     bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
-    
+    selected = -1;
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselect)];
     UIView *gView = [[UIView alloc] initWithFrame:self.timers.frame];
     [gView addGestureRecognizer:tgr];
@@ -33,6 +34,11 @@
                                              selector:@selector(setSelected)
                                                  name:@"selected"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(endEdit)
+                                                 name:@"editingEnd"
+                                               object:nil];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -41,18 +47,7 @@
         reminders = [NSMutableArray arrayWithCapacity:10];
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
     }
-    selected = -1;
     [self.timers reloadData];
-}
-
-- (void)viewDidDisappear:(BOOL)animated{
-    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
-    [UIView animateWithDuration:0.3 animations:^{
-        cell.selectMenu.alpha=0;
-    } completion:^(BOOL finished) {
-        selected = -1;
-        selectedIndexPath = nil;
-    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -134,6 +129,8 @@
     }else if([kind isEqualToString:UICollectionElementKindSectionFooter]){
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
         reusableView.backgroundColor = bgColor;
+        UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselect)];
+        [reusableView addGestureRecognizer:tgr];
     }
     return reusableView;
 }
@@ -142,10 +139,13 @@
 #pragma mark -
 #pragma mark Item Menu Methods
 - (IBAction)deleteItem:(id)sender {
+    NSLog(@"selected4: %d",selected);
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
     [UIView animateWithDuration:0.4 animations:^{
         cell.alpha=0;
+        NSLog(@"selected5: %d",selected);
     } completion:^(BOOL finished) {
+        NSLog(@"selected6: %d",selected);
         //remove selected item
         [reminders removeObjectAtIndex:selected];
         //sort the rest as a failsafe
@@ -228,7 +228,7 @@
         [controller setInitialText:[NSString stringWithFormat:@"%@ %@. countdo.co/%@ @countdoapp",[self timeLeft:[cell getDate]],reminder[@"title"],[self scramble:reminder[@"timestamp"] with:reminder[@"title"]]]];
         [self presentViewController:controller animated:YES completion:nil];
         dispatch_async(bgq, ^{
-            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString stringWithFormat:@"http://countdo.co/save/%@/%@/%@",[self scramble:reminder[@"timestamp"] with:reminder[@"title"]],reminder[@"title"],reminder[@"timestamp"]]stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:[[NSString stringWithFormat:@"http://countdo.co/save/%@/%@/%@",[self scramble:reminder[@"timestamp"] with:reminder[@"title"]],reminder[@"title"],reminder[@"timestamp"]] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]]];
             [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
         });
     }
@@ -283,6 +283,35 @@
         selectedIndexPath = nil;
         selected = -1;
     }];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"edit"]){
+        NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
+        [[NSUserDefaults standardUserDefaults] setObject:reminder forKey:@"edit"];
+        [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"editing"];
+        NSLog(@"selected0: %d",selected);
+        selected_n = selected;
+        selectedIndexPath_n = selectedIndexPath;
+    }else {
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"editing"];
+    }
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    [UIView animateWithDuration:0.3 animations:^{
+        cell.selectMenu.alpha=0;
+    } completion:^(BOOL finished) {
+        selected = -1;
+        selectedIndexPath = nil;
+    }];
+    NSLog(@"selected1: %d",selected);
+}
+
+- (void)endEdit {
+    NSLog(@"selected2: %d",selected);
+    selectedIndexPath = selectedIndexPath_n;
+    selected = selected_n;
+    NSLog(@"selected3: %d",selected);
+    [self deleteItem:nil];
 }
 
 - (IBAction)itemDone:(id)sender{

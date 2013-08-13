@@ -23,13 +23,9 @@
     [self printTimer];
     if (firstLeft>0) {
         [self.progressView increment];
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.2
-                                                 target:self
-                                               selector:@selector(printTimer)
-                                               userInfo:nil
-                                                repeats:YES ];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     }
+    timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(printTimer) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 - (void) printTimer {
