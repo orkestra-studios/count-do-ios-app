@@ -93,6 +93,10 @@
 
 - (IBAction)saveReminder:(id)sender {
     
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"editing"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"editingEnd" object:nil];
+    }
+    
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
@@ -121,10 +125,6 @@
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
     NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     [[NSUserDefaults standardUserDefaults] setObject:sorted forKey:@"reminders"];
-    
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"editing"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"editingEnd" object:nil];
-    }
     
     [self.navigationController popViewControllerAnimated:YES];
 }

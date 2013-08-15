@@ -290,7 +290,6 @@
         NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
         [[NSUserDefaults standardUserDefaults] setObject:reminder forKey:@"edit"];
         [[NSUserDefaults standardUserDefaults] setBool:true forKey:@"editing"];
-        NSLog(@"selected0: %d",selected);
         selected_n = selected;
         selectedIndexPath_n = selectedIndexPath;
     }else {
@@ -303,15 +302,17 @@
         selected = -1;
         selectedIndexPath = nil;
     }];
-    NSLog(@"selected1: %d",selected);
 }
 
 - (void)endEdit {
-    NSLog(@"selected2: %d",selected);
     selectedIndexPath = selectedIndexPath_n;
     selected = selected_n;
-    NSLog(@"selected3: %d",selected);
-    [self deleteItem:nil];
+    //remove selected item
+    [reminders removeObjectAtIndex:selected];
+    [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+    selectedIndexPath = nil;
+    selected = -1;
+    [self.timers reloadData];
 }
 
 - (IBAction)itemDone:(id)sender{
