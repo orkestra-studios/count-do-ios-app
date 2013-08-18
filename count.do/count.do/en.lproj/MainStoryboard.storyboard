@@ -392,9 +392,9 @@
                         <color key="backgroundColor" red="0.96368781887755106" green="0.96368781887755106" blue="0.96368781887755106" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="IPF-8i-Ks7" firstAttribute="top" secondItem="3" secondAttribute="top" type="default" id="1cL-ip-1Mg"/>
+                            <constraint firstItem="IPF-8i-Ks7" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="DqB-zB-7cP"/>
                             <constraint firstItem="IPF-8i-Ks7" firstAttribute="leading" secondItem="3" secondAttribute="leading" type="default" id="G6E-d7-JaC"/>
-                            <constraint firstItem="IPF-8i-Ks7" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="cJs-Ao-y5d"/>
-                            <constraint firstItem="IPF-8i-Ks7" firstAttribute="bottom" secondItem="3" secondAttribute="bottom" type="default" id="lPi-Mh-QNT"/>
+                            <constraint firstItem="IPF-8i-Ks7" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="xyG-Vc-yq2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4l7-Jv-SSY"/>
@@ -405,6 +405,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="674" y="-69"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="KW1-9D-jd8">
+            <objects>
+                <viewController id="pjK-yi-8D6" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3lq-4w-hTx">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mo4-Fa-Moc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1201" y="621"/>
         </scene>
         <!--Add Timer View Controller-->
         <scene sceneID="aCa-oL-c0H">

@@ -18,9 +18,11 @@
     timerTarget = [cal dateFromComponents:comps];
     self.selectMenu.alpha=0;
     
-    firstLeft = [timerTarget timeIntervalSinceReferenceDate] - [init timeIntervalSinceReferenceDate];
+    firstLeft = [init timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
     firstLeft = firstLeft>0 ? firstLeft : 0;
-    [self printTimer];
+    timeLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
+    self.progressView.angle = @0;
+    self.progressView.tangle = @(358.9 - ((timeLeft/(firstLeft+0.001))*360)); 
     if (firstLeft>0) {
         [self.progressView increment];
     }
@@ -29,6 +31,7 @@
 }
 
 - (void) printTimer {
+    [self.progressView stopAnimation];
     timeLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
     timeLeft = timeLeft>0 ? timeLeft : 0;
     int tempLeft = timeLeft;
@@ -70,7 +73,7 @@
     }
 }
 
-- (void)showMenu {
+- (void) showMenu {
     [UIView animateWithDuration:0.3 animations:^{
         self.selectMenu.alpha=1;
     }];

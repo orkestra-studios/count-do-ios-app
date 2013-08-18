@@ -11,9 +11,12 @@
 @interface CDProgressView : UIView
 {
     NSTimer *timer;
+    BOOL animation;
 }
 
 @property (strong, nonatomic) NSNumber *angle;
+@property (strong, nonatomic) NSNumber *tangle;
 
 - (void) increment;
+- (void) stopAnimation;
 @end

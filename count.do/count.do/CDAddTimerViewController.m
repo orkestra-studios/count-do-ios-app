@@ -121,11 +121,12 @@
         // Schedule the notification
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     };
-    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"init":[formatter stringFromDate:[NSDate date]], @"timestamp":timestamp,@"alarm":@"1"}];
+    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"timestamp":timestamp,@"alarm":@"1"}];
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
     NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     [[NSUserDefaults standardUserDefaults] setObject:sorted forKey:@"reminders"];
     
+    [[NSUserDefaults standardUserDefaults] setObject:[sorted lastObject][@"date"] forKey:@"init"];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -245,7 +246,6 @@
     if(date.minute<55) date.minute+=5;
     else {
         date.minute=0;
-        [self nextHour:nil];
     }
     [self redrawDateValues];
 }
@@ -256,7 +256,6 @@
     if(date.minute>0) date.minute-=5;
     else {
         date.minute=55;
-        [self previousHour:nil];
     }
     [self redrawDateValues];
 }

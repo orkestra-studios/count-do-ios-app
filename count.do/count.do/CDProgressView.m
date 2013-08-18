@@ -12,30 +12,43 @@
 
 @implementation CDProgressView
 @synthesize angle;
+@synthesize tangle;
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
         angle = @0;
-        /*if (f(angle)>359) {
-            timer = [NSTimer scheduledTimerWithTimeInterval:0.5
-                                                     target:self
-                                                   selector:@selector(increment)
-                                                   userInfo:nil
-                                                    repeats:YES ];
-            [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-        }*/
+        animation = true;
     }
     return self;
 }
 
 - (void) increment {
+    if(animation){
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(animate) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+     }
     if (f(angle)>359) {
         angle=@358.9;
-        [timer invalidate];
     }
     [self setNeedsDisplay];
+}
+
+- (void) animate {
+    if (!animation) {
+        [timer invalidate];
+        return;
+    }
+    if (f(angle)<f(tangle)) {
+        NSLog(@"animating: %d",animation);
+        angle = [NSNumber numberWithFloat:([angle floatValue] + [[NSNumber numberWithFloat:f(tangle)-f(angle)] floatValue]/360.0+0.5)];
+    }[self setNeedsDisplay];
+}
+
+- (void) stopAnimation {
+    animation = false;
+    [timer invalidate];
 }
 
 - (void)drawRect:(CGRect)rect

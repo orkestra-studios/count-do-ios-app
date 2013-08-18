@@ -110,15 +110,15 @@
     NSHourCalendarUnit  |
     NSMinuteCalendarUnit|
     NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[dataIndexL][@"date"]]];
-    cell.init = [formatter dateFromString:reminders[dataIndexL][@"init"]];
+    cell.init = [formatter dateFromString:[[NSUserDefaults standardUserDefaults] objectForKey:@"init"]];
     cell.selectMenu.tag = dataIndexL;
     cell.doneButton.tag = dataIndexL;
     cell.titleLabel.text = reminders[dataIndexL][@"title"];
     [cell initialize];
+    NSLog(@"alarm: %@",reminders[dataIndexL][@"alarm"]);
     if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
         cell.alarmButton.alpha=0.5;
     }
-    
     return cell;
 } 
 
@@ -139,13 +139,28 @@
 #pragma mark -
 #pragma mark Item Menu Methods
 - (IBAction)deleteItem:(id)sender {
-    NSLog(@"selected4: %d",selected);
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    //remove calibration request
+    [[NSNotificationCenter defaultCenter] removeObserver:cell];
+    //remove alarm
+    NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
+    UIApplication *app = [UIApplication sharedApplication];
+    NSArray *eventArray = [app scheduledLocalNotifications];
+    for (int i=0; i<[eventArray count]; i++)
+    {
+        UILocalNotification* oneEvent = [eventArray objectAtIndex:i];
+        NSDictionary *userInfoCurrent = oneEvent.userInfo;
+        NSNumber *uid=[userInfoCurrent valueForKey:@"uid"];
+        if ([uid isEqual:reminder[@"timestamp"]])
+        {
+            [app cancelLocalNotification:oneEvent];
+            break;
+        }
+    }
+    //remove cell
     [UIView animateWithDuration:0.4 animations:^{
         cell.alpha=0;
-        NSLog(@"selected5: %d",selected);
     } completion:^(BOOL finished) {
-        NSLog(@"selected6: %d",selected);
         //remove selected item
         [reminders removeObjectAtIndex:selected];
         //sort the rest as a failsafe
@@ -154,6 +169,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
         selectedIndexPath = nil;
         selected = -1;
+        [[NSUserDefaults standardUserDefaults] setObject:[reminders lastObject][@"date"] forKey:@"init"];
         [self.timers reloadData];
     }];
 }
