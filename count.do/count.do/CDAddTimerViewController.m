@@ -223,7 +223,6 @@
     if(date.hour<23) date.hour++;
     else {
         date.hour=0;
-        //TODO: increment day
     }
     [self redrawDateValues];
 }
@@ -234,7 +233,6 @@
     if(date.hour>0) date.hour--;
     else {
         date.hour = 23;
-        //TODO: decrement day
     }
     [self redrawDateValues];
 }

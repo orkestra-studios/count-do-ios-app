@@ -21,10 +21,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.view.backgroundColor = bgColor;
 	// Do any additional setup after loading the view, typically from a nib.
+    /* Initial setup */
+    self.view.backgroundColor = bgColor;
     bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
-    selected = -1;
+    selected = -1; // None of the timers are selected
+    /* A tap to background will also unselect it */
     UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselect)];
     UIView *gView = [[UIView alloc] initWithFrame:self.timers.frame];
     [gView addGestureRecognizer:tgr];
@@ -138,6 +140,7 @@
 
 #pragma mark -
 #pragma mark Item Menu Methods
+
 - (IBAction)deleteItem:(id)sender {
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
     //remove calibration request
