@@ -41,7 +41,6 @@
         return;
     }
     if (f(angle)<f(tangle)) {
-        NSLog(@"animating: %d",animation);
         angle = [NSNumber numberWithFloat:([angle floatValue] + [[NSNumber numberWithFloat:f(tangle)-f(angle)] floatValue]/360.0+0.5)];
     }[self setNeedsDisplay];
 }
