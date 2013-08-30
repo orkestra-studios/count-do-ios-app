@@ -10,8 +10,10 @@
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 #import <stdlib.h>
+#import <iAd/iAd.h>
 
-@interface CDMainViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface CDMainViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
+    ADBannerViewDelegate>
 {
     NSMutableArray *reminders;
     int selected;
@@ -22,6 +24,7 @@
     dispatch_queue_t bgq;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
+@property (weak, nonatomic) IBOutlet ADBannerView *banner;
 
 - (void)setSelected;
 - (IBAction)deleteItem:(id)sender;

@@ -17,26 +17,24 @@
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     timerTarget = [cal dateFromComponents:comps];
     self.selectMenu.alpha=0;
-    
     firstLeft = [init timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
     firstLeft = firstLeft>0 ? firstLeft : 0;
     timeLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
-    self.progressView.angle = @0;
+    //self.progressView.angle = @0;
     self.progressView.tangle = @(358.9 - ((timeLeft/(firstLeft+0.001))*360)); 
+    [self.progressView startAnimation];
     if (firstLeft>0) {
         [self.progressView increment];
     }
+    [self printTimer];
     timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(printTimer) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 - (void) printTimer {
-    [self.progressView stopAnimation];
     timeLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
-    timeLeft = timeLeft>0 ? timeLeft : 0;
+    timeLeft = timeLeft>=0 ? timeLeft : -timeLeft;
     int tempLeft = timeLeft;
-    self.progressView.angle = @(358.9 - ((timeLeft/(firstLeft+0.001))*360));
-    self.progressView.angle = [self.progressView.angle floatValue]>0 ? self.progressView.angle : @0.001;
     int years  = tempLeft / 31104000;
     tempLeft   = tempLeft - years*31104000;
     int months = tempLeft / 2592000;
@@ -63,11 +61,18 @@
     self.hourLabel.text = hourString;
     self.minuteLabel.text = minString;
     self.secondLabel.text = secString;
+    if([self.progressView animation] && [timerTarget timeIntervalSinceReferenceDate]<[NSDate timeIntervalSinceReferenceDate])
+        [self.progressView stopAnimation];
+    if([self.progressView animation]) {
+        [self.progressView setNeedsDisplay];
+        return;
+    }
+    self.progressView.angle = @(358.9 - ((timeLeft/(firstLeft+0.001))*360));
+    self.progressView.angle = [self.progressView.angle floatValue]>0 ? self.progressView.angle : @0.001;
     [self.progressView setNeedsDisplay];
-    if(timeLeft<0.6){
+    if(timeLeft<0.6 || [timerTarget timeIntervalSinceReferenceDate]<[NSDate timeIntervalSinceReferenceDate]){
         self.doneButton.hidden = false;
         self.doneButton.alpha = 1;
-        [timer invalidate];
     }else{
         self.doneButton.hidden = true;
     }

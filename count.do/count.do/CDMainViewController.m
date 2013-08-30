@@ -10,6 +10,7 @@
 #import "CDTimerCell.h"
 #import "CDAddTimerViewController.h"
 #import "CDBaseConversion.h"
+#import "CDProgressView.h"
 #define bgColor [UIColor colorWithRed:(236/255.0) green:(240/255.0) blue:(241/255.0) alpha:1]
 
 @interface CDMainViewController ()
@@ -17,12 +18,14 @@
 @end
 
 @implementation CDMainViewController
+@synthesize banner;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     /* Initial setup */
+    banner.backgroundColor = bgColor;
     self.view.backgroundColor = bgColor;
     bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
     selected = -1; // None of the timers are selected
@@ -117,7 +120,6 @@
     cell.doneButton.tag = dataIndexL;
     cell.titleLabel.text = reminders[dataIndexL][@"title"];
     [cell initialize];
-    NSLog(@"alarm: %@",reminders[dataIndexL][@"alarm"]);
     if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
         cell.alarmButton.alpha=0.5;
     }
@@ -167,12 +169,13 @@
         //remove selected item
         [reminders removeObjectAtIndex:selected];
         //sort the rest as a failsafe
-        /*NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
+        /*NSSortDescriptor * sorat = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
          NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];*/
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
         selectedIndexPath = nil;
         selected = -1;
         [[NSUserDefaults standardUserDefaults] setObject:[reminders lastObject][@"date"] forKey:@"init"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         [self.timers reloadData];
     }];
 }
@@ -315,12 +318,9 @@
         [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"editing"];
     }
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
-    [UIView animateWithDuration:0.3 animations:^{
         cell.selectMenu.alpha=0;
-    } completion:^(BOOL finished) {
         selected = -1;
         selectedIndexPath = nil;
-    }];
 }
 
 - (void)endEdit {
@@ -370,6 +370,29 @@
         secString = [NSString stringWithFormat:@"%d second%@ to",from.second,plural];
     }
     return [NSString stringWithFormat:@"%@%@%@%@%@%@",yearString,monthString,dayString,hourString,minString,secString];
+}
+
+#pragma mark - AdView Delegate Methods
+
+-(void)bannerView:(ADBannerView *)b
+didFailToReceiveAdWithError:(NSError *)error{
+    [UIView animateWithDuration:0.3 animations:^{
+        [self.timers setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+        [banner setCenter:CGPointMake(160, self.view.frame.size.height+25)];
+    }];
+    NSLog(@"Error loading");
+}
+
+-(void)bannerViewDidLoadAd:(ADBannerView *)banner{
+    NSLog(@"Ad loaded");
+}
+-(void)bannerViewWillLoadAd:(ADBannerView *)banner{
+    NSLog(@"Ad will load");
+}
+
+-(void)bannerViewActionDidFinish:(ADBannerView *)banner{
+    NSLog(@"Ad did finish");
+    
 }
 
 @end

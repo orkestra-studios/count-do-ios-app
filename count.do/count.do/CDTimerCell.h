@@ -16,7 +16,6 @@
     int timeLeft, firstLeft;
     NSDate *timerTarget;
     NSTimer *timer;
-    
 }
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;

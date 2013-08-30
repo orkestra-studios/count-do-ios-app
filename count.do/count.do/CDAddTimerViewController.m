@@ -58,6 +58,7 @@
     NSDate *current = [NSDate date];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
+    date.minute+=5;
     UITapGestureRecognizer *shieldToggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdits)];
     [self.shield addGestureRecognizer:shieldToggle];
     [self redrawDateValues];
@@ -73,6 +74,7 @@
     NSDate *current = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"timestamp"] integerValue]];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
+    date.minute+=5;
     UITapGestureRecognizer *shieldToggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdits)];
     [self.shield addGestureRecognizer:shieldToggle];
     [self redrawDateValues];
@@ -103,7 +105,6 @@
     date.second = arc4random_uniform(5);
     NSDate *selected = [cal dateFromComponents:date];
     NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
-    
     
     NSNumber *timestamp = @([selected timeIntervalSince1970]);
     
@@ -168,8 +169,9 @@
         days[i+j+k] = [NSString stringWithFormat:@"%d",k+1];
     }
     [self.calendar reloadData];
+    date.minute = (date.minute-date.minute%5)%60;
     hourLabel.text = [NSString stringWithFormat:@"%02d",date.hour];
-    minLabel.text = [NSString stringWithFormat:@"%02d",(date.minute-date.minute%5)];
+    minLabel.text = [NSString stringWithFormat:@"%02d",(date.minute)];
     
     [UIView animateWithDuration:0.2 animations:^{
         self.monthLabel.alpha = 1;
@@ -245,6 +247,7 @@
     else {
         date.minute=0;
     }
+    date.minute-=date.minute%5;
     [self redrawDateValues];
 }
 - (IBAction)previousMin:(id)sender{
@@ -255,6 +258,7 @@
     else {
         date.minute=55;
     }
+    date.minute-=date.minute%5;
     [self redrawDateValues];
 }
 

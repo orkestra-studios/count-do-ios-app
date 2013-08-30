@@ -20,15 +20,12 @@
     if (self) {
         angle = @0;
         animation = true;
+        [self startAnimation];
     }
     return self;
 }
 
 - (void) increment {
-    if(animation){
-        timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(animate) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-     }
     if (f(angle)>359) {
         angle=@358.9;
     }
@@ -40,14 +37,29 @@
         [timer invalidate];
         return;
     }
-    if (f(angle)<f(tangle)) {
-        angle = [NSNumber numberWithFloat:([angle floatValue] + [[NSNumber numberWithFloat:f(tangle)-f(angle)] floatValue]/360.0+0.5)];
-    }[self setNeedsDisplay];
+    if (f(tangle)-f(angle)>=1) {
+        angle = [NSNumber numberWithFloat:([angle floatValue] + [[NSNumber numberWithFloat:f(tangle)-f(angle)] floatValue]/45.0 + 0.5)];
+    }else if (f(tangle)-f(angle)<=-1) {
+        angle = [NSNumber numberWithFloat:([angle floatValue] + [[NSNumber numberWithFloat:f(tangle)-f(angle)] floatValue]/45.0 - 0.5)];
+    }else {
+        [self stopAnimation];
+    }
+    [self setNeedsDisplay];
+    [self setNeedsLayout];
 }
 
 - (void) stopAnimation {
+    NSLog(@"stop");
     animation = false;
     [timer invalidate];
+}
+
+- (void) startAnimation {
+    animation = true;
+    if(animation){
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(animate) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    }
 }
 
 - (void)drawRect:(CGRect)rect
@@ -58,6 +70,10 @@
     [[UIColor colorWithRed:(140+f(angle)/3.9)/255.0 green:(221-f(angle)/2.4)/255.0 blue:(205-f(angle)/2.2)/255.0 alpha:1] setStroke];
     [path stroke];
     
+}
+
+- (BOOL) animation {
+    return animation;
 }
 
 @end

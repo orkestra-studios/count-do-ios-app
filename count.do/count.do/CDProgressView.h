@@ -19,4 +19,6 @@
 
 - (void) increment;
 - (void) stopAnimation;
+- (void) startAnimation;
+- (BOOL) animation;
 @end
