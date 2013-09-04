@@ -377,8 +377,8 @@
 -(void)bannerView:(ADBannerView *)b
 didFailToReceiveAdWithError:(NSError *)error{
     [UIView animateWithDuration:0.3 animations:^{
-        [self.timers setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-        [banner setCenter:CGPointMake(160, self.view.frame.size.height+25)];
+        //[self.timers setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
+        //[banner setCenter:CGPointMake(160, self.view.frame.size.height+25)];
     }];
     NSLog(@"Error loading");
 }
