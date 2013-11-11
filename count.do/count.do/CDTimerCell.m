@@ -11,13 +11,15 @@
 
 @implementation CDTimerCell
 @synthesize comps;
-@synthesize init;
+@synthesize initial;
 
 - (void) initialize {
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     timerTarget = [cal dateFromComponents:comps];
-    self.selectMenu.alpha=0;
-    firstLeft = [init timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
+    self.selectMenu.alpha = 0;
+    self.deletePopup.alpha = 0;
+    self.deletePopup.hidden = true;
+    firstLeft = [initial timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
     firstLeft = firstLeft>0 ? firstLeft : 0;
     timeLeft = [timerTarget timeIntervalSinceReferenceDate] - [NSDate timeIntervalSinceReferenceDate];
     //self.progressView.angle = @0;

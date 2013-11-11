@@ -28,8 +28,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *alarmButton;
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (strong, nonatomic) NSDateComponents *comps;
-@property (strong, nonatomic) NSDate *init;
+@property (strong, nonatomic) NSDate *initial;
 @property (weak, nonatomic) IBOutlet UIView *selectMenu;
+@property (weak, nonatomic) IBOutlet UIView *deletePopup;
 
 - (void)initialize;
 - (void)showMenu;

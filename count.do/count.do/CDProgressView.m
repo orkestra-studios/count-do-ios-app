@@ -49,7 +49,6 @@
 }
 
 - (void) stopAnimation {
-    NSLog(@"stop");
     animation = false;
     [timer invalidate];
 }

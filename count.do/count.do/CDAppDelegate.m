@@ -13,20 +13,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    // Obtain the uid
-    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
-    NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(NULL,uuidRef));
-    CFRelease(uuidRef);
-    // Construct url
-    NSString *urlAsString = [NSString stringWithFormat:@"http://nightbla.de/appcounter/add/%@/CountDo/",uuidString];
-    NSURL *url = [NSURL URLWithString:urlAsString];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-    // Send the request asynchronously
-    [NSURLConnection
-     sendAsynchronousRequest:urlRequest
-     queue:[[NSOperationQueue alloc] init]
-     completionHandler:nil];
     return YES;
 }
 							

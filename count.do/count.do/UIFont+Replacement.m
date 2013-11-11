@@ -26,6 +26,13 @@ static void initializeReplacementFonts()
 
 + (void) load
 {
+    
+    Method fontWithDescriptor_size_ = class_getClassMethod([UIFont class], @selector(fontWithDescriptor:size:));
+    Method replacementFontWithDescriptor_size_ = class_getClassMethod([UIFont class], @selector(replacement_fontWithDescriptor:size:));
+    
+    if (fontWithDescriptor_size_ && replacementFontWithDescriptor_size_ && strcmp(method_getTypeEncoding(fontWithDescriptor_size_), method_getTypeEncoding(replacementFontWithDescriptor_size_)) == 0)
+        method_exchangeImplementations(fontWithDescriptor_size_, replacementFontWithDescriptor_size_);
+    
 	Method fontWithName_size_ = class_getClassMethod([UIFont class], @selector(fontWithName:size:));
 	Method fontWithName_size_traits_ = class_getClassMethod([UIFont class], @selector(fontWithName:size:traits:));
 	Method replacementFontWithName_size_ = class_getClassMethod([UIFont class], @selector(replacement_fontWithName:size:));
@@ -49,6 +56,14 @@ static void initializeReplacementFonts()
 	initializeReplacementFonts();
 	NSString *replacementFontName = [replacementDictionary objectForKey:fontName];
 	return [self replacement_fontWithName:replacementFontName ?: fontName size:fontSize traits:traits];
+}
+
++ (UIFont *) replacement_fontWithDescriptor:(UIFontDescriptor *)fontDescriptor size:(CGFloat)fontSize
+{
+    initializeReplacementFonts();
+    NSString *replacementFontName = [replacementDictionary objectForKey:fontDescriptor.postscriptName];
+    UIFontDescriptor *replacementFontDescriptor = replacementFontName ? [UIFontDescriptor fontDescriptorWithName:replacementFontName size:fontSize] : fontDescriptor;
+    return [self replacement_fontWithDescriptor:replacementFontDescriptor size:fontSize];
 }
 
 + (NSDictionary *) replacementDictionary

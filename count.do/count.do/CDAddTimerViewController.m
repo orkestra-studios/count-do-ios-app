@@ -21,6 +21,11 @@
 @synthesize hourLabel;
 @synthesize minLabel;
 
+- (BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

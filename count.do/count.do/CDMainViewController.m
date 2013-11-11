@@ -18,14 +18,12 @@
 @end
 
 @implementation CDMainViewController
-@synthesize banner;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     /* Initial setup */
-    banner.backgroundColor = bgColor;
     self.view.backgroundColor = bgColor;
     bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
     selected = -1; // None of the timers are selected
@@ -52,6 +50,7 @@
         reminders = [NSMutableArray arrayWithCapacity:10];
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
     }
+    [self closeDeletePopup:nil];
     [self.timers reloadData];
 }
 
@@ -115,7 +114,7 @@
     NSHourCalendarUnit  |
     NSMinuteCalendarUnit|
     NSSecondCalendarUnit fromDate:[formatter dateFromString:reminders[dataIndexL][@"date"]]];
-    cell.init = [formatter dateFromString:[[NSUserDefaults standardUserDefaults] objectForKey:@"init"]];
+    cell.initial = [formatter dateFromString:[[NSUserDefaults standardUserDefaults] objectForKey:@"init"]];
     cell.selectMenu.tag = dataIndexL;
     cell.doneButton.tag = dataIndexL;
     cell.titleLabel.text = reminders[dataIndexL][@"title"];
@@ -167,6 +166,7 @@
         cell.alpha=0;
     } completion:^(BOOL finished) {
         //remove selected item
+        NSLog(@"itemDone:%d",selected);
         [reminders removeObjectAtIndex:selected];
         //sort the rest as a failsafe
         /*NSSortDescriptor * sorat = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
@@ -291,6 +291,24 @@
     //,multiplier];
 }
 
+- (IBAction) openDeletePopup:(id)sender {
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    cell.deletePopup.hidden = false;
+    cell.deletePopup.alpha  = 0;
+    [UIView animateWithDuration:0.4 animations:^{
+        cell.deletePopup.alpha = 1;
+    } completion:nil];
+}
+
+- (IBAction) closeDeletePopup:(id)sender {
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    [UIView animateWithDuration:0.4 animations:^{
+        cell.deletePopup.alpha = 0;
+    } completion:^(BOOL finished) {
+        cell.deletePopup.hidden = true;
+    }];
+}
+
 - (void) setSelected {
     NSIndexPath *path = [NSIndexPath indexPathForRow:[[NSUserDefaults standardUserDefaults] integerForKey:@"selected"] inSection:1];
     selected = path.row;
@@ -299,6 +317,7 @@
 
 - (void) deselect {
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    [self closeDeletePopup:nil];
     [UIView animateWithDuration:0.4 animations:^{
         cell.selectMenu.alpha = 0;
     } completion:^(BOOL finished) {
@@ -337,6 +356,7 @@
 - (IBAction)itemDone:(id)sender{
     UIButton *d = (UIButton *)sender;
     [[NSUserDefaults standardUserDefaults] setInteger:d.tag forKey:@"selected"];
+    NSLog(@"itemDone:%d",d.tag);
     [self setSelected];
     [self deleteItem:nil];
 }
@@ -370,29 +390,6 @@
         secString = [NSString stringWithFormat:@"%d second%@ to",from.second,plural];
     }
     return [NSString stringWithFormat:@"%@%@%@%@%@%@",yearString,monthString,dayString,hourString,minString,secString];
-}
-
-#pragma mark - AdView Delegate Methods
-
--(void)bannerView:(ADBannerView *)b
-didFailToReceiveAdWithError:(NSError *)error{
-    [UIView animateWithDuration:0.3 animations:^{
-        //[self.timers setFrame:CGRectMake(0, 0, 320, self.view.frame.size.height)];
-        //[banner setCenter:CGPointMake(160, self.view.frame.size.height+25)];
-    }];
-    NSLog(@"Error loading");
-}
-
--(void)bannerViewDidLoadAd:(ADBannerView *)banner{
-    NSLog(@"Ad loaded");
-}
--(void)bannerViewWillLoadAd:(ADBannerView *)banner{
-    NSLog(@"Ad will load");
-}
-
--(void)bannerViewActionDidFinish:(ADBannerView *)banner{
-    NSLog(@"Ad did finish");
-    
 }
 
 @end
