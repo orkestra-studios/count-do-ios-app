@@ -119,6 +119,7 @@
     cell.doneButton.tag = dataIndexL;
     cell.titleLabel.text = reminders[dataIndexL][@"title"];
     [cell initialize];
+    NSLog(@"cell-final:%@",cell);
     if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
         cell.alarmButton.alpha=0.5;
     }
@@ -166,7 +167,6 @@
         cell.alpha=0;
     } completion:^(BOOL finished) {
         //remove selected item
-        NSLog(@"itemDone:%d",selected);
         [reminders removeObjectAtIndex:selected];
         //sort the rest as a failsafe
         /*NSSortDescriptor * sorat = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
@@ -176,6 +176,8 @@
         selected = -1;
         [[NSUserDefaults standardUserDefaults] setObject:[reminders lastObject][@"date"] forKey:@"init"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        cell.alpha=1;
+        cell.hidden=false;
         [self.timers reloadData];
     }];
 }
@@ -356,7 +358,6 @@
 - (IBAction)itemDone:(id)sender{
     UIButton *d = (UIButton *)sender;
     [[NSUserDefaults standardUserDefaults] setInteger:d.tag forKey:@"selected"];
-    NSLog(@"itemDone:%d",d.tag);
     [self setSelected];
     [self deleteItem:nil];
 }

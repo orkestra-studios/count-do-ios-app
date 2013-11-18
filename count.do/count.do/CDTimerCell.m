@@ -28,9 +28,12 @@
     if (firstLeft>0) {
         [self.progressView increment];
     }
+    NSLog(@"memeler");
+    self.hidden = false;
     [self printTimer];
     timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(printTimer) userInfo:nil repeats:YES];
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    
 }
 
 - (void) printTimer {
