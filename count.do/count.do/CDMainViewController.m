@@ -123,6 +123,19 @@
     if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
         cell.alarmButton.alpha=0.5;
     }
+    if([priorityType isEqualToString:@"none"]){
+        cell.priorityButton.hidden = true;
+        cell.priorityImage.alpha = 0;
+    }else {
+        cell.priorityButton.hidden = false;
+        if ([reminders[dataIndexL][@"priority"] isEqualToString:@"1"]) {
+            cell.priorityButton.alpha = 1;
+            cell.priorityImage.alpha = 1;
+        }else {
+            cell.priorityButton.alpha = 0.3;
+            cell.priorityImage.alpha = 0;
+        }
+    }
     return cell;
 } 
 
@@ -236,6 +249,34 @@
                 [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
             }];
         }
+    }
+}
+
+- (IBAction)togglePriority:(id)sender{
+    CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
+    NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
+    
+    if ([reminder[@"priority"] isEqualToString:@"1"]) {
+        [UIView animateWithDuration:0.2 animations:^{
+            cell.priorityButton.alpha = 0.3;
+            cell.priorityImage.alpha = 0;
+        } completion:^(BOOL finished) {
+            [reminders removeObjectAtIndex:selected];
+            reminder[@"priority"] = @"0";
+            [reminders insertObject:reminder atIndex:selected];
+            [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+        }];
+        
+    }else{
+        [UIView animateWithDuration:0.2 animations:^{
+            cell.priorityButton.alpha = 1;
+            cell.priorityImage.alpha = 1;
+        } completion:^(BOOL finished) {
+            [reminders removeObjectAtIndex:selected];
+            reminder[@"priority"] = @"1";
+            [reminders insertObject:reminder atIndex:selected];
+            [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+        }];
     }
 }
 

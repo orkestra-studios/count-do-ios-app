@@ -31,6 +31,8 @@
 @property (strong, nonatomic) NSDate *initial;
 @property (weak, nonatomic) IBOutlet UIView *selectMenu;
 @property (weak, nonatomic) IBOutlet UIView *deletePopup;
+@property (weak, nonatomic) IBOutlet UIView *priorityImage;
+@property (weak, nonatomic) IBOutlet UIButton *priorityButton;
 
 - (void)initialize;
 - (void)showMenu;

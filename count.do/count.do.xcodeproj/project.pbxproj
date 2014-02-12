@@ -65,6 +65,18 @@
 		36E37DBE1761FD06001461C6 /* goback.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DB91761FD06001461C6 /* goback.png */; };
 		36E37DBF1761FD06001461C6 /* goback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DBA1761FD06001461C6 /* goback@2x.png */; };
 		36E37DC2176200D9001461C6 /* finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DC1176200D9001461C6 /* finish.png */; };
+		D4EBCF2918AA15C500341529 /* featured.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF2718AA15C500341529 /* featured.png */; };
+		D4EBCF2A18AA15C500341529 /* settings_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF2818AA15C500341529 /* settings_bg.png */; };
+		D4EBCF3618AA17F900341529 /* standard_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF2F18AA17F900341529 /* standard_circle.png */; };
+		D4EBCF3718AA17F900341529 /* current_theme.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3018AA17F900341529 /* current_theme.png */; };
+		D4EBCF3818AA17F900341529 /* dark_theme.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3118AA17F900341529 /* dark_theme.png */; };
+		D4EBCF3918AA17F900341529 /* red_theme.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3218AA17F900341529 /* red_theme.png */; };
+		D4EBCF3E18AA256200341529 /* saatler.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3A18AA256200341529 /* saatler.png */; };
+		D4EBCF3F18AA256200341529 /* saat.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3B18AA256200341529 /* saat.png */; };
+		D4EBCF4018AA256200341529 /* 1-2-circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3C18AA256200341529 /* 1-2-circle.png */; };
+		D4EBCF4118AA256200341529 /* settings_bg 2.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3D18AA256200341529 /* settings_bg 2.png */; };
+		D4EBCF4418AA279A00341529 /* CDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EBCF4318AA279A00341529 /* CDSettingsViewController.m */; };
+		D4EBCF4618AA2B9D00341529 /* featured_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF4518AA2B9D00341529 /* featured_icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -137,6 +149,19 @@
 		36E37DB91761FD06001461C6 /* goback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goback.png; sourceTree = "<group>"; };
 		36E37DBA1761FD06001461C6 /* goback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goback@2x.png"; sourceTree = "<group>"; };
 		36E37DC1176200D9001461C6 /* finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish.png; sourceTree = "<group>"; };
+		D4EBCF2718AA15C500341529 /* featured.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = featured.png; sourceTree = "<group>"; };
+		D4EBCF2818AA15C500341529 /* settings_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_bg.png; sourceTree = "<group>"; };
+		D4EBCF2F18AA17F900341529 /* standard_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standard_circle.png; sourceTree = "<group>"; };
+		D4EBCF3018AA17F900341529 /* current_theme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = current_theme.png; sourceTree = "<group>"; };
+		D4EBCF3118AA17F900341529 /* dark_theme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dark_theme.png; sourceTree = "<group>"; };
+		D4EBCF3218AA17F900341529 /* red_theme.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_theme.png; sourceTree = "<group>"; };
+		D4EBCF3A18AA256200341529 /* saatler.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saatler.png; sourceTree = "<group>"; };
+		D4EBCF3B18AA256200341529 /* saat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = saat.png; sourceTree = "<group>"; };
+		D4EBCF3C18AA256200341529 /* 1-2-circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1-2-circle.png"; sourceTree = "<group>"; };
+		D4EBCF3D18AA256200341529 /* settings_bg 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings_bg 2.png"; sourceTree = "<group>"; };
+		D4EBCF4218AA279A00341529 /* CDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSettingsViewController.h; sourceTree = "<group>"; };
+		D4EBCF4318AA279A00341529 /* CDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSettingsViewController.m; sourceTree = "<group>"; };
+		D4EBCF4518AA2B9D00341529 /* featured_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = featured_icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +222,8 @@
 				36E37D69176099E9001461C6 /* CDMainViewController.m */,
 				36E37DA71760E6BB001461C6 /* CDAddTimerViewController.h */,
 				36E37DA81760E6BB001461C6 /* CDAddTimerViewController.m */,
+				D4EBCF4218AA279A00341529 /* CDSettingsViewController.h */,
+				D4EBCF4318AA279A00341529 /* CDSettingsViewController.m */,
 				36E37D841760AAA3001461C6 /* CDTimerCell.h */,
 				36E37D851760AAA3001461C6 /* CDTimerCell.m */,
 				36E37D8A1760BCDE001461C6 /* CDProgressView.h */,
@@ -234,6 +261,7 @@
 		36E37D7917609D1B001461C6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D4EBCF2B18AA17D900341529 /* Settings Screen */,
 				36F692A617623534009EB15F /* Add Timer Screen */,
 				36F692A51762352A009EB15F /* Main Screen */,
 				36F692A417622B0C009EB15F /* App Images */,
@@ -269,6 +297,8 @@
 		36F692A51762352A009EB15F /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
+				D4EBCF2718AA15C500341529 /* featured.png */,
+				D4EBCF2818AA15C500341529 /* settings_bg.png */,
 				36B7544117DDDB440012F114 /* button_yes.png */,
 				36B7544217DDDB440012F114 /* button_nope.png */,
 				36C466DA17BB4C870044CE8E /* edit.png */,
@@ -289,6 +319,7 @@
 		36F692A617623534009EB15F /* Add Timer Screen */ = {
 			isa = PBXGroup;
 			children = (
+				D4EBCF4518AA2B9D00341529 /* featured_icon.png */,
 				36A935031767A2BE00AFF987 /* goback_mini.png */,
 				36A934F317679CA700AFF987 /* delete.png */,
 				36A934F417679CA700AFF987 /* delete@2x.png */,
@@ -309,6 +340,21 @@
 				36E37DBA1761FD06001461C6 /* goback@2x.png */,
 			);
 			name = "Add Timer Screen";
+			sourceTree = "<group>";
+		};
+		D4EBCF2B18AA17D900341529 /* Settings Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D4EBCF3A18AA256200341529 /* saatler.png */,
+				D4EBCF3B18AA256200341529 /* saat.png */,
+				D4EBCF3C18AA256200341529 /* 1-2-circle.png */,
+				D4EBCF3D18AA256200341529 /* settings_bg 2.png */,
+				D4EBCF2F18AA17F900341529 /* standard_circle.png */,
+				D4EBCF3018AA17F900341529 /* current_theme.png */,
+				D4EBCF3118AA17F900341529 /* dark_theme.png */,
+				D4EBCF3218AA17F900341529 /* red_theme.png */,
+			);
+			name = "Settings Screen";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -369,11 +415,13 @@
 				36E37DAB1760E93B001461C6 /* Lato-Lig.ttf in Resources */,
 				36E37D58176099E9001461C6 /* InfoPlist.strings in Resources */,
 				36E37D67176099E9001461C6 /* MainStoryboard.storyboard in Resources */,
+				D4EBCF2A18AA15C500341529 /* settings_bg.png in Resources */,
 				36E37D7217609BE0001461C6 /* container.png in Resources */,
 				36E37D7317609BE0001461C6 /* container@2x.png in Resources */,
 				36E37D821760A2A7001461C6 /* addnewcountdown.png in Resources */,
 				36E37D831760A2A7001461C6 /* addnewcountdown@2x.png in Resources */,
 				36E37D881760AB88001461C6 /* indicator.png in Resources */,
+				D4EBCF2918AA15C500341529 /* featured.png in Resources */,
 				36E37D941760C644001461C6 /* Default.png in Resources */,
 				36E37D951760C644001461C6 /* Default@2x.png in Resources */,
 				36E37D961760C644001461C6 /* Default-568h@2x.png in Resources */,
@@ -384,10 +432,12 @@
 				36E37DA21760E2AC001461C6 /* left_arrow.png in Resources */,
 				36E37DA61760E2BD001461C6 /* right_arrow.png in Resources */,
 				36E37DBC1761FD06001461C6 /* proceed_button.png in Resources */,
+				D4EBCF3918AA17F900341529 /* red_theme.png in Resources */,
 				36E37DBD1761FD06001461C6 /* proceed_button@2x.png in Resources */,
 				36E37DBE1761FD06001461C6 /* goback.png in Resources */,
 				36E37DBF1761FD06001461C6 /* goback@2x.png in Resources */,
 				36E37DC2176200D9001461C6 /* finish.png in Resources */,
+				D4EBCF4018AA256200341529 /* 1-2-circle.png in Resources */,
 				36A934F2176799EB00AFF987 /* back.png in Resources */,
 				36A934FB17679CA700AFF987 /* delete.png in Resources */,
 				36A934FC17679CA700AFF987 /* delete@2x.png in Resources */,
@@ -398,12 +448,19 @@
 				36A9350117679CA700AFF987 /* twitter.png in Resources */,
 				36A9350217679CA700AFF987 /* twitter@2x.png in Resources */,
 				36A935041767A2BE00AFF987 /* goback_mini.png in Resources */,
+				D4EBCF3F18AA256200341529 /* saat.png in Resources */,
 				36A9350A1767B5DE00AFF987 /* done.png in Resources */,
+				D4EBCF4618AA2B9D00341529 /* featured_icon.png in Resources */,
 				36A9350B1767B5DE00AFF987 /* done@2x.png in Resources */,
 				36174212177970530018C4AA /* sound.m4r in Resources */,
+				D4EBCF3618AA17F900341529 /* standard_circle.png in Resources */,
+				D4EBCF4118AA256200341529 /* settings_bg 2.png in Resources */,
 				36C466DC17BB4C870044CE8E /* edit.png in Resources */,
+				D4EBCF3818AA17F900341529 /* dark_theme.png in Resources */,
 				36C466DD17BB4C870044CE8E /* edit@2x.png in Resources */,
 				36C466E117BF650F0044CE8E /* settings.png in Resources */,
+				D4EBCF3E18AA256200341529 /* saatler.png in Resources */,
+				D4EBCF3718AA17F900341529 /* current_theme.png in Resources */,
 				36B7544317DDDB440012F114 /* button_yes.png in Resources */,
 				36B7544417DDDB440012F114 /* button_nope.png in Resources */,
 			);
@@ -416,6 +473,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4EBCF4418AA279A00341529 /* CDSettingsViewController.m in Sources */,
 				36E37D891760AFC7001461C6 /* UIFont+Replacement.m in Sources */,
 				36E37D5A176099E9001461C6 /* main.m in Sources */,
 				36E37D5E176099E9001461C6 /* CDAppDelegate.m in Sources */,

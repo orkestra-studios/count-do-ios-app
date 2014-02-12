@@ -13,6 +13,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (![[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"]) {
+        [[NSUserDefaults standardUserDefaults] setObject:@{@"theme":@"basic",@"priority":@"none",@"reminder":@"basic"} forKey:@"settings"];
+    }
     return YES;
 }
 							

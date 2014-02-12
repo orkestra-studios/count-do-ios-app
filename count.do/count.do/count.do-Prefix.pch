@@ -14,3 +14,7 @@
 #endif
 
 #define memeler 92
+
+#define selectedTheme [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"theme"]
+#define priorityType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"priority"]
+#define reminderType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"reminder"]
