@@ -13,6 +13,7 @@
     NSMutableArray *days;
     NSDateComponents *date;
     int i,j,k;
+    float sliderVal;
 }
 @property (weak, nonatomic) IBOutlet UILabel *monthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yearLabel;
@@ -26,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UIView *minDetector;
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeholder;
+@property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
 
 - (void) newReminder;
 - (void) editReminder;

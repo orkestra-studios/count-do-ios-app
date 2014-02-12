@@ -77,6 +77,8 @@
 		D4EBCF4118AA256200341529 /* settings_bg 2.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF3D18AA256200341529 /* settings_bg 2.png */; };
 		D4EBCF4418AA279A00341529 /* CDSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4EBCF4318AA279A00341529 /* CDSettingsViewController.m */; };
 		D4EBCF4618AA2B9D00341529 /* featured_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF4518AA2B9D00341529 /* featured_icon.png */; };
+		D4EBCF4918ABB47D00341529 /* Progress Indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF4718ABB47D00341529 /* Progress Indicator@2x.png */; };
+		D4EBCF4A18ABB47D00341529 /* Knob.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF4818ABB47D00341529 /* Knob.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -162,6 +164,8 @@
 		D4EBCF4218AA279A00341529 /* CDSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDSettingsViewController.h; sourceTree = "<group>"; };
 		D4EBCF4318AA279A00341529 /* CDSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDSettingsViewController.m; sourceTree = "<group>"; };
 		D4EBCF4518AA2B9D00341529 /* featured_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = featured_icon.png; sourceTree = "<group>"; };
+		D4EBCF4718ABB47D00341529 /* Progress Indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Progress Indicator@2x.png"; sourceTree = "<group>"; };
+		D4EBCF4818ABB47D00341529 /* Knob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Knob.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +323,8 @@
 		36F692A617623534009EB15F /* Add Timer Screen */ = {
 			isa = PBXGroup;
 			children = (
+				D4EBCF4718ABB47D00341529 /* Progress Indicator@2x.png */,
+				D4EBCF4818ABB47D00341529 /* Knob.png */,
 				D4EBCF4518AA2B9D00341529 /* featured_icon.png */,
 				36A935031767A2BE00AFF987 /* goback_mini.png */,
 				36A934F317679CA700AFF987 /* delete.png */,
@@ -422,6 +428,7 @@
 				36E37D831760A2A7001461C6 /* addnewcountdown@2x.png in Resources */,
 				36E37D881760AB88001461C6 /* indicator.png in Resources */,
 				D4EBCF2918AA15C500341529 /* featured.png in Resources */,
+				D4EBCF4A18ABB47D00341529 /* Knob.png in Resources */,
 				36E37D941760C644001461C6 /* Default.png in Resources */,
 				36E37D951760C644001461C6 /* Default@2x.png in Resources */,
 				36E37D961760C644001461C6 /* Default-568h@2x.png in Resources */,
@@ -461,6 +468,7 @@
 				36C466E117BF650F0044CE8E /* settings.png in Resources */,
 				D4EBCF3E18AA256200341529 /* saatler.png in Resources */,
 				D4EBCF3718AA17F900341529 /* current_theme.png in Resources */,
+				D4EBCF4918ABB47D00341529 /* Progress Indicator@2x.png in Resources */,
 				36B7544317DDDB440012F114 /* button_yes.png in Resources */,
 				36B7544417DDDB440012F114 /* button_nope.png in Resources */,
 			);
