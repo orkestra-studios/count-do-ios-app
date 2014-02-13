@@ -46,6 +46,15 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
+    for (int i=0;i<[reminders count];i++) {
+        NSMutableDictionary *reminder = [[NSMutableDictionary alloc] initWithDictionary:reminders[i]];
+        if(![reminder objectForKey:@"priority"]){
+            reminder[@"priority"] = @0;
+        }
+        reminders[i] = reminder;
+    }
+    [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     if (!reminders) {
         reminders = [NSMutableArray arrayWithCapacity:10];
         [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
@@ -123,15 +132,21 @@
     if ([reminders[dataIndexL][@"alarm"] isEqualToString:@"0"]) {
         cell.alarmButton.alpha=0.5;
     }
-    if([priorityType isEqualToString:@"none"]){
+    if([priorityType isEqualToString:@"none"] || !boughtPriority){
         cell.priorityButton.hidden = true;
         cell.priorityImage.alpha = 0;
     }else {
         cell.priorityButton.hidden = false;
-        if ([reminders[dataIndexL][@"priority"] isEqualToString:@"1"]) {
-            cell.priorityButton.alpha = 1;
-            cell.priorityImage.alpha = 1;
-        }else {
+        @try {
+            if ([reminders[dataIndexL][@"priority"] isEqualToNumber:@1]) {
+                cell.priorityButton.alpha = 1;
+                cell.priorityImage.alpha = 1;
+            }else {
+                cell.priorityButton.alpha = 0.3;
+                cell.priorityImage.alpha = 0;
+            }
+        }
+        @catch (NSException *exception) {
             cell.priorityButton.alpha = 0.3;
             cell.priorityImage.alpha = 0;
         }
@@ -255,27 +270,54 @@
 - (IBAction)togglePriority:(id)sender{
     CDTimerCell *cell = (CDTimerCell *)[self.timers cellForItemAtIndexPath:selectedIndexPath];
     NSMutableDictionary *reminder = [NSMutableDictionary dictionaryWithDictionary:reminders[selected]];
-    
-    if ([reminder[@"priority"] isEqualToString:@"1"]) {
-        [UIView animateWithDuration:0.2 animations:^{
-            cell.priorityButton.alpha = 0.3;
-            cell.priorityImage.alpha = 0;
-        } completion:^(BOOL finished) {
-            [reminders removeObjectAtIndex:selected];
-            reminder[@"priority"] = @"0";
-            [reminders insertObject:reminder atIndex:selected];
-            [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
-        }];
-        
-    }else{
+    @try {
+        if ([reminder[@"priority"] isEqualToNumber:@1]) {
+            [UIView animateWithDuration:0.2 animations:^{
+                cell.priorityButton.alpha = 0.3;
+                cell.priorityImage.alpha = 0;
+            } completion:^(BOOL finished) {
+                [reminders removeObjectAtIndex:selected];
+                reminder[@"priority"] = @0;
+                [reminders insertObject:reminder atIndex:selected];
+                NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
+                reminders = [[NSMutableArray alloc] initWithArray:[reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+                sort = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:false];
+                reminders = [[NSMutableArray alloc] initWithArray:[reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+                [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+                [self.timers reloadData];
+            }];
+            
+        }else{
+            [UIView animateWithDuration:0.2 animations:^{
+                cell.priorityButton.alpha = 1;
+                cell.priorityImage.alpha = 1;
+            } completion:^(BOOL finished) {
+                [reminders removeObjectAtIndex:selected];
+                reminder[@"priority"] = @1;
+                [reminders insertObject:reminder atIndex:selected];
+                NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
+                reminders = [[NSMutableArray alloc] initWithArray:[reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+                sort = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:false];
+                reminders = [[NSMutableArray alloc] initWithArray:[reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+                [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+                [self.timers reloadData];
+            }];
+        }
+    }
+    @catch (NSException *exception) {
         [UIView animateWithDuration:0.2 animations:^{
             cell.priorityButton.alpha = 1;
             cell.priorityImage.alpha = 1;
         } completion:^(BOOL finished) {
             [reminders removeObjectAtIndex:selected];
-            reminder[@"priority"] = @"1";
+            reminder[@"priority"] = @1;
             [reminders insertObject:reminder atIndex:selected];
+            NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
+            reminders = [[NSMutableArray alloc] initWithArray:[reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
+            sort = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:false];
+            reminders = [[NSMutableArray alloc] initWithArray:[reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]]];
             [[NSUserDefaults standardUserDefaults] setObject:reminders forKey:@"reminders"];
+            [self.timers reloadData];
         }];
     }
 }

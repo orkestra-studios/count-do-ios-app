@@ -61,6 +61,7 @@
 
 - (void) newReminder {
     sliderVal = 0;
+    if(!boughtReminder) self.slider.enabled = false;
     NSDate *current = [NSDate date];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
@@ -77,6 +78,7 @@
 
 - (void) editReminder {
     sliderVal = 0;
+    if(!boughtReminder) self.slider.enabled = false;
     self.titleInput.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"title"];
     NSDate *current = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"timestamp"] integerValue]];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -102,22 +104,6 @@
 
 - (IBAction)saveReminder:(id)sender {
     
-    if(sliderVal==0) {
-        self.reminderLabel.text = @"Remind me at exact time";
-    }else if(sliderVal<=0.1) {
-        self.reminderLabel.text = @"Remind me 5 minutes earlier";
-    }else if(sliderVal<=0.3) {
-        self.reminderLabel.text = @"Remind me 10 minutes earlier";
-    }else if(sliderVal<=0.5) {
-        self.reminderLabel.text = @"Remind me 30 minutes earlier";
-    }else if(sliderVal<=0.7) {
-        self.reminderLabel.text = @"Remind me 1 hour earlier";
-    }else if(sliderVal<=0.9) {
-        self.reminderLabel.text = @"Remind me 6 hours earlier";
-    }else {
-        self.reminderLabel.text = @"Remind me 12 hours earlier";
-    }
-    
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"editing"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"editingEnd" object:nil];
     }
@@ -126,7 +112,10 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat: @"dd/MM/yyyy HH:mm:ss"];
     date.second = arc4random_uniform(5);
+    NSDateComponents *offset = [[NSDateComponents alloc] init];
+    [offset setSecond:-sliderVal];
     NSDate *selected = [cal dateFromComponents:date];
+    selected = [cal dateByAddingComponents:offset toDate:selected options:0];
     NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
     
     NSNumber *timestamp = @([selected timeIntervalSince1970]);
@@ -145,12 +134,14 @@
         // Schedule the notification
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     };
-    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"timestamp":timestamp,@"alarm":@"1"}];
+    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"timestamp":timestamp,@"alarm":@"1",@"priority":@0}];
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
     NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
+    sort = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:false];
+    sorted = [sorted sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     [[NSUserDefaults standardUserDefaults] setObject:sorted forKey:@"reminders"];
-    
     [[NSUserDefaults standardUserDefaults] setObject:[sorted lastObject][@"date"] forKey:@"init"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -400,20 +391,26 @@
 - (IBAction)sliderChanged:(UISlider *)sender {
     if(sender.value==0) {
         self.reminderLabel.text = @"Remind me at exact time";
+        sliderVal = 0;
     }else if(sender.value<=0.1) {
         self.reminderLabel.text = @"Remind me 5 minutes earlier";
+        sliderVal = 300;
     }else if(sender.value<=0.3) {
         self.reminderLabel.text = @"Remind me 10 minutes earlier";
+        sliderVal = 600;
     }else if(sender.value<=0.5) {
         self.reminderLabel.text = @"Remind me 30 minutes earlier";
+        sliderVal = 1800;
     }else if(sender.value<=0.7) {
         self.reminderLabel.text = @"Remind me 1 hour earlier";
+        sliderVal = 3600;
     }else if(sender.value<=0.9) {
         self.reminderLabel.text = @"Remind me 6 hours earlier";
+        sliderVal = 21600;
     }else {
         self.reminderLabel.text = @"Remind me 12 hours earlier";
+        sliderVal = 43200;
     }
-    sliderVal = sender.value;
 }
 
 @end

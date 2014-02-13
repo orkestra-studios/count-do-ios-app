@@ -7,6 +7,7 @@
 //
 
 #import "CDAppDelegate.h"
+#import "DEStoreKitManager.h"
 #import "UIFont+Replacement.h"
 
 @implementation CDAppDelegate
@@ -15,7 +16,16 @@
 {
     if (![[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@{@"theme":@"basic",@"priority":@"none",@"reminder":@"basic"} forKey:@"settings"];
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"themesBought"];
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"priorityBought"];
+        [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"reminderBought"];
     }
+    NSSet *productIdentifiers = [NSSet setWithObjects:@"Themes", @"Priority",@"Reminder", nil];
+    
+    [[DEStoreKitManager sharedManager] fetchProductsWithIdentifiers:productIdentifiers
+      onSuccess: ^(NSArray *products, NSArray *invalidIdentifiers) {}
+      onFailure: ^(NSError *error) {}
+     ];
     return YES;
 }
 							

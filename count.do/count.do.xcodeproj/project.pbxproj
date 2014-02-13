@@ -65,6 +65,9 @@
 		36E37DBE1761FD06001461C6 /* goback.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DB91761FD06001461C6 /* goback.png */; };
 		36E37DBF1761FD06001461C6 /* goback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DBA1761FD06001461C6 /* goback@2x.png */; };
 		36E37DC2176200D9001461C6 /* finish.png in Resources */ = {isa = PBXBuildFile; fileRef = 36E37DC1176200D9001461C6 /* finish.png */; };
+		D4369C9918ACF70C009A12E0 /* DEStoreKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D4369C9818ACF70C009A12E0 /* DEStoreKitManager.m */; };
+		D4369C9B18AD10F5009A12E0 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4369C9A18AD10F5009A12E0 /* StoreKit.framework */; };
+		D4D1872E18ABE3010097FF25 /* 099.png in Resources */ = {isa = PBXBuildFile; fileRef = D4D1872D18ABE3010097FF25 /* 099.png */; };
 		D4EBCF2918AA15C500341529 /* featured.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF2718AA15C500341529 /* featured.png */; };
 		D4EBCF2A18AA15C500341529 /* settings_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF2818AA15C500341529 /* settings_bg.png */; };
 		D4EBCF3618AA17F900341529 /* standard_circle.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF2F18AA17F900341529 /* standard_circle.png */; };
@@ -151,6 +154,10 @@
 		36E37DB91761FD06001461C6 /* goback.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = goback.png; sourceTree = "<group>"; };
 		36E37DBA1761FD06001461C6 /* goback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "goback@2x.png"; sourceTree = "<group>"; };
 		36E37DC1176200D9001461C6 /* finish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish.png; sourceTree = "<group>"; };
+		D4369C9718ACF70C009A12E0 /* DEStoreKitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEStoreKitManager.h; sourceTree = "<group>"; };
+		D4369C9818ACF70C009A12E0 /* DEStoreKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEStoreKitManager.m; sourceTree = "<group>"; };
+		D4369C9A18AD10F5009A12E0 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		D4D1872D18ABE3010097FF25 /* 099.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 099.png; sourceTree = "<group>"; };
 		D4EBCF2718AA15C500341529 /* featured.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = featured.png; sourceTree = "<group>"; };
 		D4EBCF2818AA15C500341529 /* settings_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = settings_bg.png; sourceTree = "<group>"; };
 		D4EBCF2F18AA17F900341529 /* standard_circle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = standard_circle.png; sourceTree = "<group>"; };
@@ -173,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4369C9B18AD10F5009A12E0 /* StoreKit.framework in Frameworks */,
 				3651AF7D17D0B686001738C5 /* iAd.framework in Frameworks */,
 				36A934B117663F3E00AFF987 /* Accounts.framework in Frameworks */,
 				36A934AF17663F3A00AFF987 /* Social.framework in Frameworks */,
@@ -205,6 +213,7 @@
 		36E37D4C176099E9001461C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D4369C9A18AD10F5009A12E0 /* StoreKit.framework */,
 				3651AF7C17D0B686001738C5 /* iAd.framework */,
 				36A934B017663F3E00AFF987 /* Accounts.framework */,
 				36A934AE17663F3A00AFF987 /* Social.framework */,
@@ -282,6 +291,8 @@
 				36E37D7F17609F1A001461C6 /* UIFont+Replacement.m */,
 				36A935051767AC5400AFF987 /* CDBaseConversion.h */,
 				36A935061767AC5400AFF987 /* CDBaseConversion.m */,
+				D4369C9718ACF70C009A12E0 /* DEStoreKitManager.h */,
+				D4369C9818ACF70C009A12E0 /* DEStoreKitManager.m */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -351,6 +362,7 @@
 		D4EBCF2B18AA17D900341529 /* Settings Screen */ = {
 			isa = PBXGroup;
 			children = (
+				D4D1872D18ABE3010097FF25 /* 099.png */,
 				D4EBCF3A18AA256200341529 /* saatler.png */,
 				D4EBCF3B18AA256200341529 /* saat.png */,
 				D4EBCF3C18AA256200341529 /* 1-2-circle.png */,
@@ -424,6 +436,7 @@
 				D4EBCF2A18AA15C500341529 /* settings_bg.png in Resources */,
 				36E37D7217609BE0001461C6 /* container.png in Resources */,
 				36E37D7317609BE0001461C6 /* container@2x.png in Resources */,
+				D4D1872E18ABE3010097FF25 /* 099.png in Resources */,
 				36E37D821760A2A7001461C6 /* addnewcountdown.png in Resources */,
 				36E37D831760A2A7001461C6 /* addnewcountdown@2x.png in Resources */,
 				36E37D881760AB88001461C6 /* indicator.png in Resources */,
@@ -481,6 +494,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4369C9918ACF70C009A12E0 /* DEStoreKitManager.m in Sources */,
 				D4EBCF4418AA279A00341529 /* CDSettingsViewController.m in Sources */,
 				36E37D891760AFC7001461C6 /* UIFont+Replacement.m in Sources */,
 				36E37D5A176099E9001461C6 /* main.m in Sources */,

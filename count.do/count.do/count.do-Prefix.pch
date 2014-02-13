@@ -18,3 +18,7 @@
 #define selectedTheme [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"theme"]
 #define priorityType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"priority"]
 #define reminderType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"reminder"]
+
+#define boughtThemes [[NSUserDefaults standardUserDefaults] boolForKey:@"themesBought"]
+#define boughtPriority [[NSUserDefaults standardUserDefaults] boolForKey:@"priorityBought"]
+#define boughtReminder [[NSUserDefaults standardUserDefaults] boolForKey:@"reminderBought"]

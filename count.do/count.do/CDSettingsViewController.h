@@ -26,5 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *basicReminderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *detailedRemainderButton;
 @property (weak, nonatomic) IBOutlet UILabel *detailedReminderLabel;
+@property (weak, nonatomic) IBOutlet UIView *themeShield;
+@property (weak, nonatomic) IBOutlet UIView *priorityShield;
+@property (weak, nonatomic) IBOutlet UIView *reminderShield;
 
 @end

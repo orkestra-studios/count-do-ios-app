@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeholder;
 @property (weak, nonatomic) IBOutlet UILabel *reminderLabel;
+@property (weak, nonatomic) IBOutlet UISlider *slider;
 
 - (void) newReminder;
 - (void) editReminder;
