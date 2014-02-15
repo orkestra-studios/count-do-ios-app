@@ -103,7 +103,26 @@
             self.detailedRemainderButton.userInteractionEnabled = false;
         }
     }
-    //[[DEStoreKitManager sharedManager] restoreCompletedTransactions];
+    [[DEStoreKitManager sharedManager] restorePurchasesOnSuccess:^(SKPaymentTransaction *transaction) {
+        NSString *t = transaction.payment.productIdentifier;
+        NSLog(@"transaction: %@",transaction);
+        NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+        if ([t isEqualToString:@"Themes"]) {
+            [d setBool:true forKey:@"themesBought"];
+            self.themeShield.hidden = true;
+            [d synchronize];
+        }else if ([t isEqualToString:@"Priority"]) {
+            [d setBool:true forKey:@"priorityBought"];
+            self.priorityShield.hidden = true;
+            [d synchronize];
+        }else if ([t isEqualToString:@"Reminder"]) {
+            [d setBool:true forKey:@"reminderBought"];
+            self.reminderShield.hidden = true;
+            [d synchronize];
+        }
+    } onFailure:^(NSError *error) {
+        NSLog(@"failed");
+    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -204,7 +223,6 @@
     NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
     [[DEStoreKitManager sharedManager] purchaseProductWithIdentifier: @"Themes"
         onSuccess: ^(SKPaymentTransaction *transaction) {
-            NSLog(@"memeler");
             [d setBool:true forKey:@"themesBought"];
             self.themeShield.hidden = true;
             [d synchronize];

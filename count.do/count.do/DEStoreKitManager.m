@@ -242,29 +242,9 @@ typedef void (^DEStoreKitTransactionHandlerVerifyBlock)(SKPaymentTransaction *tr
 
 @synthesize payment = payment_;
 
--(void) dealloc {
-    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-    
-    self.product = nil;
-    self.storeKitManager = nil;
-    self.delegate = nil;
-    
-#ifdef __BLOCKS__
-    self.successBlock = nil;
-    self.restoreBlock = nil;
-    self.failureBlock = nil;
-    self.cancelBlock = nil;
-    self.verifyBlock = nil;
-#endif
-    
-    self.payment = nil;
-}
-
 -(void) purchase {
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-    
     self.payment = [SKPayment paymentWithProduct:self.product];
-    
     [[SKPaymentQueue defaultQueue] addPayment:self.payment];
 }
 
@@ -599,7 +579,7 @@ typedef void (^DEStoreKitTransactionHandlerVerifyBlock)(SKPaymentTransaction *tr
               onFailure: (void (^)(SKPaymentTransaction *transaction))failure
                onCancel: (void (^)(SKPaymentTransaction *transaction))cancel
                onVerify: (void (^)(SKPaymentTransaction *transaction))verify {
-    DEStoreKitTransactionHandler *handler = [DEStoreKitTransactionHandler new];
+    DEStoreKitTransactionHandler *handler = [[DEStoreKitTransactionHandler alloc] init];
     
     handler.storeKitManager = self;
     handler.product = product;
@@ -616,7 +596,7 @@ typedef void (^DEStoreKitTransactionHandlerVerifyBlock)(SKPaymentTransaction *tr
 
 -(void) restorePurchasesOnSuccess: (void (^)(SKPaymentTransaction *transaction))success
                         onFailure: (void (^)(NSError *error))failure {
-    DEStoreKitTransactionHandler *handler = [DEStoreKitTransactionHandler new];
+    DEStoreKitTransactionHandler *handler = [[DEStoreKitTransactionHandler alloc] init];
     
     handler.storeKitManager = self;
     handler.successBlock = success;
