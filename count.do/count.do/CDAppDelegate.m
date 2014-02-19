@@ -21,7 +21,7 @@
         [[NSUserDefaults standardUserDefaults] setBool:false forKey:@"reminderBought"];
     }
     NSSet *productIdentifiers = [NSSet setWithObjects:@"Themes", @"Priority",@"Reminder", nil];
-    
+
     [[DEStoreKitManager sharedManager] fetchProductsWithIdentifiers:productIdentifiers
       onSuccess: ^(NSArray *products, NSArray *invalidIdentifiers) {}
       onFailure: ^(NSError *error) {}

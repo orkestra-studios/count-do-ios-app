@@ -19,6 +19,22 @@
 #define priorityType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"priority"]
 #define reminderType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"reminder"]
 
-#define boughtThemes [[NSUserDefaults standardUserDefaults] boolForKey:@"themesBought"]
-#define boughtPriority [[NSUserDefaults standardUserDefaults] boolForKey:@"priorityBought"]
-#define boughtReminder [[NSUserDefaults standardUserDefaults] boolForKey:@"reminderBought"]
+#define boughtThemes true //[[NSUserDefaults standardUserDefaults] boolForKey:@"themesBought"]
+#define boughtPriority true //[[NSUserDefaults standardUserDefaults] boolForKey:@"priorityBought"]
+#define boughtReminder true //[[NSUserDefaults standardUserDefaults] boolForKey:@"reminderBought"]
+
+//Colours
+#define rgba(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0]
+#define rgb(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]
+#define hex(val) [UIColor colorWithRed:((float)((val&0xFF0000)>>16))/255.0 green:((float)((val&0xFF00)>>8))/255.0 blue:((float)(val&0xFF))/255.0 alpha:1]
+#define white [UIColor whiteColor]
+
+//Theme definitions
+
+#define basic @"basic"
+#define red @"red"
+#define dark @"dark"
+
+#define colors @{@"basic":@{@"textcolor":hex(0x59cbb5),@"background":hex(0xeaeaea),@"cellcolor":hex(0xfafafa)}, @"red":@{@"textcolor":hex(0x5a5a5a),@"background":hex(0xff5a53),@"cellcolor":hex(0xefebd5)},@"dark":@{@"textcolor":hex(0xfefefe),@"background":hex(0x2e3641),@"cellcolor":hex(0x4e8bb6)}}
+
+

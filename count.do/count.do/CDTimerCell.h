@@ -34,6 +34,17 @@
 @property (weak, nonatomic) IBOutlet UIView *priorityImage;
 @property (weak, nonatomic) IBOutlet UIButton *priorityButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *yearTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *monthTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dayTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *hourTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *minTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *secTitleLabel;
+
+@property (weak, nonatomic) IBOutlet UIImageView *indicator;
+@property (weak, nonatomic) IBOutlet UIImageView *container;
+@property (weak, nonatomic) IBOutlet UIImageView *feature;
+
 - (void)initialize;
 - (void)showMenu;
 - (NSDateComponents *)getDate;

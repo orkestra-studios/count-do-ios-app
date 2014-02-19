@@ -11,6 +11,7 @@
 #import "CDAddTimerViewController.h"
 #import "CDBaseConversion.h"
 #import "CDProgressView.h"
+
 #define bgColor [UIColor colorWithRed:(236/255.0) green:(240/255.0) blue:(241/255.0) alpha:1]
 
 @interface CDMainViewController ()
@@ -24,7 +25,6 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     /* Initial setup */
-    self.view.backgroundColor = bgColor;
     bgq = dispatch_queue_create("com.orkestra.count-do.bgq", NULL);
     selected = -1; // None of the timers are selected
     /* A tap to background will also unselect it */
@@ -44,7 +44,16 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
+    if ([selectedTheme isEqualToString:@"basic"]) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }else {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+    
+    [super viewWillAppear:animated];
+    self.view.backgroundColor = colors[selectedTheme][@"background"];
+
     reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
     for (int i=0;i<[reminders count];i++) {
         NSMutableDictionary *reminder = [[NSMutableDictionary alloc] initWithDictionary:reminders[i]];
@@ -158,11 +167,15 @@
     UICollectionReusableView *reusableView = nil;
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"addNew" forIndexPath:indexPath];
+        [((UIButton *)[reusableView viewWithTag:1]) setImage:[UIImage imageNamed:[NSString stringWithFormat:@"addnewcountdown_%@",selectedTheme]] forState:UIControlStateNormal];
+
     }else if([kind isEqualToString:UICollectionElementKindSectionFooter]){
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
-        reusableView.backgroundColor = bgColor;
-        UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselect)];
-        [reusableView addGestureRecognizer:tgr];
+        //reusableView.backgroundColor = bgColor;
+        /*UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselect)];
+        [reusableView addGestureRecognizer:tgr];*/
+        [((UIButton *)[reusableView viewWithTag:1]) setTitleColor:colors[selectedTheme][@"textcolor"] forState:UIControlStateNormal];
+        [((UIButton *)[reusableView viewWithTag:1]) setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",selectedTheme]] forState:UIControlStateNormal];
     }
     return reusableView;
 }

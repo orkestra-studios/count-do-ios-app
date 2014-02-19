@@ -14,6 +14,7 @@
 @synthesize initial;
 
 - (void) initialize {
+    //self.backgroundColor = colors[selectedTheme][@"cellcolor"];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     timerTarget = [cal dateFromComponents:comps];
     self.selectMenu.alpha = 0;
@@ -28,6 +29,15 @@
     if (firstLeft>0) {
         [self.progressView increment];
     }
+    for (NSObject *p in self.contentView.subviews) {
+        if([p respondsToSelector:@selector(setTextColor:)]) {
+            [((UILabel *)p) setTextColor:colors[selectedTheme][@"textcolor"]];
+        }
+    }
+    self.indicator.image = [UIImage imageNamed:[NSString stringWithFormat:@"indicator_%@",selectedTheme]];
+    self.container.image = [UIImage imageNamed:[NSString stringWithFormat:@"container_%@",selectedTheme]];
+    self.feature.image   = [UIImage imageNamed:[NSString stringWithFormat:@"featured_%@",selectedTheme]];
+    
     NSLog(@"memeler");
     self.hidden = false;
     [self printTimer];

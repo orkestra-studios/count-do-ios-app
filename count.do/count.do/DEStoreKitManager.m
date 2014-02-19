@@ -256,8 +256,9 @@ typedef void (^DEStoreKitTransactionHandlerVerifyBlock)(SKPaymentTransaction *tr
 - (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
     for (SKPaymentTransaction *trans in queue.transactions) {
+        NSLog(@"t234: %@",trans.payment.productIdentifier);
         if (self.successBlock) {
-            self.successBlock(nil);
+            self.successBlock(trans);
         }
     }
 }
@@ -268,12 +269,11 @@ typedef void (^DEStoreKitTransactionHandlerVerifyBlock)(SKPaymentTransaction *tr
     }
 }
 
-
 - (void)paymentQueue: (SKPaymentQueue *)queue
  updatedTransactions: (NSArray *)transactions {
     for (SKPaymentTransaction *transaction in transactions) {
         NSLog(@"Error %d", transaction.transactionState);
-        NSLog(@"Payment %@", [transaction.payment description]);
+        NSLog(@"Payment %@", transaction.payment.productIdentifier);
         if ([transaction.payment isEqual:self.payment]) {
             switch (transaction.transactionState) {
                 case SKPaymentTransactionStatePurchased:

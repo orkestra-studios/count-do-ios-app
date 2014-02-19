@@ -40,7 +40,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" priority="1" constant="498" id="nEJ-c0-c2h"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="2DM-0M-ghi">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="2DM-0M-ghi">
                                     <size key="itemSize" width="320" height="90"/>
                                     <size key="headerReferenceSize" width="320" height="68"/>
                                     <size key="footerReferenceSize" width="320" height="36"/>
@@ -54,14 +54,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" image="container.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hb7-39-1UC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="16" height="90"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="container_basic.png" translatesAutoresizingMaskIntoConstraints="NO" id="Hb7-39-1UC">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m8H-aM-ENA" customClass="CDProgressView">
                                                     <rect key="frame" x="250" y="15" width="60" height="61"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="indicator.png" translatesAutoresizingMaskIntoConstraints="NO" id="1RL-MZ-nJy">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="indicator_basic.png" translatesAutoresizingMaskIntoConstraints="NO" id="1RL-MZ-nJy">
                                                     <rect key="frame" x="267" y="32" width="27" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="4lt-AH-EsS"/>
@@ -185,8 +185,8 @@
                                                     <color key="textColor" red="0.23586828603825183" green="0.35304710468181671" blue="0.47076291454081631" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="featured.png" translatesAutoresizingMaskIntoConstraints="NO" id="9dv-5s-vJt">
-                                                    <rect key="frame" x="2" y="5" width="24" height="36"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="featured_basic.png" translatesAutoresizingMaskIntoConstraints="NO" id="9dv-5s-vJt">
+                                                    <rect key="frame" x="-3" y="8" width="24" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LId-0A-2wV">
@@ -302,7 +302,7 @@
                                                             </connections>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="0.70000000000000007" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.089999999999999997" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="MoH-xj-9NR" firstAttribute="leading" secondItem="hO4-5U-gnk" secondAttribute="trailing" constant="10" id="27e-mb-Ud9"/>
                                                         <constraint firstAttribute="trailing" secondItem="7WO-B1-0Xs" secondAttribute="trailing" constant="13" id="AGA-su-ai4"/>
@@ -388,6 +388,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Zcp-Rd-ofn" firstAttribute="baseline" secondItem="k4O-fI-sjJ" secondAttribute="baseline" id="0Iq-Ki-NCU"/>
                                             <constraint firstItem="aeu-5a-8FD" firstAttribute="leading" secondItem="d4O-nI-JMI" secondAttribute="leading" constant="55" id="1AN-Ll-hO6"/>
@@ -444,19 +445,28 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="alarmButton" destination="o5g-58-1AY" id="vps-jZ-57A"/>
+                                            <outlet property="container" destination="Hb7-39-1UC" id="y26-oI-3mJ"/>
                                             <outlet property="dayLabel" destination="Lgh-D1-tbF" id="zaB-2v-dDB"/>
+                                            <outlet property="dayTextLabel" destination="YAG-1R-6ne" id="GBU-X0-6AY"/>
                                             <outlet property="deletePopup" destination="Ys1-hZ-oq2" id="wgQ-5D-3WC"/>
                                             <outlet property="doneButton" destination="VLA-AZ-rva" id="oWD-wU-Yy4"/>
+                                            <outlet property="feature" destination="9dv-5s-vJt" id="fPX-u8-RvO"/>
                                             <outlet property="hourLabel" destination="X12-Gv-pwu" id="5iy-Zd-Hdu"/>
+                                            <outlet property="hourTextLabel" destination="k4O-fI-sjJ" id="0tY-qL-faC"/>
+                                            <outlet property="indicator" destination="1RL-MZ-nJy" id="QMO-yE-aF3"/>
+                                            <outlet property="minTextLabel" destination="Zcp-Rd-ofn" id="6xS-2s-V1E"/>
                                             <outlet property="minuteLabel" destination="PgH-N4-XfQ" id="g86-6O-91r"/>
                                             <outlet property="monthLabel" destination="5Av-z6-snm" id="isr-Ns-UTe"/>
+                                            <outlet property="monthTextLabel" destination="aeu-5a-8FD" id="DrC-Jq-yaB"/>
                                             <outlet property="priorityButton" destination="fNJ-5t-arY" id="G50-6R-cSj"/>
                                             <outlet property="priorityImage" destination="9dv-5s-vJt" id="gqH-2d-Kru"/>
                                             <outlet property="progressView" destination="m8H-aM-ENA" id="OOq-R9-jac"/>
+                                            <outlet property="secTitleLabel" destination="Uxe-yE-8GW" id="7dd-Yx-fJz"/>
                                             <outlet property="secondLabel" destination="oma-US-vQU" id="0SV-gW-i7T"/>
                                             <outlet property="selectMenu" destination="LId-0A-2wV" id="sFC-83-rju"/>
                                             <outlet property="titleLabel" destination="ROD-E4-oBz" id="hPY-py-q1V"/>
                                             <outlet property="yearLabel" destination="SMd-da-Jgd" id="6CA-ie-uUa"/>
+                                            <outlet property="yearTextLabel" destination="lI7-gI-F79" id="xkf-p1-z4Q"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell autoresizesSubviews="NO" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="menu" id="huE-ah-asn">
@@ -467,6 +477,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <size key="customSize" width="320" height="32"/>
                                     </collectionViewCell>
                                 </cells>
@@ -474,13 +485,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODy-bh-7E2">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODy-bh-7E2">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="68" id="48e-El-VLU"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" image="addnewcountdown.png">
+                                            <state key="normal" image="addnewcountdown_basic.png">
                                                 <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -492,6 +503,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="ODy-bh-7E2" firstAttribute="trailing" secondItem="3fz-KG-K12" secondAttribute="trailing" id="Puo-DA-XY7"/>
                                         <constraint firstItem="ODy-bh-7E2" firstAttribute="leading" secondItem="3fz-KG-K12" secondAttribute="leading" id="eJT-5N-mYh"/>
@@ -502,11 +514,11 @@
                                     <rect key="frame" x="0.0" y="190" width="320" height="36"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xh-5V-d0X">
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xh-5V-d0X">
                                             <rect key="frame" x="0.0" y="3" width="320" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
-                                            <state key="normal" title="Settings" backgroundImage="settings_bg.png">
+                                            <state key="normal" title="Settings" backgroundImage="settings_bg_basic.png">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -515,6 +527,7 @@
                                             </connections>
                                         </button>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="2" id="AIv-sd-83V"/>
@@ -590,7 +603,7 @@
                                 <rect key="frame" x="10" y="436" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
-                                <state key="normal" title="Go Back" backgroundImage="settings_bg.png">
+                                <state key="normal" title="Go Back" backgroundImage="settings_bg_basic.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1330,10 +1343,10 @@
     <resources>
         <image name="099.png" width="96" height="47"/>
         <image name="1-2-circle.png" width="110" height="111"/>
-        <image name="addnewcountdown.png" width="253" height="13"/>
+        <image name="addnewcountdown_basic.png" width="253" height="13"/>
         <image name="button_nope.png" width="146" height="50"/>
         <image name="button_yes.png" width="212" height="50"/>
-        <image name="container.png" width="320" height="68"/>
+        <image name="container_basic.png" width="320" height="68"/>
         <image name="current_theme.png" width="66" height="66"/>
         <image name="dark_theme.png" width="66" height="66"/>
         <image name="delete.png" width="36" height="36"/>
@@ -1341,11 +1354,11 @@
         <image name="down_arrow.png" width="19" height="10"/>
         <image name="edit.png" width="36" height="36"/>
         <image name="facebook.png" width="36" height="36"/>
-        <image name="featured.png" width="36" height="50"/>
+        <image name="featured_basic.png" width="24" height="36"/>
         <image name="featured_icon.png" width="56" height="56"/>
         <image name="goback.png" width="115" height="35"/>
         <image name="goback_mini.png" width="131" height="70"/>
-        <image name="indicator.png" width="54" height="54"/>
+        <image name="indicator_basic.png" width="54" height="54"/>
         <image name="left_arrow.png" width="11" height="19"/>
         <image name="notification.png" width="36" height="36"/>
         <image name="proceed_button.png" width="190" height="35"/>
@@ -1354,7 +1367,7 @@
         <image name="saat.png" width="111" height="111"/>
         <image name="saatler.png" width="110" height="110"/>
         <image name="settings_bg 2.png" width="562" height="336"/>
-        <image name="settings_bg.png" width="640" height="42"/>
+        <image name="settings_bg_basic.png" width="640" height="42"/>
         <image name="standard_circle.png" width="120" height="120"/>
         <image name="twitter.png" width="36" height="36"/>
         <image name="up_arrow.png" width="19" height="11"/>

@@ -22,6 +22,8 @@
     dispatch_queue_t bgq;
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *timers;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
+@property (weak, nonatomic) IBOutlet UIButton *adNewButton;
 
 - (void)setSelected;
 - (IBAction)itemDone:(id)sender;
