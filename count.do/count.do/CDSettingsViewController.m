@@ -32,6 +32,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self changeTheme];
     if ([[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"]) {
         settings = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"]];
     }else{
@@ -127,12 +128,46 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[NSUserDefaults standardUserDefaults] setObject:settings forKey:@"settings"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) changeThemeOTF {
+    if ([settings[@"theme"] isEqualToString:@"basic"]) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }else {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+    NSArray *subviews = self.view.subviews;
+    for (UIView *v in subviews) {
+        if ([v respondsToSelector:@selector(setImage:)]) {
+            ((UIImageView *)v).image = [UIImage imageNamed:[NSString stringWithFormat:@"container_s_%@",settings[@"theme"]]];
+        }else if ([v respondsToSelector:@selector(setTextColor:)]) {
+            ((UILabel *)v).textColor = colors[settings[@"theme"]][@"textcolor"];
+        }
+    }
+    self.view.backgroundColor = colors[settings[@"theme"]][@"background"];
+    [self.goBack setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",settings[@"theme"]]] forState:UIControlStateNormal];
+    [self.goBack setTitleColor:colors[settings[@"theme"]][@"secondarycolor"] forState:UIControlStateNormal];
+}
+
+- (void) changeTheme {
+    NSArray *subviews = self.view.subviews;
+    for (UIView *v in subviews) {
+        if ([v respondsToSelector:@selector(setImage:)]) {
+            ((UIImageView *)v).image = [UIImage imageNamed:[NSString stringWithFormat:@"container_s_%@",selectedTheme]];
+        }else if ([v respondsToSelector:@selector(setTextColor:)]) {
+            ((UILabel *)v).textColor = colors[selectedTheme][@"textcolor"];
+        }
+    }
+    self.view.backgroundColor = colors[selectedTheme][@"background"];
+    [self.goBack setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",selectedTheme]] forState:UIControlStateNormal];
+    [self.goBack setTitleColor:colors[selectedTheme][@"secondarycolor"] forState:UIControlStateNormal];
 }
 
 - (IBAction)BasicTheme:(id)sender {
@@ -146,6 +181,7 @@
     self.redThemeButton.userInteractionEnabled = true;
     self.darkThemeButton.userInteractionEnabled = true;
     settings[@"theme"] = @"basic";
+    [self changeThemeOTF];
 }
 - (IBAction)RedTheme:(id)sender {
     self.basicThemeButton.alpha = 0.3;
@@ -158,6 +194,7 @@
     self.redThemeButton.userInteractionEnabled = false;
     self.darkThemeButton.userInteractionEnabled = true;
     settings[@"theme"] = @"red";
+    [self changeThemeOTF];
 }
 
 - (IBAction)DarkTheme:(id)sender {
@@ -171,6 +208,7 @@
     self.redThemeButton.userInteractionEnabled = true;
     self.darkThemeButton.userInteractionEnabled = false;
     settings[@"theme"] = @"dark";
+    [self changeThemeOTF];
 }
 
 - (IBAction)NoPriority:(id)sender {

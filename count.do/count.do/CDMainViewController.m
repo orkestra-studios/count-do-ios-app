@@ -22,6 +22,12 @@
 
 - (void)viewDidLoad
 {
+    if ([selectedTheme isEqualToString:@"basic"]) {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+    }else {
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     /* Initial setup */
@@ -45,12 +51,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    if ([selectedTheme isEqualToString:@"basic"]) {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    }else {
-        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    }
-    
     [super viewWillAppear:animated];
     self.view.backgroundColor = colors[selectedTheme][@"background"];
 
@@ -168,13 +168,12 @@
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"addNew" forIndexPath:indexPath];
         [((UIButton *)[reusableView viewWithTag:1]) setImage:[UIImage imageNamed:[NSString stringWithFormat:@"addnewcountdown_%@",selectedTheme]] forState:UIControlStateNormal];
-
     }else if([kind isEqualToString:UICollectionElementKindSectionFooter]){
         reusableView = [collectionView dequeueReusableSupplementaryViewOfKind: kind withReuseIdentifier:@"footer" forIndexPath:indexPath];
         //reusableView.backgroundColor = bgColor;
         /*UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(deselect)];
         [reusableView addGestureRecognizer:tgr];*/
-        [((UIButton *)[reusableView viewWithTag:1]) setTitleColor:colors[selectedTheme][@"textcolor"] forState:UIControlStateNormal];
+        [((UIButton *)[reusableView viewWithTag:1]) setTitleColor:colors[selectedTheme][@"secondarycolor"] forState:UIControlStateNormal];
         [((UIButton *)[reusableView viewWithTag:1]) setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",selectedTheme]] forState:UIControlStateNormal];
     }
     return reusableView;

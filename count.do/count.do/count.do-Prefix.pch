@@ -35,6 +35,6 @@
 #define red @"red"
 #define dark @"dark"
 
-#define colors @{@"basic":@{@"textcolor":hex(0x59cbb5),@"background":hex(0xeaeaea),@"cellcolor":hex(0xfafafa)}, @"red":@{@"textcolor":hex(0x5a5a5a),@"background":hex(0xff5a53),@"cellcolor":hex(0xefebd5)},@"dark":@{@"textcolor":hex(0xfefefe),@"background":hex(0x2e3641),@"cellcolor":hex(0x4e8bb6)}}
+#define colors @{@"basic":@{@"textcolor":hex(0x4e566a),@"secondarycolor":hex(0xfefefe),@"background":hex(0xeaeaea),@"cellcolor":hex(0xfafafa),@"topcolor":hex(0x1abc9c),@"bottomcolor":hex(0x3498db),@"titlecolor":hex(0xff5a53)}, @"red":@{@"textcolor":hex(0x5a5a5a),@"secondarycolor":hex(0x5a5a5a),@"background":hex(0xff5a53),@"cellcolor":hex(0xefebd5),@"topcolor":hex(0xff5a53),@"bottomcolor":hex(0xff5a53),@"titlecolor":hex(0xff5a53)},@"dark":@{@"textcolor":hex(0xfefefe),@"background":hex(0x2e3641),@"cellcolor":hex(0x4e8bb6),@"secondarycolor":hex(0xfefefe),@"topcolor":hex(0x4e8bb6),@"bottomcolor":hex(0x4e8bb6),@"titlecolor":hex(0xfefefe)}}
 
 

@@ -57,11 +57,36 @@
     dmgr.direction = UISwipeGestureRecognizerDirectionDown;
     [self.minDetector addGestureRecognizer:umgr];
     [self.minDetector addGestureRecognizer:dmgr];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if([selectedTheme isEqualToString:@"red"]) {
+        self.view.backgroundColor = white;
+        self.shield.backgroundColor = white;
+    }else{
+        self.view.backgroundColor = colors[selectedTheme][@"background"];
+        self.shield.backgroundColor = colors[selectedTheme][@"background"];
+    }
+    self.topView.backgroundColor = colors[selectedTheme][@"topcolor"];
+    self.bottomView.backgroundColor = colors[selectedTheme][@"bottomcolor"];
+    for (UIView *v in self.dayTitleView.subviews) {
+        if([v respondsToSelector:@selector(setTextColor:)]) {
+            [((UILabel *)v) setTextColor:colors[selectedTheme][@"titlecolor"]];
+        }
+    }
+    self.titleInput.textColor = colors[selectedTheme][@"secondarycolor"];
+    [self.slider setThumbImage:[UIImage imageNamed:[NSString stringWithFormat:@"Knob_%@.png",selectedTheme]] forState:UIControlStateNormal];
+    [self.slider setMinimumTrackTintColor:colors[selectedTheme][@"bottomcolor"]];
+    
 }
 
 - (void) newReminder {
+    
     sliderVal = 0;
-    if(!boughtReminder) self.slider.enabled = false;
+    if(!boughtReminder || [reminderType isEqualToString:@"basic"]) self.slider.enabled = false;
     NSDate *current = [NSDate date];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
@@ -78,7 +103,7 @@
 
 - (void) editReminder {
     sliderVal = 0;
-    if(!boughtReminder) self.slider.enabled = false;
+    if(!boughtReminder || [reminderType isEqualToString:@"basic"]) self.slider.enabled = false;
     self.titleInput.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"title"];
     NSDate *current = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"timestamp"] integerValue]];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -313,14 +338,14 @@
     } else if (indexPath.row>=i+j) {
         ((UILabel *)[cell viewWithTag:1]).textColor = [UIColor lightGrayColor];
     } else {
-        ((UILabel *)[cell viewWithTag:1]).textColor = [UIColor blackColor];
+        ((UILabel *)[cell viewWithTag:1]).textColor = colors[selectedTheme][@"textcolor"];
     }
     if (indexPath.row-i+1==date.day) {
         cell.backgroundColor = [UIColor colorWithRed:230/255.0 green:97/255.0 blue:97/255.0 alpha:1];
         ((UILabel *)[cell viewWithTag:1]).font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
         ((UILabel *)[cell viewWithTag:1]).textColor = [UIColor whiteColor];
     }else{
-        cell.backgroundColor = [UIColor whiteColor];
+        cell.backgroundColor = [UIColor clearColor];
         ((UILabel *)[cell viewWithTag:1]).font = [UIFont fontWithName:@"Helvetica-Light" size:15];
     }
     
