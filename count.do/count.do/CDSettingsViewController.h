@@ -30,5 +30,6 @@
 @property (weak, nonatomic) IBOutlet UIView *priorityShield;
 @property (weak, nonatomic) IBOutlet UIView *reminderShield;
 @property (weak, nonatomic) IBOutlet UIButton *goBack;
+@property (weak, nonatomic) IBOutlet UIButton *restoreButton;
 
 @end

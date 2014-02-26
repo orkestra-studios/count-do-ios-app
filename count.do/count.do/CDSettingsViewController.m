@@ -104,26 +104,6 @@
             self.detailedRemainderButton.userInteractionEnabled = false;
         }
     }
-    [[DEStoreKitManager sharedManager] restorePurchasesOnSuccess:^(SKPaymentTransaction *transaction) {
-        NSString *t = transaction.payment.productIdentifier;
-        NSLog(@"transaction: %@",transaction);
-        NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
-        if ([t isEqualToString:@"Themes"]) {
-            [d setBool:true forKey:@"themesBought"];
-            self.themeShield.hidden = true;
-            [d synchronize];
-        }else if ([t isEqualToString:@"Priority"]) {
-            [d setBool:true forKey:@"priorityBought"];
-            self.priorityShield.hidden = true;
-            [d synchronize];
-        }else if ([t isEqualToString:@"Reminder"]) {
-            [d setBool:true forKey:@"reminderBought"];
-            self.reminderShield.hidden = true;
-            [d synchronize];
-        }
-    } onFailure:^(NSError *error) {
-        NSLog(@"failed");
-    }];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -154,6 +134,8 @@
     self.view.backgroundColor = colors[settings[@"theme"]][@"background"];
     [self.goBack setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",settings[@"theme"]]] forState:UIControlStateNormal];
     [self.goBack setTitleColor:colors[settings[@"theme"]][@"secondarycolor"] forState:UIControlStateNormal];
+    [self.restoreButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",settings[@"theme"]]] forState:UIControlStateNormal];
+    [self.restoreButton setTitleColor:colors[settings[@"theme"]][@"secondarycolor"] forState:UIControlStateNormal];
 }
 
 - (void) changeTheme {
@@ -168,6 +150,8 @@
     self.view.backgroundColor = colors[selectedTheme][@"background"];
     [self.goBack setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",selectedTheme]] forState:UIControlStateNormal];
     [self.goBack setTitleColor:colors[selectedTheme][@"secondarycolor"] forState:UIControlStateNormal];
+    [self.restoreButton setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"settings_bg_%@",selectedTheme]] forState:UIControlStateNormal];
+    [self.restoreButton setTitleColor:colors[selectedTheme][@"secondarycolor"] forState:UIControlStateNormal];
 }
 
 - (IBAction)BasicTheme:(id)sender {
@@ -317,6 +301,30 @@
             self.reminderShield.hidden = false;
             [d synchronize];
         } onVerify: nil];
+}
+
+- (IBAction)restorePurchases:(id)sender {
+    
+    [[DEStoreKitManager sharedManager] restorePurchasesOnSuccess:^(SKPaymentTransaction *transaction) {
+        NSString *t = transaction.payment.productIdentifier;
+        NSLog(@"transaction: %@",transaction);
+        NSUserDefaults *d = [NSUserDefaults standardUserDefaults];
+        if ([t isEqualToString:@"Themes"]) {
+            [d setBool:true forKey:@"themesBought"];
+            self.themeShield.hidden = true;
+            [d synchronize];
+        }else if ([t isEqualToString:@"Priority"]) {
+            [d setBool:true forKey:@"priorityBought"];
+            self.priorityShield.hidden = true;
+            [d synchronize];
+        }else if ([t isEqualToString:@"Reminder"]) {
+            [d setBool:true forKey:@"reminderBought"];
+            self.reminderShield.hidden = true;
+            [d synchronize];
+        }
+    } onFailure:^(NSError *error) {
+        NSLog(@"failed");
+    }];
 }
 
 

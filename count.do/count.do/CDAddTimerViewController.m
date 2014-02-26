@@ -77,7 +77,7 @@
             [((UILabel *)v) setTextColor:colors[selectedTheme][@"titlecolor"]];
         }
     }
-    self.titleInput.textColor = colors[selectedTheme][@"secondarycolor"];
+    self.titleInput.textColor = colors[selectedTheme][@"textcolor"];
     [self.slider setThumbImage:[UIImage imageNamed:[NSString stringWithFormat:@"Knob_%@.png",selectedTheme]] forState:UIControlStateNormal];
     [self.slider setMinimumTrackTintColor:colors[selectedTheme][@"bottomcolor"]];
     
@@ -102,13 +102,36 @@
 }
 
 - (void) editReminder {
-    sliderVal = 0;
     if(!boughtReminder || [reminderType isEqualToString:@"basic"]) self.slider.enabled = false;
     self.titleInput.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"title"];
     NSDate *current = [NSDate dateWithTimeIntervalSince1970:[[[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"timestamp"] integerValue]];
     NSCalendar *cal = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     date = [cal components:(NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit| NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:current];
     date.minute+=5;
+    self.slider.value = [[[NSUserDefaults standardUserDefaults] objectForKey:@"edit"][@"offset"] floatValue];
+    UISlider *sender = self.slider;
+    if(sender.value==0) {
+        self.reminderLabel.text = @"Remind me at exact time";
+        sliderVal = 0;
+    }else if(sender.value<=0.1) {
+        self.reminderLabel.text = @"Remind me 10 minutes earlier";
+        sliderVal = 600;
+    }else if(sender.value<=0.3) {
+        self.reminderLabel.text = @"Remind me 30 minutes earlier";
+        sliderVal = 1800;
+    }else if(sender.value<=0.5) {
+        self.reminderLabel.text = @"Remind me 1 hour earlier";
+        sliderVal = 3600;
+    }else if(sender.value<=0.7) {
+        self.reminderLabel.text = @"Remind me 6 hours earlier";
+        sliderVal = 21600;
+    }else if(sender.value<=0.9) {
+        self.reminderLabel.text = @"Remind me 12 hours earlier";
+        sliderVal = 43200;
+    }else {
+        self.reminderLabel.text = @"Remind me one day earlier";
+        sliderVal = 86400;
+    }
     UITapGestureRecognizer *shieldToggle = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endEdits)];
     [self.shield addGestureRecognizer:shieldToggle];
     [self redrawDateValues];
@@ -140,7 +163,8 @@
     NSDateComponents *offset = [[NSDateComponents alloc] init];
     [offset setSecond:-sliderVal];
     NSDate *selected = [cal dateFromComponents:date];
-    selected = [cal dateByAddingComponents:offset toDate:selected options:0];
+    NSDate *timed = [cal dateFromComponents:date];
+    timed = [cal dateByAddingComponents:offset toDate:selected options:0];
     NSMutableArray *reminders = [NSMutableArray arrayWithArray:[[NSUserDefaults standardUserDefaults] objectForKey:@"reminders"]];
     
     NSNumber *timestamp = @([selected timeIntervalSince1970]);
@@ -149,7 +173,7 @@
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     if (localNotif != nil){
         // Notification details
-        localNotif.fireDate = selected;
+        localNotif.fireDate = timed;
         localNotif.timeZone = [NSTimeZone defaultTimeZone];
         localNotif.alertBody = [NSString stringWithFormat:@"Countdown finished: %@",self.titleInput.text];
         localNotif.alertAction = @"Dismiss";
@@ -159,7 +183,7 @@
         // Schedule the notification
         [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
     };
-    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"timestamp":timestamp,@"alarm":@"1",@"priority":@0}];
+    [reminders addObject:@{@"title":self.titleInput.text,@"date":[formatter stringFromDate:selected], @"timestamp":timestamp,@"offset":[NSNumber numberWithFloat:self.slider.value],@"alarm":@"1",@"priority":@0}];
     NSSortDescriptor * sort = [[NSSortDescriptor alloc] initWithKey:@"timestamp" ascending:true];
     NSArray *sorted = [reminders sortedArrayUsingDescriptors:[NSArray arrayWithObject:sort]];
     sort = [[NSSortDescriptor alloc] initWithKey:@"priority" ascending:false];
@@ -419,23 +443,23 @@
         self.reminderLabel.text = @"Remind me at exact time";
         sliderVal = 0;
     }else if(sender.value<=0.1) {
-        self.reminderLabel.text = @"Remind me 5 minutes earlier";
-        sliderVal = 300;
-    }else if(sender.value<=0.3) {
         self.reminderLabel.text = @"Remind me 10 minutes earlier";
         sliderVal = 600;
-    }else if(sender.value<=0.5) {
+    }else if(sender.value<=0.3) {
         self.reminderLabel.text = @"Remind me 30 minutes earlier";
         sliderVal = 1800;
-    }else if(sender.value<=0.7) {
+    }else if(sender.value<=0.5) {
         self.reminderLabel.text = @"Remind me 1 hour earlier";
         sliderVal = 3600;
-    }else if(sender.value<=0.9) {
+    }else if(sender.value<=0.7) {
         self.reminderLabel.text = @"Remind me 6 hours earlier";
         sliderVal = 21600;
-    }else {
+    }else if(sender.value<=0.9) {
         self.reminderLabel.text = @"Remind me 12 hours earlier";
         sliderVal = 43200;
+    }else {
+        self.reminderLabel.text = @"Remind me one day earlier";
+        sliderVal = 86400;
     }
 }
 
