@@ -95,6 +95,11 @@
 		D4EBCF4618AA2B9D00341529 /* featured_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF4518AA2B9D00341529 /* featured_icon.png */; };
 		D4EBCF4918ABB47D00341529 /* Progress Indicator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF4718ABB47D00341529 /* Progress Indicator@2x.png */; };
 		D4EBCF4A18ABB47D00341529 /* Knob_basic.png in Resources */ = {isa = PBXBuildFile; fileRef = D4EBCF4818ABB47D00341529 /* Knob_basic.png */; };
+		DCFD56AD18C0161E00F1FCC9 /* 16.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFD56A818C0161E00F1FCC9 /* 16.png */; };
+		DCFD56AE18C0161E00F1FCC9 /* 29.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFD56A918C0161E00F1FCC9 /* 29.png */; };
+		DCFD56AF18C0161E00F1FCC9 /* 58.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFD56AA18C0161E00F1FCC9 /* 58.png */; };
+		DCFD56B018C0161E00F1FCC9 /* 80.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFD56AB18C0161E00F1FCC9 /* 80.png */; };
+		DCFD56B118C0161E00F1FCC9 /* 120.png in Resources */ = {isa = PBXBuildFile; fileRef = DCFD56AC18C0161E00F1FCC9 /* 120.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +204,11 @@
 		D4EBCF4518AA2B9D00341529 /* featured_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = featured_icon.png; sourceTree = "<group>"; };
 		D4EBCF4718ABB47D00341529 /* Progress Indicator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Progress Indicator@2x.png"; sourceTree = "<group>"; };
 		D4EBCF4818ABB47D00341529 /* Knob_basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Knob_basic.png; sourceTree = "<group>"; };
+		DCFD56A818C0161E00F1FCC9 /* 16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 16.png; sourceTree = "<group>"; };
+		DCFD56A918C0161E00F1FCC9 /* 29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 29.png; sourceTree = "<group>"; };
+		DCFD56AA18C0161E00F1FCC9 /* 58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 58.png; sourceTree = "<group>"; };
+		DCFD56AB18C0161E00F1FCC9 /* 80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 80.png; sourceTree = "<group>"; };
+		DCFD56AC18C0161E00F1FCC9 /* 120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 120.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -326,6 +336,11 @@
 		36F692A417622B0C009EB15F /* App Images */ = {
 			isa = PBXGroup;
 			children = (
+				DCFD56A818C0161E00F1FCC9 /* 16.png */,
+				DCFD56A918C0161E00F1FCC9 /* 29.png */,
+				DCFD56AA18C0161E00F1FCC9 /* 58.png */,
+				DCFD56AB18C0161E00F1FCC9 /* 80.png */,
+				DCFD56AC18C0161E00F1FCC9 /* 120.png */,
 				36E37D911760C644001461C6 /* Default.png */,
 				36E37D921760C644001461C6 /* Default@2x.png */,
 				36E37D931760C644001461C6 /* Default-568h@2x.png */,
@@ -443,6 +458,11 @@
 				CLASSPREFIX = CD;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Can Bülbül";
+				TargetAttributes = {
+					36E37D49176099E9001461C6 = {
+						DevelopmentTeam = 22R85DDBLV;
+					};
+				};
 			};
 			buildConfigurationList = 36E37D45176099E9001461C6 /* Build configuration list for PBXProject "count.do" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -479,6 +499,7 @@
 				36E37D7317609BE0001461C6 /* container_basic@2x.png in Resources */,
 				D4D1872E18ABE3010097FF25 /* 099.png in Resources */,
 				D482FECA18B61C0300286598 /* container_s_red.png in Resources */,
+				DCFD56AF18C0161E00F1FCC9 /* 58.png in Resources */,
 				36E37D831760A2A7001461C6 /* addnewcountdown_basic@2x.png in Resources */,
 				36E37D881760AB88001461C6 /* indicator_basic.png in Resources */,
 				D4EBCF4A18ABB47D00341529 /* Knob_basic.png in Resources */,
@@ -502,6 +523,7 @@
 				36E37DBF1761FD06001461C6 /* goback@2x.png in Resources */,
 				D46DD7E218B4E0A800F5577E /* featured_red.png in Resources */,
 				D4B33E4718B7935A00BC36C9 /* Knob_red.png in Resources */,
+				DCFD56AE18C0161E00F1FCC9 /* 29.png in Resources */,
 				36E37DC2176200D9001461C6 /* finish.png in Resources */,
 				D46DD7D618B4BFCD00F5577E /* addnewcountdown_dark@2x.png in Resources */,
 				D4EBCF4018AA256200341529 /* 1-2-circle.png in Resources */,
@@ -521,6 +543,7 @@
 				D4EBCF4618AA2B9D00341529 /* featured_icon.png in Resources */,
 				D4B33E4918B7944400BC36C9 /* Knob_dark.png in Resources */,
 				D46DD7CE18B4B28700F5577E /* featured_basic.png in Resources */,
+				DCFD56B018C0161E00F1FCC9 /* 80.png in Resources */,
 				36A9350B1767B5DE00AFF987 /* done@2x.png in Resources */,
 				36174212177970530018C4AA /* sound.m4r in Resources */,
 				D4EBCF3618AA17F900341529 /* standard_circle.png in Resources */,
@@ -535,7 +558,9 @@
 				D4EBCF4918ABB47D00341529 /* Progress Indicator@2x.png in Resources */,
 				D46DD7DE18B4DE3700F5577E /* container_dark.png in Resources */,
 				36B7544317DDDB440012F114 /* button_yes.png in Resources */,
+				DCFD56B118C0161E00F1FCC9 /* 120.png in Resources */,
 				36B7544417DDDB440012F114 /* button_nope.png in Resources */,
+				DCFD56AD18C0161E00F1FCC9 /* 16.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,7 +619,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Taner Yildirim (22R85DDBLV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taner Yildirim (22R85DDBLV)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -609,6 +635,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "02819E53-1D44-4C56-996F-651A47412A79";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -625,7 +652,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Taner Yildirim (22R85DDBLV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Taner Yildirim (22R85DDBLV)";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -633,6 +661,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "02819E53-1D44-4C56-996F-651A47412A79";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -641,6 +670,7 @@
 		36E37D6E176099E9001461C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Taner Yildirim (22R85DDBLV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "count.do/count.do-Prefix.pch";
 				INFOPLIST_FILE = "count.do/count.do-Info.plist";
@@ -653,6 +683,7 @@
 		36E37D6F176099E9001461C6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Taner Yildirim (22R85DDBLV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "count.do/count.do-Prefix.pch";
 				INFOPLIST_FILE = "count.do/count.do-Info.plist";
