@@ -234,7 +234,22 @@
     }
     [self.calendar reloadData];
     date.minute = (date.minute-date.minute%5)%60;
-    hourLabel.text = [NSString stringWithFormat:@"%02d",date.hour];
+    int hOffset = 0;
+    NSLog(@"clock: %@, %d",clockType, [(NSString *)clockType isEqualToString:@"12"]);
+    if([(NSString *)clockType isEqualToString:@"12"]){
+        self.ampmIndicator.hidden = false;
+        if (date.hour>12) {
+            hOffset = 12;
+            self.ampmIndicator.text = @"PM";
+        }else {
+            self.ampmIndicator.text = @"AM";
+        }
+        if (date.hour==12) self.ampmIndicator.text = @"PM";
+    }else {
+        self.ampmIndicator.hidden = true;
+    }
+    
+    hourLabel.text = [NSString stringWithFormat:@"%02d",date.hour-hOffset];
     minLabel.text = [NSString stringWithFormat:@"%02d",(date.minute)];
     
     [UIView animateWithDuration:0.2 animations:^{

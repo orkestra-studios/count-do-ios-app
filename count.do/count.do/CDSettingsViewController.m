@@ -27,7 +27,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    // Do any additional setup after loading the view.
+    self.scroller.frame = self.view.frame;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.scroller setContentSize:CGSizeMake(340, 638)];
+    });
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -35,8 +39,11 @@
     [self changeTheme];
     if ([[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"]) {
         settings = [[NSMutableDictionary alloc] initWithDictionary:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"]];
+        if(!settings[@"clock"]) {
+            settings[@"clock"] = @"24";
+        }
     }else{
-        settings = [[NSMutableDictionary alloc] initWithDictionary:@{@"theme":@"basic",@"priority":@"none",@"reminder":@"basic"}];
+        settings = [[NSMutableDictionary alloc] initWithDictionary:@{@"theme":@"basic",@"priority":@"none",@"reminder":@"basic",@"clock":@"24"}];
     }
     if (boughtThemes) {
         self.themeShield.hidden = true;
@@ -103,6 +110,19 @@
             self.detailedReminderLabel.alpha = 1;
             self.detailedRemainderButton.userInteractionEnabled = false;
         }
+    }
+    
+    //clock type
+    if([settings[@"clock"] isEqualToString:@"12"]){
+        self.twelveButton.alpha = 1;
+        self.twelveLabel.alpha = 1;
+        self.twelveButton.userInteractionEnabled = false;
+        self.twentyFourButton.userInteractionEnabled = true;
+    }else if([settings[@"clock"] isEqualToString:@"24"]){
+        self.twentyFourButton.alpha = 1;
+        self.twentyFourLabel.alpha = 1;
+        self.twentyFourButton.userInteractionEnabled = false;
+        self.twelveButton.userInteractionEnabled = true;
     }
 }
 
@@ -233,6 +253,27 @@
     self.detailedReminderLabel.alpha = 1;
     self.detailedRemainderButton.userInteractionEnabled = false;
     settings[@"reminder"] = @"detailed";
+}
+
+- (IBAction)twentyFourHour:(id)sender {
+    NSLog(@"(%.1f,%.1f)\n(%.1f,%.1f)",self.scroller.frame.size.width,self.scroller.frame.size.height,self.scroller.contentSize.width,self.scroller.contentSize.height);
+    self.twelveButton.alpha = 0.3;
+    self.twelveLabel.alpha  = 0.3;
+    self.twelveButton.userInteractionEnabled = true;
+    self.twentyFourButton.alpha = 1;
+    self.twentyFourLabel.alpha  = 1;
+    self.twentyFourButton.userInteractionEnabled = false;
+    settings[@"clock"] = @"24";
+}
+
+- (IBAction)twelveHour:(id)sender {
+    self.twelveButton.alpha = 1;
+    self.twelveLabel.alpha = 1;
+    self.twelveButton.userInteractionEnabled = false;
+    self.twentyFourButton.alpha = 0.3;
+    self.twentyFourLabel.alpha = 0.3;
+    self.twentyFourButton.userInteractionEnabled = true;
+    settings[@"clock"] = @"12";
 }
 
 - (IBAction)goBack:(id)sender {

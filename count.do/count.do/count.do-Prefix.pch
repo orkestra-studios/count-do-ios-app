@@ -18,10 +18,11 @@
 #define selectedTheme [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"theme"]
 #define priorityType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"priority"]
 #define reminderType  [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"reminder"]
+#define clockType     [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"settings"][@"clock"]
 
-#define boughtThemes [[NSUserDefaults standardUserDefaults] boolForKey:@"themesBought"]
-#define boughtPriority [[NSUserDefaults standardUserDefaults] boolForKey:@"priorityBought"]
-#define boughtReminder [[NSUserDefaults standardUserDefaults] boolForKey:@"reminderBought"]
+#define boughtThemes true/*[[NSUserDefaults standardUserDefaults] boolForKey:@"themesBought"]*/
+#define boughtPriority true/*[[NSUserDefaults standardUserDefaults] boolForKey:@"priorityBought"]*/
+#define boughtReminder true/*[[NSUserDefaults standardUserDefaults] boolForKey:@"reminderBought"]*/
 
 //Colours
 #define rgba(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a/255.0]

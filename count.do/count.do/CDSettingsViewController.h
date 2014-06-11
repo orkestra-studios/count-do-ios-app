@@ -12,6 +12,7 @@
 {
     NSMutableDictionary *settings;
 }
+@property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 @property (weak, nonatomic) IBOutlet UIButton *basicThemeButton;
 @property (weak, nonatomic) IBOutlet UILabel *basicThemeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *redThemeButton;
@@ -25,6 +26,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *BasicRemainderButton;
 @property (weak, nonatomic) IBOutlet UILabel *basicReminderLabel;
 @property (weak, nonatomic) IBOutlet UIButton *detailedRemainderButton;
+@property (weak, nonatomic) IBOutlet UILabel *twelveLabel;
+@property (weak, nonatomic) IBOutlet UIButton *twelveButton;
+@property (weak, nonatomic) IBOutlet UILabel *twentyFourLabel;
+@property (weak, nonatomic) IBOutlet UIButton *twentyFourButton;
 @property (weak, nonatomic) IBOutlet UILabel *detailedReminderLabel;
 @property (weak, nonatomic) IBOutlet UIView *themeShield;
 @property (weak, nonatomic) IBOutlet UIView *priorityShield;
